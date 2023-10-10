@@ -6,7 +6,7 @@
 /*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 12:00:50 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/10 17:09:23 by raruiz-r         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:16:55 by raruiz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 #include "libft/libft.h"
 #include "structs.h"
 #include <stdio.h>
+#include "MLX42/include/MLX42/MLX42.h"
 #include <math.h>
 #include <stdbool.h> 
+
 
 #define WIDTH 30
 #define HEIGHT 30
