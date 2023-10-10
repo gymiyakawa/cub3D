@@ -6,7 +6,7 @@
 #    By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 09:58:15 by gmiyakaw          #+#    #+#              #
-#    Updated: 2023/10/10 10:21:45 by gmiyakaw         ###   ########.fr        #
+#    Updated: 2023/10/10 12:12:49 by gmiyakaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,25 +20,31 @@ INC_DIR = ./inc
 OBJ_DIR = ./obj
 
 ####    LIBRARIES    ####
-MLX_DIR = ./MLX42/mlx42/
-LIBFT_DIR = ./libft/
-
-$(LIBS) = -I $(MLX_DIR)libmlx42.a -I $(LIBFT_DIR)libft.a 
+MLX_DIR = ./inc//MLX42/mlx42/
+LIBFT_DIR = ./inc/libft/
 
 ####    FILES    ####
-RAW_SRC = cub3d.cpp 
-RAW_INC = 
+RAW_SRC = cub3d.c
+RAW_INC = defs.h
 
 HEADERS = $(addprefix $(INC_DIR)/, $(RAW_INC))
 SOURCES = $(addprefix $(SRC_DIR)/, $(RAW_SRC))
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
+####    COLORS    ####
+
+GREEN	=	\033[0;32m
+RESET	=	\033[0m
+RED		=	\033[0;31m
+
+####    RECIPES    ####
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS) | $(OBJ_DIR) 
-	$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBS)
-	@echo "compiled!"
+	@make -C $(LIBFT_DIR)
+	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a 
+	@echo "$(GREEN) cub3d compiled successfully!$(RESET)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
@@ -48,6 +54,7 @@ $(OBJ_DIR):
 
 clean:
 	@rm -rf $(NAME) $(OBJ_DIR)
+	@make -C $(LIBFT_DIR) fclean
 
 fclean: clean
 
