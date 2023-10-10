@@ -6,7 +6,7 @@
 #    By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 09:58:15 by gmiyakaw          #+#    #+#              #
-#    Updated: 2023/10/10 16:16:22 by gmiyakaw         ###   ########.fr        #
+#    Updated: 2023/10/10 16:47:57 by gmiyakaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,12 @@ SRC_DIR = ./src
 INC_DIR = ./inc
 OBJ_DIR = ./obj
 
-####    LIBRARIES    ####
-MLX_DIR = ./inc/MLX42/build/
-MLX_CC = $(MLX_DIR)libmlx42.a -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+####    MLX    ####
+MLX_DIR = ./inc/MLX42/
+MLX_CC = $(MLX_DIR)/build/libmlx42.a -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+MLX_GIT = https://github.com/codam-coding-college/MLX42.git
 
+####    LIBFT    ####
 LIBFT_DIR = ./inc/libft/
 
 ####    FILES    ####
@@ -57,22 +59,29 @@ $(OBJ_DIR):
 
 
 mlx:
+	@if [ ! -d "$(INC_DIR)/MLX42" ]; then \
+	git clone $(MLX_GIT) $(INC_DIR)/MLX42; \
+	fi
 	cmake -B inc/MLX42/build inc/MLX42
 	cmake --build inc/MLX42/build -j4 
 
 
 clean:
 	@rm -rf $(NAME) $(OBJ_DIR)
+
+fclean: clean
 	@make -C $(LIBFT_DIR) fclean
 	@rm -rf $(MLX_DIR)
 	@echo "$(RED)cub3d cleaned$(RESET)"
-
-fclean: clean
 
 leaks:
 	make re
 	valgrind --leak-check=full --show-leak-kinds=all ./cub3d
 
+run:
+	make re
+	./cub3d
+	
 re: fclean all
 
-.PHONY: all clean fclean re leaks
+.PHONY: all clean fclean re leaks run mlx
