@@ -6,11 +6,11 @@
 /*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 10:18:42 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/10 15:05:14 by raruiz-r         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:13:49 by raruiz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/defs.h"
+#include "../inc/cub3d.h"
 
 // int main (int ac, char **av) {
 	
