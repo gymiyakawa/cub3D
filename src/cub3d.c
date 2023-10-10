@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 10:18:42 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/10 16:42:23 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:00:45 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		
+		printf("what is this?");
 	// 	initialize_map(&map);
 	// 	check_map_extension(argv[1]);
 	// 	open_and_allocate_map(argv[1], &map);
