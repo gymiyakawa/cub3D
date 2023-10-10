@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 12:00:50 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/10 17:13:26 by raruiz-r         ###   ########.fr       */
+/*   Created: 2023/10/10 16:13:29 by raruiz-r          #+#    #+#             */
+/*   Updated: 2023/10/10 17:05:15 by raruiz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "../inc/cub3d.h"
 
-#include "libft/libft.h"
-#include "MLX42/include/MLX42/MLX42.h"
-#include <math.h>
-#include <stdbool.h> 
-#include "structs.h"
-
-
-#define WIDTH 30
-#define HEIGHT 30
-#define TRUE 1
-#define FALSE 0
-
+void    error_and_exit(char *str, t_main *data)
+{
+    printf("%s\n",str);
+    free(data);//fix me a function to free data;
+    exit(1);
+}
