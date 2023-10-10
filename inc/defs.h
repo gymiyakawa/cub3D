@@ -6,8 +6,30 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 12:00:50 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/10 12:02:03 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/10 12:44:18 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
+
+
+#define MAX_WI
+
+/*
+
+strtuc mae{
+	maps
+	
+	
+	
+	}
+
+
+1
+
+
+
+11
+
+
+*/

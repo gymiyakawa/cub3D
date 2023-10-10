@@ -6,7 +6,7 @@
 #    By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 09:58:15 by gmiyakaw          #+#    #+#              #
-#    Updated: 2023/10/10 12:12:49 by gmiyakaw         ###   ########.fr        #
+#    Updated: 2023/10/10 12:30:02 by gmiyakaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ INC_DIR = ./inc
 OBJ_DIR = ./obj
 
 ####    LIBRARIES    ####
-MLX_DIR = ./inc//MLX42/mlx42/
+MLX_DIR = ./inc/mlx42/
 LIBFT_DIR = ./inc/libft/
 
 ####    FILES    ####
