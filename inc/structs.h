@@ -7,15 +7,34 @@ typedef struct s_color
 	int	fRed;
 	int	fBlue;
 	int	fGreen;
+	
+	
 	int	cRed;
 	int	cBlue;
 	int	cGreen;
+	
 	int	fColor;
 	int	cColor;
 	
 }	t_color;
 
 
+typedef struct s_img
+{
+	int	height;
+	int	width;
+	//pointer/instance/context/count??
+
+}	t_img;
+
+
+typedef struct s_texture
+{
+	t_img	n_tex;
+	t_img	s_tex;
+	t_img	e_tex;
+	t_img	w_tex;
+}	t_texture;
 
 
 typedef struct s_map
@@ -24,6 +43,14 @@ typedef struct s_map
 	
 	
 }	t_map;
+
+typedef struct s_main
+{
+	t_color	*colors;
+	t_map		*map;
+	t_texture	*texture;
+	mlx_t*	mlx;
+}	t_main;
 
 			// from so_long
 // typedef struct s_map
