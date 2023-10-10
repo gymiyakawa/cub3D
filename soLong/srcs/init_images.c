@@ -6,7 +6,7 @@
 /*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:00:52 by raruiz-r          #+#    #+#             */
-/*   Updated: 2022/12/10 22:35:43 by raruiz-r         ###   ########.fr       */
+/*   Updated: 2023/10/10 14:20:27 by raruiz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,22 +83,24 @@ int	images_to_screen(t_map *map)
 	return (0);
 }
 
+//mlx_image_to_window below is codam's function; need to fix the parameters
+//int32_t mlx_image_to_window(mlx_t* mlx, mlx_image_t* img, int32_t x, int32_t y)
 int	display_image(t_map *map, int asset)
 {
 	if (asset == 'P')
-		mlx_put_image_to_window(map->mlx, map->win, map->img_p,
+		mlx_image_to_window(map->mlx, map->win, map->img_p,
 			map->x * 64, map->y * 64);
 	else if (asset == 'C')
-		mlx_put_image_to_window(map->mlx, map->win, map->img_c,
+		mlx_image_to_window(map->mlx, map->win, map->img_c,
 			map->x * 64, map->y * 64);
 	else if (asset == 'E')
-		mlx_put_image_to_window(map->mlx, map->win, map->img_e,
+		mlx_image_to_window(map->mlx, map->win, map->img_e,
 			map->x * 64, map->y * 64);
 	else if (asset == '1')
-		mlx_put_image_to_window(map->mlx, map->win, map->img_w,
+		mlx_image_to_window(map->mlx, map->win, map->img_w,
 			map->x * 64, map->y * 64);
 	else if (asset == '0')
-		mlx_put_image_to_window(map->mlx, map->win, map->img_z,
+		mlx_image_to_window(map->mlx, map->win, map->img_z,
 			map->x * 64, map->y * 64);
 	return (0);
 }
