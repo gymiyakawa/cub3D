@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:12:44 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/10 13:14:22 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:08:11 by raruiz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ typedef struct s_map
 
 typedef struct s_main
 {
-	t_color	*colors;
+	t_color		*colors;
 	t_map		*map;
 	t_texture	*texture;
-	mlx_t*	mlx;
+	void		*mlx;
 }	t_main;
 
 			// from so_long
@@ -95,11 +95,3 @@ typedef struct s_main
 // 	bool	is_dead;
 // }			t_map;
 
-
-typedef struct s_main
-{
-	t_color *colors;
-	t_map	*map;
-	
-	
-}	t_main;

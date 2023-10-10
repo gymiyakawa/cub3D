@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+         #
+#    By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 09:58:15 by gmiyakaw          #+#    #+#              #
-#    Updated: 2023/10/10 13:19:03 by gmiyakaw         ###   ########.fr        #
+#    Updated: 2023/10/10 17:04:41 by raruiz-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ MLX_DIR = ./inc/mlx42/
 LIBFT_DIR = ./inc/libft/
 
 ####    FILES    ####
-RAW_SRC = cub3d.c color_parsing.c
+RAW_SRC = cub3d.c color_parsing.c error.c map_parsing.c
 RAW_INC = cub3d.h structs.h
 
 HEADERS = $(addprefix $(INC_DIR)/, $(RAW_INC))
