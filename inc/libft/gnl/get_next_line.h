@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raruiz-r <raruiz-r@42quebec.com>           +#+  +:+       +#+        */
+/*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:22:21 by raruiz-r          #+#    #+#             */
-/*   Updated: 2022/07/08 12:14:13 by raruiz-r         ###   ########.fr       */
+/*   Updated: 2023/10/10 12:24:25 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "../libft.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 5
 # endif
 
-size_t	ft_strlen(char *str);
 char	*get_next_line(int fd);
 char	*ft_strchrsearch(char *s, int c);
 char	*ft_strjoingnl(char *s1, char *s2);

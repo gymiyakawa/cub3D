@@ -6,7 +6,7 @@
 #    By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/10 15:08:27 by gmiyakaw          #+#    #+#              #
-#    Updated: 2023/10/10 11:18:30 by gmiyakaw         ###   ########.fr        #
+#    Updated: 2023/10/10 12:24:03 by gmiyakaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,10 @@ SRC 	= 	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c\
 	ft_arrdup.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c\
 	ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c ft_revstr.c x_free_str_array.c
 
-OBJ		=	$(SRC:.c=.o) $(PRINTF:.c=.o)
+OBJ		=	$(SRC:.c=.o) $(PRINTF:.c=.o) $(GNL:.c=.o)
 
 PRINTF	=	./ft_printf/ft_printf.c ./ft_printf/ft_printf_utils.c
+GNL		=	./gnl/get_next_line.c ./gnl/get_next_line_utils.c
 
 CC		=	gcc
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raruiz-r <raruiz-r@42quebec.com>           +#+  +:+       +#+        */
+/*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:21:34 by raruiz-r          #+#    #+#             */
-/*   Updated: 2022/07/08 12:21:53 by raruiz-r         ###   ########.fr       */
+/*   Updated: 2023/10/10 12:24:45 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,6 @@ char	*ft_strchrsearch(char *s, int c)
 		s++;
 	}
 	return (NULL);
-}
-
-size_t	ft_strlen(char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str && str[i])
-		i++;
-	return (i);
 }
 
 char	*ft_strjoingnl(char *s1, char *s2)

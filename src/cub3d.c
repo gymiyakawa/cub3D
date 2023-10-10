@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 10:18:42 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/10 12:06:02 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/10 12:25:34 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,4 @@ int main (int ac, char **av) {
 	printf("%s \n", str2);
 	
 	return (0);
-	
-	
-	
 }
