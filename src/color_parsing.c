@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   color_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 10:18:42 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/10 13:17:17 by gmiyakaw         ###   ########.fr       */
+/*   Created: 2023/10/10 13:12:01 by gmiyakaw          #+#    #+#             */
+/*   Updated: 2023/10/10 13:21:48 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int main (int ac, char **av) {
-	
-	(void) ac;
-	(void) av;
-	
-	char *str = {"hello"};
-	
-	
-	printf("%s \n", str);
-	
-	char *str2 = ft_strdup(str);
-	
-	printf("%s \n", str2);
+
+
+// F 220,100,0
+// C 225,30,0
+
+
+int parseColors(t_main *ms)
+{
+		(void)ms;
 	
 	return (0);
 }
+

@@ -1,20 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/10 13:12:44 by gmiyakaw          #+#    #+#             */
+/*   Updated: 2023/10/10 13:14:22 by gmiyakaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#pragma once
 
 
-// F 220,100,0
-// C 225,30,0
 typedef struct s_color
 {
 	int	fRed;
 	int	fBlue;
 	int	fGreen;
+	
+	
 	int	cRed;
 	int	cBlue;
 	int	cGreen;
+	
 	int	fColor;
 	int	cColor;
 	
 }	t_color;
-
 
 
 
@@ -57,3 +70,12 @@ typedef struct s_map
 // 	int		pixel_max;
 // 	bool	is_dead;
 // }			t_map;
+
+
+typedef struct s_main
+{
+	t_color *colors;
+	t_map	*map;
+	
+	
+}	t_main;

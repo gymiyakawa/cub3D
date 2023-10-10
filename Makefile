@@ -6,7 +6,7 @@
 #    By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 09:58:15 by gmiyakaw          #+#    #+#              #
-#    Updated: 2023/10/10 12:30:02 by gmiyakaw         ###   ########.fr        #
+#    Updated: 2023/10/10 13:19:03 by gmiyakaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ MLX_DIR = ./inc/mlx42/
 LIBFT_DIR = ./inc/libft/
 
 ####    FILES    ####
-RAW_SRC = cub3d.c
-RAW_INC = defs.h
+RAW_SRC = cub3d.c color_parsing.c
+RAW_INC = cub3d.h structs.h
 
 HEADERS = $(addprefix $(INC_DIR)/, $(RAW_INC))
 SOURCES = $(addprefix $(SRC_DIR)/, $(RAW_SRC))
@@ -55,6 +55,7 @@ $(OBJ_DIR):
 clean:
 	@rm -rf $(NAME) $(OBJ_DIR)
 	@make -C $(LIBFT_DIR) fclean
+	@echo "$(RED)cub3d cleaned$(RESET)"
 
 fclean: clean
 
