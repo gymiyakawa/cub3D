@@ -6,7 +6,7 @@
 #    By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 09:58:15 by gmiyakaw          #+#    #+#              #
-#    Updated: 2023/10/10 13:19:03 by gmiyakaw         ###   ########.fr        #
+#    Updated: 2023/10/10 16:16:22 by gmiyakaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ INC_DIR = ./inc
 OBJ_DIR = ./obj
 
 ####    LIBRARIES    ####
-MLX_DIR = ./inc/mlx42/
+MLX_DIR = ./inc/MLX42/build/
+MLX_CC = $(MLX_DIR)libmlx42.a -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+
 LIBFT_DIR = ./inc/libft/
 
 ####    FILES    ####
@@ -39,11 +41,12 @@ RED		=	\033[0;31m
 
 ####    RECIPES    ####
 
-all: $(NAME)
+all: mlx $(NAME)
 
-$(NAME): $(OBJECTS) | $(OBJ_DIR) 
+$(NAME): $(OBJECTS) | $(OBJ_DIR)
+
 	@make -C $(LIBFT_DIR)
-	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a 
+	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_CC)
 	@echo "$(GREEN) cub3d compiled successfully!$(RESET)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
@@ -52,9 +55,16 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
+
+mlx:
+	cmake -B inc/MLX42/build inc/MLX42
+	cmake --build inc/MLX42/build -j4 
+
+
 clean:
 	@rm -rf $(NAME) $(OBJ_DIR)
 	@make -C $(LIBFT_DIR) fclean
+	@rm -rf $(MLX_DIR)
 	@echo "$(RED)cub3d cleaned$(RESET)"
 
 fclean: clean
