@@ -6,7 +6,7 @@
 #    By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 09:58:15 by gmiyakaw          #+#    #+#              #
-#    Updated: 2023/10/10 17:16:19 by raruiz-r         ###   ########.fr        #
+#    Updated: 2023/10/11 12:08:29 by raruiz-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,11 +75,13 @@ fclean: clean
 
 leaks:
 	make re
-	valgrind --leak-check=full --show-leak-kinds=all ./cub3d
+	valgrind --leak-check=full --show-leak-kinds=all ./cub3d ./maps/small.cub
 
 run:
-	make
-	./cub3d
+	@make
+	@echo "testing with sample map"
+	@echo ""
+	@./cub3d ./maps/small.cub
 	
 re: fclean all
 

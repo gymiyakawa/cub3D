@@ -6,7 +6,7 @@
 /*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 12:00:50 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/10 17:16:55 by raruiz-r         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:56:49 by raruiz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,17 @@
 
 //error messages:
 #define MAP_E "Input file inexistent or not conforming to .cub extension"
-
+#define AC_E "Only two arguments for cub3d (the first is the program's name)"
+#define MAL_E "Error on malloc"
 
 //map_parsing.c
-int	check_map(t_main *data);
-int	open_and_allocate_map(char *str, t_main *data);
-int	check_input_extension(char *str, t_main *data);
+int	    check_map(t_main *data);
+int	    open_and_allocate_map(char *str, t_main *data);
+int     check_input_extension(char *str, t_main *data);
 
 //error.c
 void    error_and_exit(char *str, t_main *data);
 
 //cub3d.c
 bool	parsing(char *str, t_main *data);
+int     initialize_data(t_main *data);
