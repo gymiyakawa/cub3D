@@ -6,7 +6,7 @@
 #    By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 09:58:15 by gmiyakaw          #+#    #+#              #
-#    Updated: 2023/10/11 09:54:21 by gmiyakaw         ###   ########.fr        #
+#    Updated: 2023/10/11 14:16:13 by gmiyakaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ MLX_GIT = https://github.com/codam-coding-college/MLX42.git
 LIBFT_DIR = ./inc/libft/
 
 ####    FILES    ####
-RAW_SRC = cub3d.c color_parsing.c init.c error.c map_parsing.c
+RAW_SRC = cub3d.c color_parsing.c init.c error.c map_parsing.c exit.c
 RAW_INC = cub3d.h structs.h
 
 HEADERS = $(addprefix $(INC_DIR)/, $(RAW_INC))
@@ -78,8 +78,10 @@ leaks:
 	valgrind --leak-check=full --show-leak-kinds=all ./cub3d
 
 run:
-	make
-	./cub3d
+	@make
+	@echo "testing with sample map"
+	@echo ""
+	@./cub3d ./maps/small.cub
 	
 re: fclean all
 

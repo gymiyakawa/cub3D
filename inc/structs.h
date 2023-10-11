@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:12:44 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/11 09:58:02 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:49:27 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ typedef struct s_texture
 
 typedef struct s_map
 {
-	mlx_t*	mlx;
-	// void	*mlx;
 	void	*win;
 	char	**map;
 	int		flag;
@@ -76,7 +74,6 @@ typedef struct s_map
 	int		pixel;
 	int		pixel_max;
 	bool	is_dead;
-	
 }	t_map;
 
 typedef struct s_main

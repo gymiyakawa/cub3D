@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 12:17:38 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/08/02 16:02:31 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:17:43 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,8 @@ size_t	ft_strlen(const char *s)
 {
 	int	i;
 
-	if (!s)
-	{
-		perror("ft_strlen error: invalid/empty argument\n");
-		return (-1);
-	}
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 	{
 		i++;
 	}
