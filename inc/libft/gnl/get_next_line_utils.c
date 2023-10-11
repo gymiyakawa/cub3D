@@ -6,30 +6,30 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:21:34 by raruiz-r          #+#    #+#             */
-/*   Updated: 2023/10/10 12:24:45 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:22:23 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*ft_calloc(size_t count, size_t size)
-{
-	size_t	i;
-	char	*call;
+// void	*ft_calloc(size_t count, size_t size)
+// {
+// 	size_t	i;
+// 	char	*call;
 
-	i = 0;
-	if (count == SIZE_MAX && size == SIZE_MAX)
-		return (NULL);
-	call = malloc(count * size);
-	if (!call)
-		return (NULL);
-	while (i < count * size)
-	{
-		call[i] = 0;
-		i++;
-	}
-	return (call);
-}
+// 	i = 0;
+// 	if (count == SIZE_MAX && size == SIZE_MAX)
+// 		return (NULL);
+// 	call = malloc(count * size);
+// 	if (!call)
+// 		return (NULL);
+// 	while (i < count * size)
+// 	{
+// 		call[i] = 0;
+// 		i++;
+// 	}
+// 	return (call);
+// }
 
 char	*ft_strchrsearch(char *s, int c)
 {
