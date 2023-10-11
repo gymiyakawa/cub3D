@@ -1,5 +1,4 @@
 
-
 NAME = cub3d
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g
@@ -18,7 +17,7 @@ MLX_GIT = https://github.com/codam-coding-college/MLX42.git
 LIBFT_DIR = ./inc/libft/
 
 ####    FILES    ####
-RAW_SRC = cub3d.c color_parsing.c init.c error.c map_parsing.c
+RAW_SRC = cub3d.c color_parsing.c init.c error.c map_parsing.c flood_fill.c
 RAW_INC = cub3d.h structs.h
 
 HEADERS = $(addprefix $(INC_DIR)/, $(RAW_INC))
@@ -64,7 +63,7 @@ fclean: clean
 	@echo "$(RED)cub3d cleaned$(RESET)"
 
 leaks:
-	make re
+	make
 	valgrind --leak-check=full --show-leak-kinds=all ./cub3d ./maps/small.cub
 
 run:

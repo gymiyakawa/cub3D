@@ -2,6 +2,8 @@
 
 #pragma once
 
+typedef struct s_main t_main;
+
 typedef struct s_color
 {
 	int	f_red;
@@ -14,8 +16,9 @@ typedef struct s_color
 	
 	int	f_color;
 	int	c_color;
+	t_main	*ms;
 	
-}	t_colors;
+}	t_color;
 
 
 typedef struct s_img
@@ -33,6 +36,7 @@ typedef struct s_texture
 	t_img	s_tex;
 	t_img	e_tex;
 	t_img	w_tex;
+	t_main	*ms;
 }	t_texture;
 
 typedef struct s_map
@@ -40,7 +44,7 @@ typedef struct s_map
 	// mlx_t*	mlx;
 	// void	*mlx;
 	void	*win;
-	char	**map;
+	char	**maze;
 	int		flag;
 	int		x;
 	int		y;
@@ -66,12 +70,13 @@ typedef struct s_map
 	int		pixel;
 	// int		pixel_max;
 	// bool	is_dead;
+	t_main	*ms;
 	
 }	t_map;
 
 typedef struct s_main
 {
-	t_color	*colors;
+	t_color		*colors;
 	t_map		*map;
 	t_texture	*texture;
 	void		*mlx;
