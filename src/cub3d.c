@@ -7,7 +7,7 @@ int	main(int ac, char **av)
 	
 	main = x_calloc(sizeof(t_main));
 	
-	init_structs(main);
+	init_structs(main, av);
 			(void)ac;
 			(void)av;
 			main->fd = open(av[1], O_RDONLY);
@@ -16,6 +16,7 @@ int	main(int ac, char **av)
 		if (parse_colors(main) != 0)
 			error_and_exit("parsing error\n", main);
 	
-	
+		print_color_struct(main->colors);
 	return 0;
 }
+

@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:12:44 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/11 11:49:27 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:42:22 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_main
 	t_texture	*texture;
 	mlx_t*		mlx;
 	int			fd;
+	char		*filename;
 }	t_main;
 
 			// from so_long

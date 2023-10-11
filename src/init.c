@@ -1,8 +1,8 @@
 #include "../inc/cub3d.h"
 
-void	init_structs(t_main *main)
+void	init_structs(t_main *main, char **av)
 {
-
+	main->filename = ft_strdup(av[1]);
 	
 	main->colors = x_calloc(sizeof(t_color));
 	init_color(main->colors);

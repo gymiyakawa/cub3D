@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:12:01 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/11 15:32:07 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/11 17:07:47 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,55 +32,71 @@ int parse_colors(t_main *ms)
 {
 	char	*arg;
 
-	arg = find_identifier(ms->fd, 'F');
-	
-						printf("arg: %s\n", arg);
-	
+	arg = find_identifier(ms, 'F');
 	if (arg == NULL)
 		error_and_exit(E_PRS_COL, ms);
+									printf("arg: %s\n", arg);
 	if (parse_floor(ms->colors, arg) != 0)
 		error_and_exit(E_PRS_COL, ms);
-	
-	
-	arg = x_free(arg);
-	
-	
-	
-	arg = find_identifier(ms->fd, 'C');
-	
+	if (arg)
+		arg = x_free(arg);
+
+	arg = find_identifier(ms, 'C');
 	if (arg == NULL)
 		error_and_exit(E_PRS_COL, ms);
-	
+									printf("arg: %s\n", arg);
+	if (parse_ceiling(ms->colors, arg) != 0)
+		error_and_exit(E_PRS_COL, ms);
+	if (arg)
+		arg = x_free(arg);
 	return (0);
 }
 
-char *find_identifier(int fd, char identifier)
+int	parse_ceiling(t_color *c, char *arg)
+{
+	int	i;
+
+	i = 0;
+	// while (arg[i] != 'C' && arg[i])
+	// 	i++;
+	if (set_color_bit(arg, &c->c_red, &i) != 0)
+		return (-1);
+	if (set_color_bit(arg, &c->c_green, &i) != 0)
+		return (-2);
+	if (set_color_bit(arg, &c->c_blue, &i) != 0)
+		return (-3);
+	c->c_color = create_trgb(0, c->c_red, c->c_green, c->c_blue);
+	return (0);
+}
+
+char *find_identifier(t_main *ms, char identifier)
 {
 	char	*line;
 	char	*tmp;
 	int		i;
 
-	line = get_next_line(fd);
+	close(ms->fd);
+	ms->fd = open(ms->filename, O_RDONLY);
+
+	line = get_next_line(ms->fd);
 	while (line)
 	{
 		tmp = line;
 		i = 0;
 		while (line[i])
 		{
-						// printf("line i %s\n", &line[i]);
-						// printf("identifier %s\n", identifier);
-						// printf("strlen %zu\n", ft_strlen(identifier));
-						// if (ft_strncmp(&line[i], identifier, ft_strlen(identifier) == 0))
+											// printf("line %d: %c\n", i, line[i]);
 			if (line[i] == identifier)
 			{
 				if (valid_up_to_identifier(tmp, &line[i]) == false)
 					break;
-				return (&line[i]);
+				return (&line[i]);			// set
 			}
 			i++;
 		}
-		line = x_free(line);
-		line = get_next_line(fd);
+		if (line)
+			line = x_free(line);
+		line = get_next_line(ms->fd);
 	}
 	return (NULL);
 }
@@ -91,7 +107,6 @@ bool	valid_up_to_identifier(char *initial, char *identifier)
 	{
 		if (*initial != ' ')
 		{
-									printf("found invalid characters pre identifier\n");
 			return (false);
 		}
 		initial++;
@@ -104,29 +119,38 @@ int	parse_floor(t_color *c, char *arg)
 	int	i;
 
 	i = 0;
-	while (arg[i] != 'F' && arg[i])
-		i++;
-	if (f_red(c, arg) != 0)
+	// while (arg[i] != 'F' && arg[i])
+	// 	i++;
+	if (set_color_bit(arg, &c->f_red, &i) != 0)
 		return (-1);
-							printf("f_red: %d\n", c->f_red);
-
+	if (set_color_bit(arg, &c->f_green, &i) != 0)
+		return (-2);
+	if (set_color_bit(arg, &c->f_blue, &i) != 0)
+		return (-3);
+	c->f_color = create_trgb(0, c->f_red, c->f_green, c->f_blue);
 	return (0);
 }
 
-int	f_red(t_color *c, char *arg)
+int	create_trgb(int t, int r, int g, int b)
 {
-	int	i;
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 
-	i = 0;
-	while (arg[++i] != ',' && arg[i] != '\n')
+
+int	set_color_bit(char *arg, int *color_bit, int *i)
+{
+	while (arg[++*i] != ',' && arg[*i] != '\n')
 	{
-		if (arg[i] == ' ')
+		if (arg[*i] == ' ')
 			continue ;
-		if (ft_isdigit(arg[i]) == false)
+		if (ft_isdigit(arg[*i]) == false)
 			return (1);
-		if (c->f_red != 0)
-			c->f_red *= 10;
-		c->f_red += (int)arg[i] - '0';
+		if (*color_bit != 0)
+			*color_bit *= 10;
+		*color_bit += (int)arg[*i] - '0';
 	}
-	return (0);
+	if (*color_bit < 0 || *color_bit > 255)
+		return (2);
+	else
+		return (0);
 }
