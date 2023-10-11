@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:46:34 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/07/31 17:34:56 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:18:12 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,11 @@ size_t	ft_rputstr(char *s);
 size_t	ft_rputnbr_base(long long int n, int base, char *base_str);
 size_t	ft_rputaddress(unsigned long long int n, char *base_str);
 size_t	ft_rputchar(char c);
+
+/*-------------------- GET NEXT LINE FUNCTIONS ----------------------*/
+char	*get_next_line(int fd);
+char	*ft_strchrsearch(char *s, int c);
+char	*ft_strjoingnl(char *s1, char *s2);
+void	*ft_calloc(size_t count, size_t size);
 
 #endif

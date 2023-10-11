@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 12:00:50 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/11 11:56:49 by raruiz-r         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #pragma once
 
@@ -17,9 +7,12 @@
 #include <stdio.h>
 #include "MLX42/include/MLX42/MLX42.h"
 #include <math.h>
+#include <fcntl.h>
 #include <stdbool.h> 
 
-
+/*
+		DEFINITIONS
+*/
 #define WIDTH 30
 #define HEIGHT 30
 #define TRUE 1
@@ -41,3 +34,27 @@ void    error_and_exit(char *str, t_main *data);
 //cub3d.c
 bool	parsing(char *str, t_main *data);
 int     initialize_data(t_main *data);
+
+/*
+		ERROR MESSAGES
+*/
+
+#define E_PRS_COL "\nparsing error on color section\n"
+
+/*
+		FUNCTION PROTOTYPES
+*/
+	// Initialization
+void	init_structs(t_main *main);
+void	init_color(t_color *color);
+
+
+	// error and exit functions
+void    error_and_exit(char *str, t_main *data);
+
+
+	//	color parsing
+int		parse_colors(t_main *ms);
+char	*find_identifier(int fd, char identifier);
+int		parse_floor(t_color *c, char *arg);
+int		f_red(t_color *c, char *arg);

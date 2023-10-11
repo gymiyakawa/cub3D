@@ -1,27 +1,16 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_parsing.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 16:09:42 by raruiz-r          #+#    #+#             */
-/*   Updated: 2023/10/11 12:01:16 by raruiz-r         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "../inc/cub3d.h"
 
-int	check_map(t_main *data)
-{
-	(void)data;
-	// check_top_and_bottom_walls(data->map);
-	// check_right_and_left_walls(data->map);
-	// check_map_inside(data->map);
-	// check_assets(data->map);
-	// check_valid_path(data->map);
-	return (0);
-}
+// int	check_map(t_main *data)
+// {
+// 	check_top_and_bottom_walls(data->map);
+// 	check_right_and_left_walls(data->map);
+// 	check_map_inside(data->map);
+// 	check_assets(data->map);
+// 	check_valid_path(data->map);
+// 	return (0);
+// }
 
 // int	open_and_allocate_map(char *str, t_main *data)
 // {//work on this function

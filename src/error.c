@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:13:29 by raruiz-r          #+#    #+#             */
-/*   Updated: 2023/10/10 17:05:15 by raruiz-r         ###   ########.fr       */
+/*   Updated: 2023/10/11 10:01:17 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 void    error_and_exit(char *str, t_main *data)
 {
     printf("%s\n",str);
-    free(data);//fix me a function to free data;
+				(void)data; // delete this once free data is functional
+	// free(data);//fix me a function to free data;
     exit(1);
 }
+
+

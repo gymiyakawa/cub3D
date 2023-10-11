@@ -1,17 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 13:12:44 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/11 12:00:30 by raruiz-r         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #pragma once
-
 
 typedef struct s_color
 {
@@ -20,7 +9,7 @@ typedef struct s_color
 	int	f_green;
 	
 	int	c_red;
-	int _blue;
+	int c_blue;
 	int	c_green;
 	
 	int	f_color;
@@ -82,10 +71,11 @@ typedef struct s_map
 
 typedef struct s_main
 {
-	t_colors	*colors;
+	t_color	*colors;
 	t_map		*map;
 	t_texture	*texture;
 	void		*mlx;
+	int			fd;
 }	t_main;
 
 			// from so_long
