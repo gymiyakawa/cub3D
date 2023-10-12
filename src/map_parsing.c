@@ -12,7 +12,7 @@
 // 	return (0);
 // }
 
-int	open_and_allocate_map(char *str, t_main **ms)
+int	open_and_allocate_map(char *str, t_main *ms)
 {
 	char	*temp;
 	int		fd;

@@ -7,13 +7,13 @@ bool	parsing(char *str, t_main *ms)
 	check_input_extension(str, ms);
 	//color & texture parsing
 	//keep a pointer to end of color & texture input and send it to the next function?
-	open_and_allocate_map(str, &ms);
+	open_and_allocate_map(str, ms);
 	// check_map(ms);
 
 
-	if (parse_colors(main) != 0)
-		error_and_exit("parsing error\n", main);
-	print_color_struct(main->colors);
+	if (parse_colors(ms) != 0)
+		error_and_exit("parsing error\n", ms);
+	print_color_struct(ms->colors);
 	return (TRUE);
 }
 
@@ -22,13 +22,14 @@ int	main(int ac, char **av)
 {
 	t_main *ms;
 	
+	ms = NULL;
 	if (ac == 2)
 	{
-		init_ms(&ms, av);
-		if (parsing(av[1], &ms))
+		init_ms(ms, av);
+		if (parsing(av[1], ms))
 		{
-			ms.mlx = mlx_init(WIDTH, HEIGHT, "cub3d", TRUE);
-			if (!ms.mlx)
+			ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", TRUE);
+			if (!ms->mlx)
 				exit(0);
 			// map.win = mlx_new_window(map.mlx, (map.x_max * 64), (map.y_max * 64),
 			// 		"./so_long");
@@ -43,7 +44,7 @@ int	main(int ac, char **av)
 			//free ms here?
 		}
 	}
-	mlx_terminate(ms.mlx);
+	mlx_terminate(ms->mlx);
 
 	return 0;
 }

@@ -2,7 +2,7 @@
 
 void	init_ms(t_main *ms, char **av)
 {
-	ms = ft_calloc(sizeof(t_main));
+	ms = ft_calloc(1, sizeof(t_main));
 	if (!ms)
 		error_and_exit(E_MALLOC, ms);
 	ms->filename = ft_strdup(av[1]);
