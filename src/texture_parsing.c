@@ -10,8 +10,6 @@
 //
 //pointer/instance/context/count??
 
-
-
 int	parse_texture(t_main *ms)
 {
 	if (parse_indiv_textures(ms, "NO") != 0)
@@ -65,21 +63,6 @@ int	texture_pathfinder(char *arg, t_main *ms, t_img *img)
 	return (0);
 }
 
-// checks if the path is valid and assigns fd at the correct img structure
-void	check_valid_path(char *path, t_main *ms, t_img *img)
-{
-	int	fd;
-
-	fd = open(path, O_RDONLY);
-	if (!fd)
-	{
-		path = x_free(path);
-		error_and_exit(E_OPEN, ms);
-	}
-	(*img).text_fd = fd;
-	return ;
-}
-
 t_img	*which_texture(t_main *ms, char *direction)
 {
 	if (ft_strcmp(direction, "NO") == 0)
@@ -93,8 +76,6 @@ t_img	*which_texture(t_main *ms, char *direction)
 	else
 		return (NULL);
 }
-
-
 
 		// old, deprecated. keeping for backup
 // char *find_identifier_variant(t_main *ms, char *identifier)

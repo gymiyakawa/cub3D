@@ -103,16 +103,24 @@ int	main(int ac, char **av)
 		}
 	}
 	// mlx_terminate(ms->mlx);
-
+	close_fds();
 	return 0;
 	// else
 	// 	perror(AC_E);
-	
-
 	
 	// add headers
 	//norminette
 	//test with valgrind and leaks
 	// (void)ac;
 	// (void)av;
+}
+
+void	close_fd(void)
+{
+	int i;
+
+	i = 3;
+	while (i++ < MAX_FILES)
+		close(i);
+	return;
 }

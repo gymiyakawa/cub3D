@@ -16,6 +16,7 @@
 #define HEIGHT 30
 #define TRUE 1
 #define FALSE 0
+#define MAX_FILES 256
 
 // ERROR MESSAGES
 

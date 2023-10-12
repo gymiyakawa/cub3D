@@ -44,6 +44,20 @@ char *find_identifier(t_main *ms, char *identifier)
 	return (NULL);
 }
 
+// checks if the path to an img is valid and assigns fd at the correct img structure
+void	check_valid_path(char *path, t_main *ms, t_img *img)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (!fd)
+	{
+		path = x_free(path);
+		error_and_exit(E_OPEN, ms);
+	}
+	(*img).text_fd = fd;
+	return ;
+}
 
 				// old, deprecated keeping for backup
 // char *find_identifier(t_main *ms, char identifier)
