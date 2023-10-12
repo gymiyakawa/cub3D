@@ -73,7 +73,6 @@ typedef struct s_map
 
 typedef struct s_main
 {
-	char		**file_copy;
 	t_color		*colors;
 	t_map		*map;
 	t_texture	*texture;

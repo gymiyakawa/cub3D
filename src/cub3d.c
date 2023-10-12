@@ -9,6 +9,8 @@ char	**copy_file(char *str, t_main *ms)
 	int		i;
 
 	i = 0;
+	(void)str;
+	file_copy = NULL;
 	temp = get_next_line(ms->fd);
 	while (file_copy[i])
 	{
