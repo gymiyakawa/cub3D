@@ -50,15 +50,20 @@ void	init_texture(t_texture **texture, t_main *ms)
 		error_and_exit(E_MALLOC, ms);
 	(*texture)->n_tex.height = 0;
 	(*texture)->n_tex.width = 0;
-	
+	(*texture)->n_tex.text_fd = 0;
+	(*texture)->n_tex.path = NULL;
 	(*texture)->s_tex.height = 0;
 	(*texture)->s_tex.width = 0;
-	
+	(*texture)->s_tex.text_fd = 0;
+	(*texture)->s_tex.path = NULL;
 	(*texture)->e_tex.height = 0;
 	(*texture)->e_tex.width = 0;
-	
+	(*texture)->e_tex.text_fd = 0;
+	(*texture)->e_tex.path = NULL;
 	(*texture)->w_tex.height = 0;
 	(*texture)->w_tex.width = 0;
+	(*texture)->w_tex.text_fd = 0;
+	(*texture)->w_tex.path = NULL;
 	(*texture)->ms = ms;
 	return ;
 }

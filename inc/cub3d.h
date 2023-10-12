@@ -66,19 +66,17 @@ int		set_color_bit(char *arg, int *color_bit, int *i);
 int		parse_texture(t_main *ms);
 int		parse_indiv_textures(t_main *ms, char *direction);
 t_img	*which_texture(t_main *ms, char *direction);
-
-char	*find_identifier_variant(t_main *ms, char *identifier);
+int	texture_pathfinder(char *arg, t_main *ms, t_img *img);
+void	check_valid_path(char *path, t_main *ms, t_img *img);
 
 //parsing utils.c
-char	*find_identifier(t_main *ms, char identifier);
+char	*find_identifier(t_main *ms, char *identifier);
 bool	valid_up_to_identifier(char *initial, char *identifier);
 int		create_trgb(int t, int r, int g, int b);
 
-char *find_identifier_array(t_main *ms, char *identifier);
 
 //printing functions
 void	print_color_struct(t_color *c);
-
-
-
+void	print_textures(t_texture *t);
+void	print_img_struct(t_img *img);
 

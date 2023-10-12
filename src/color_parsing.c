@@ -17,14 +17,14 @@ int	set_floor_ceiling(t_main *ms)
 {
 	char	*arg;
 
-	arg = find_identifier(ms, 'F');
+	arg = find_identifier(ms, "F");
 	if (!arg)
 		return (-1);
 	ms->colors->floor_ceiling[0] = ft_strdup(arg);
 	if (arg)
 		arg = x_free(arg);
 	
-	arg = find_identifier(ms, 'C');
+	arg = find_identifier(ms, "C");
 	if (!arg)
 		return (-1);
 	ms->colors->floor_ceiling[1] = ft_strdup(arg);

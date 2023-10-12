@@ -46,7 +46,6 @@ char	**copy_file(char *str, t_main *ms)
 	close(ms->fd);
 	free(temp);
 	file_copy[i] = NULL;
-							printf("TESTANDO: %s\n", file_copy[25]); //delete
 	return (file_copy);
 }
 
@@ -57,12 +56,19 @@ bool	parsing(char *str, t_main *ms)
 	if (parse_colors(ms) != 0)
 		error_and_exit(E_PARS, ms);
 									print_color_struct(ms->colors); //we are deleting this later
-	// if (parse_texture(ms) != 0)
-	// 	error_and_exit(E_PARS, ms);
+	if (parse_texture(ms) != 0)
+		error_and_exit(E_PARS, ms);
+									print_textures(ms->texture);
+	
+		
 	// if (parse_map(ms) != 0)
 	// 	error_and_exit(E_PARS, ms);
 	return (TRUE);
 }
+
+
+
+
 
 //void mlx_key_hook(mlx_t* mlx, mlx_keyfunc func, void* param)
 int	main(int ac, char **av)

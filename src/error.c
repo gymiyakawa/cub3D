@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:13:29 by raruiz-r          #+#    #+#             */
-/*   Updated: 2023/10/12 14:38:19 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:22:54 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ void    *free_color(t_color *colors)
 void    *free_texture(t_texture *texture)
 {
     //need to free images? see if there's a mlx function for it
+	texture->n_tex.path = x_free(texture->n_tex.path);
+	texture->s_tex.path = x_free(texture->s_tex.path);
+	texture->w_tex.path = x_free(texture->w_tex.path);
+	texture->e_tex.path = x_free(texture->e_tex.path);
     texture = x_free(texture);
     return(texture);
 }

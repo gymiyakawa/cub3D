@@ -17,15 +17,14 @@ typedef struct s_color
 	t_main	*ms;
 }	t_color;
 
-
 typedef struct s_img
 {
-	int	height;
-	int	width;
 	//pointer/instance/context/count??
-
+	int		height;
+	int		width;
+	char	*path;
+	int		text_fd;
 }	t_img;
-
 
 typedef struct s_texture
 {
