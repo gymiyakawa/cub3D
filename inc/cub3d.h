@@ -26,25 +26,32 @@
 #define E_BIG "Map too big for this screen\n"
 #define E_PRS_COL "Invalid color parameter\n"
 #define E_PRS_TXT "Invalid texture parameter\n"
+#define E_PARS "Parsing error\n"
 
 // FUNCTION PROTOTYPES
 
 //map_parsing.c
-int	    check_map(t_main *ms);
-int	    open_and_allocate_map(char *str, t_main *ms);
+int	    parse_map(t_main *ms);
+// int	    open_and_allocate_map(char *str, t_main *ms);
 int     check_input_extension(char *str, t_main *ms);
+char	*set_maze(t_main *ms);
 
 //error.c
 void    error_and_exit(char *str, t_main *ms);
+void    *free_color(t_color *colors);
+void    *free_texture(t_texture *texture);
+void    *free_map(t_map *map);
+void    *free_ms(t_main *ms);
 
 //cub3d.c
+char	**copy_file(char *str, t_main *ms);
 bool	parsing(char *str, t_main *ms);
 
 //init.c
 void    init_ms(t_main **ms, char **av);
 void	init_color(t_color **color, t_main *ms);
 void	init_texture(t_texture **texture, t_main *ms);
-void	init_map(t_map **map);
+void	init_map(t_map **map, t_main *ms);
 
 //color_parsing.c
 int		parse_colors(t_main *ms);

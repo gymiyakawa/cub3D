@@ -5,12 +5,16 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"type": "lldb",
+			"name": "(lldb) Launch",
+			"type": "cppdbg",
 			"request": "launch",
-			"name": "Debug",
-			"program": "cub3d",
+			"program": "${workspaceFolder}/cub3d",
 			"args": ["./maps/small.cub"],
-			"cwd": "./"
-		}
+			"stopAtEntry": true,
+			"cwd": "${fileDirname}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "lldb"
+		},
 	]
 }

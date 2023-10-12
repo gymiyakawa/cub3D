@@ -79,6 +79,7 @@ typedef struct s_main
 	t_texture	*texture;
 	void		*mlx;
 	int			fd;
+	char		**file_copy;
 	char		*filename;
 }	t_main;
 

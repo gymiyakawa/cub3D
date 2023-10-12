@@ -8,28 +8,10 @@ void	init_ms(t_main **ms, char **av)
 	(*ms)->filename = ft_strdup(av[1]);
 	(*ms)->fd = open(av[1], O_RDONLY);
 	if ((*ms)->fd < 0)
-		error_and_exit("error. failed to open file\n", *ms);
-	// ms->map = malloc(sizeof(t_map));
-	// if (!ms->map)
-	// 	error_and_exit(E_MALLOC, ms); // would need to free colors too - maybe add code to the function?	
-	// ms->texture = malloc(sizeof(t_texture));
-	// if (!ms->texture)
-	// 	error_and_exit(E_MALLOC, ms); // would need to free colors and map too - maybe add code to the function?	
-	// map->pixel = 0;
-	// ms->map->y_max = 0;
-	// map->x_max = 0;
-	// map->flag = 0;
-	// map->y = 0;
-	// map->x = 0;
-	// map->p_y = 0;
-	// map->p_x = 0;
-	// map->e_y = 0;
-	// map->e_x = 0;
-	
+		error_and_exit(E_OPEN, *ms);
 	init_color(&(*ms)->colors, *ms);
 	init_texture(&(*ms)->texture, *ms);
-	
-	// init_map(&ms->map);
+	init_map(&(*ms)->map, *ms);
 	return ;
 }
 
@@ -73,14 +55,16 @@ void	init_texture(t_texture **texture, t_main *ms)
 	return ;
 }
 
-void	init_map(t_map **map)
+void	init_map(t_map **map, t_main *ms)
 {
-	(*map) = ft_calloc(sizeof(char *), MAX_WIDTH);
+	*map = ft_calloc(1, sizeof(t_map));
 	if (!map)
-		error_and_exit(E_MALLOC, (*map)->ms);		// needs to be changed to just ms. must include ms * to the function
-	(*map)->maze = ft_calloc(sizeof(char **), 1);
+		error_and_exit(E_MALLOC, ms);
+	(*map)->maze = ft_calloc(1, sizeof(char **));
 	if (!(*map)->maze)
-		error_and_exit(E_MALLOC, (*map)->ms); //should free map here as well /use code?
+		error_and_exit(E_MALLOC, ms); 
 	(*map)->y_max = 0;
+	(*map)->x_max = 0;
+	(*map)->ms = ms;
 	return ;
 }
