@@ -28,9 +28,9 @@ int	main(int ac, char **av)
 		init_ms(&ms, av);
 		if (parsing(av[1], ms))
 		{
-			ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", TRUE);
-			if (!ms->mlx)
-				exit(0);
+			// ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", TRUE);
+			// if (!ms->mlx)
+				// exit(0);
 			// map.win = mlx_new_window(map.mlx, (map.x_max * 64), (map.y_max * 64),
 			// 		"./so_long");
 			// if (!map.win)
@@ -44,7 +44,7 @@ int	main(int ac, char **av)
 			//free ms here?
 		}
 	}
-	mlx_terminate(ms->mlx);
+	// mlx_terminate(ms->mlx);
 
 	return 0;
 }

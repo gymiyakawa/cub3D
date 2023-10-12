@@ -17,17 +17,12 @@ int	set_floor_ceiling(t_main *ms)
 {
 	char	*arg;
 
-
-
-
-	
 	arg = find_identifier(ms, 'F');
 	if (!arg)
 		return (-1);
 	ms->colors->floor_ceiling[0] = ft_strdup(arg);
 	if (arg)
 		arg = x_free(arg);
-							printf("is it here?\n");
 	arg = find_identifier(ms, 'C');
 	if (!arg)
 		return (-1);
@@ -61,8 +56,8 @@ char *find_identifier(t_main *ms, char identifier)
 	char	*tmp;
 	int		i;
 
-	// close(ms->fd);
-	// ms->fd = open(ms->filename, O_RDONLY);
+	close(ms->fd);
+	ms->fd = open(ms->filename, O_RDONLY);
 
 	line = get_next_line(ms->fd);
 	while (line)
@@ -71,7 +66,6 @@ char *find_identifier(t_main *ms, char identifier)
 		i = 0;
 		while (line[i])
 		{
-											// printf("line %d: %c\n", i, line[i]);
 			if (line[i] == identifier)
 			{
 				if (valid_up_to_identifier(tmp, &line[i]) == false)
