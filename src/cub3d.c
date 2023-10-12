@@ -2,17 +2,41 @@
 
 #include "../inc/cub3d.h"
 
+int	line_count(char *str, t_main *ms)
+{
+	char	*temp;
+	int 	fd;
+	int		i;
+
+	i = 0;
+	fd = open_fd(str, ms);
+	temp = get_next_line(fd);
+	while (temp)
+	{
+		i++;
+		temp = get_next_line(fd);
+		free(temp);
+	}
+	close(fd);
+	free(temp);
+	return (i);
+}
+
 char	**copy_file(char *str, t_main *ms)
 {
 	char 	**file_copy;
 	char	*temp;
+	int 	len;
 	int		i;
 
 	i = 0;
-	(void)str;
-	file_copy = NULL;
+	len = line_count(str, ms);
+	file_copy = ft_calloc(len + 1, sizeof(char *));
+	if(!file_copy)
+		error_and_exit(E_MALLOC, ms);
+	ms->fd = open_fd(str, ms);
 	temp = get_next_line(ms->fd);
-	while (file_copy[i])
+	while (temp)
 	{
 		file_copy[i] = ft_strdup(temp);
 		i++;
@@ -49,7 +73,6 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		init_ms(&ms, av);
-		
 		if (parsing(av[1], ms))
 		{
 			
@@ -76,7 +99,6 @@ int	main(int ac, char **av)
 	// mlx_terminate(ms->mlx);
 
 	return 0;
-}
 	// else
 	// 	perror(AC_E);
 	
@@ -87,3 +109,4 @@ int	main(int ac, char **av)
 	//test with valgrind and leaks
 	// (void)ac;
 	// (void)av;
+}
