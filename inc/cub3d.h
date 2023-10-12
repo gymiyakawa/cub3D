@@ -40,8 +40,8 @@ void    error_and_exit(char *str, t_main *ms);
 bool	parsing(char *str, t_main *ms);
 
 //init.c
-void    init_ms(t_main *ms, char **av);
-void	init_color(t_color *color);
+void    init_ms(t_main **ms, char **av);
+void	init_color(t_color **color);
 void	init_texture(t_texture *texture);
 void	init_map(t_map **map);
 
