@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/10 09:58:15 by gmiyakaw          #+#    #+#              #
-#    Updated: 2023/10/11 21:03:29 by gmiyakaw         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 NAME = cub3d
 CC = gcc
@@ -30,6 +19,7 @@ LIBFT_DIR = ./inc/libft/
 ####    FILES    ####
 RAW_SRC = cub3d.c color_parsing.c init.c error.c map_parsing.c \
 		exit.c print.c
+
 RAW_INC = cub3d.h structs.h
 
 HEADERS = $(addprefix $(INC_DIR)/, $(RAW_INC))
@@ -46,14 +36,13 @@ all: mlx $(NAME)
 
 $(NAME): $(OBJECTS) | $(OBJ_DIR)
 	@make -C $(LIBFT_DIR)
-#	MacOs compilaion
-# @$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_CC)
-	
-	
-#	Linux compilation
-	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_DIR)/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
 
-	
+#	MacOs compilaion
+	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_CC)
+
+#	Linux compilation
+#@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_DIR)/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
+
 	@echo "$(GREEN) cub3d compiled successfully!$(RESET)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
@@ -82,8 +71,8 @@ fclean: clean
 	@echo "$(RED)cub3d cleaned$(RESET)"
 
 leaks:
-	make re
-	valgrind --leak-check=full --show-leak-kinds=all ./cub3d
+	make
+	valgrind --leak-check=full --show-leak-kinds=all ./cub3d ./maps/small.cub
 
 run:
 	@make

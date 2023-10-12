@@ -1,32 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   color_parsing.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 13:12:01 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/11 21:32:36 by gmiyakaw         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-
-
-// F 220,100,0
-// C 225,30,0
-
-/*
-	find CHAR.
-		go through the line and build a f_red until a "," is found.
-			check if it's valid.
-		do the same for f_green
-		do the same for f_blue, but using \n 
-				build f_color and free all f.
-	do the same for C
-
-*/
 
 
 int parse_colors(t_main *ms)
@@ -64,34 +37,6 @@ int	set_floor_ceiling(t_main *ms)
 	return (0);
 }
 
-
-
-
-
-					// roguhly working but ill try a different approach.
-// int parse_colors(t_main *ms)
-// {
-// 	char	*arg;
-
-// 	arg = find_identifier(ms, 'F');
-// 	if (arg == NULL)
-// 		error_and_exit(E_PRS_COL, ms);
-// 									printf("arg: %s\n", arg);
-// 	if (parse_floor(ms->colors, arg) != 0)
-// 		error_and_exit(E_PRS_COL, ms);
-// 	// if (arg)
-// 	// 	arg = x_free(arg);
-
-// 	arg = find_identifier(ms, 'C');
-// 	if (arg == NULL)
-// 		error_and_exit(E_PRS_COL, ms);
-// 									printf("arg: %s\n", arg);
-// 	if (parse_ceiling(ms->colors, arg) != 0)
-// 		error_and_exit(E_PRS_COL, ms);
-// 	if (arg)
-// 		arg = x_free(arg);
-// 	return (0);
-// }
 
 int	parse_ceiling(t_color *c, char *arg)
 {
@@ -195,14 +140,3 @@ int	set_color_bit(char *arg, int *color_bit, int *i)
 	else
 		return (0);
 }
-
-// char	*skip_to_identifier(char *line, char identifier)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (line[i] != identifier)
-// 		i++;
-	
-// }
-
