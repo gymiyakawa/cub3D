@@ -34,7 +34,8 @@
 int	    parse_map(t_main *ms);
 // int	    open_and_allocate_map(char *str, t_main *ms);
 int     check_input_extension(char *str, t_main *ms);
-char	*set_maze(t_main *ms);
+char    **copy_maze(char *str, t_main *ms);
+// char	*set_maze(t_main *ms);
 
 //error.c
 void    error_and_exit(char *str, t_main *ms);
@@ -73,8 +74,7 @@ char	*find_identifier_variant(t_main *ms, char *identifier);
 char	*find_identifier(t_main *ms, char identifier);
 bool	valid_up_to_identifier(char *initial, char *identifier);
 int		create_trgb(int t, int r, int g, int b);
-
-char *find_identifier_array(t_main *ms, char *identifier);
+char    *find_identifier_array(t_main *ms, char *identifier);
 
 //printing functions
 void	print_color_struct(t_color *c);

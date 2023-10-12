@@ -73,6 +73,7 @@ void	init_map(t_map **map, t_main *ms)
 		error_and_exit(E_MALLOC, ms); 
 	(*map)->y_max = 0;
 	(*map)->x_max = 0;
+	//add more stuff as needed
 	(*map)->ms = ms;
 	return ;
 }

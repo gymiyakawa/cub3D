@@ -4,7 +4,12 @@
 
 int	parse_map(t_main *ms)
 {
-	(void)ms;
+	char	*temp;
+
+	temp = find_identifier_array(ms, "1");
+	if (!temp)
+		return (-1);
+	ms->map->maze = copy_maze(temp, ms);
 	// ms->map->maze = set_maze(ms); //returns the whole maze
 	// check_maze_chars(ms->map); // checks if the whole maze only has NSEW10 or spaces
 	// check_if_closed(ms->map); //checks if the borders are composed of only 1 or spaces (Tristan and Sam's idea of checking 8 points around 0s)
@@ -18,6 +23,39 @@ int	parse_map(t_main *ms)
 // if (ms->map->y_max >= MAX_WIDTH)
 // 		error_and_exit(E_BIG, ms);
 	return (0);
+}
+
+char **copy_maze(char *str, t_main *ms)
+{
+	char	**maze;
+	int		len;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	maze = ft_calloc(ms->line_count + 1, sizeof(char *));
+	if (!maze)
+		error_and_exit(E_MALLOC, ms);
+	len = ft_strlen(str);
+	while(i <= ms->line_count)
+	{
+		if (!ft_strncmp(str, ms->file_copy[j], len))
+		{
+			//I am only copying the first line here again. need to copy the whole thing
+			maze[i] = ft_strdup(ms->file_copy[j]);
+									printf("MAZE %s\n", maze[i]);
+			if(!maze[i])
+			{
+				maze = x_free(maze);
+				return(NULL);
+			}
+			i++;
+		}
+		j++;
+	}
+	maze[i] = NULL;
+	return(maze);
 }
 
 // char	*set_maze(t_main *ms)

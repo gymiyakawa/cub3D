@@ -80,6 +80,7 @@ typedef struct s_main
 	int			fd;
 	char		**file_copy;
 	char		*filename;
+	int			line_count;
 }	t_main;
 
 			// from so_long

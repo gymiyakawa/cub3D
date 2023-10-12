@@ -26,12 +26,11 @@ char	**copy_file(char *str, t_main *ms)
 {
 	char 	**file_copy;
 	char	*temp;
-	int 	len;
 	int		i;
 
 	i = 0;
-	len = line_count(str, ms);
-	file_copy = ft_calloc(len + 1, sizeof(char *));
+	ms->line_count = line_count(str, ms);
+	file_copy = ft_calloc(ms->line_count + 1, sizeof(char *));
 	if(!file_copy)
 		error_and_exit(E_MALLOC, ms);
 	ms->fd = open_fd(str, ms);
@@ -46,7 +45,7 @@ char	**copy_file(char *str, t_main *ms)
 	close(ms->fd);
 	free(temp);
 	file_copy[i] = NULL;
-							printf("TESTANDO: %s\n", file_copy[25]); //delete
+							// printf("TESTANDO: %s\n", file_copy[25]); //delete
 	return (file_copy);
 }
 
@@ -59,8 +58,8 @@ bool	parsing(char *str, t_main *ms)
 									print_color_struct(ms->colors); //we are deleting this later
 	// if (parse_texture(ms) != 0)
 	// 	error_and_exit(E_PARS, ms);
-	// if (parse_map(ms) != 0)
-	// 	error_and_exit(E_PARS, ms);
+	if (parse_map(ms) != 0)
+		error_and_exit(E_PARS, ms);
 	return (TRUE);
 }
 
