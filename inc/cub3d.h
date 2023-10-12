@@ -44,10 +44,12 @@ void    *free_map(t_map *map);
 void    *free_ms(t_main *ms);
 
 //cub3d.c
+int     line_count(char *str, t_main *ms);
 char	**copy_file(char *str, t_main *ms);
 bool	parsing(char *str, t_main *ms);
 
 //init.c
+int     open_fd(char *str, t_main *ms);
 void    init_ms(t_main **ms, char **av);
 void	init_color(t_color **color, t_main *ms);
 void	init_texture(t_texture **texture, t_main *ms);

@@ -11,7 +11,7 @@
 			"program": "${workspaceFolder}/cub3d",
 			"args": ["./maps/small.cub"],
 			"stopAtEntry": true,
-			"cwd": "${fileDirname}",
+			"cwd": "${workspaceFolder}",
 			"environment": [],
 			"externalConsole": false,
 			"MIMode": "lldb"
