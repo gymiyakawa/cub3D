@@ -28,6 +28,9 @@ int	parse_indiv_textures(t_main *ms, char *direction)
 	img = which_texture(ms, direction);
 	if (!img)
 		return (-1);
+		
+		
+		
 	return (0);
 }
 

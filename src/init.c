@@ -1,19 +1,30 @@
 #include "../inc/cub3d.h"
 
-void	init_ms(t_main **ms, char **av)
+int    open_fd(char *str, t_main *ms)
 {
-	*ms = ft_calloc(1, sizeof(t_main));
-	if (!*ms)
-		error_and_exit(E_MALLOC, *ms);
-	(*ms)->filename = ft_strdup(av[1]);
-	(*ms)->fd = open(av[1], O_RDONLY);
-	if ((*ms)->fd < 0)
-		error_and_exit(E_OPEN, *ms);
-	init_color(&(*ms)->colors, *ms);
-	init_texture(&(*ms)->texture, *ms);
-	init_map(&(*ms)->map, *ms);
-	return ;
+    int fd;
+
+    fd = open(str, O_RDONLY);
+						printf("fd: %d\n", fd);
+	
+    if (fd < 0)
+        error_and_exit(E_OPEN, ms);
+	return (fd);
 }
+
+void    init_ms(t_main **ms, char **av)
+{
+    *ms = ft_calloc(1, sizeof(t_main));
+    if (!*ms)
+        error_and_exit(E_MALLOC, *ms);
+    (*ms)->filename = ft_strdup(av[1]);
+    (*ms)->fd = open_fd(av[1], *ms);
+    init_color(&(*ms)->colors, *ms);
+    init_texture(&(*ms)->texture, *ms);
+    init_map(&(*ms)->map, *ms);
+    return ;
+}
+
 
 void	init_color(t_color **color, t_main *ms)
 {

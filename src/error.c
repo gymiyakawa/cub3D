@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:13:29 by raruiz-r          #+#    #+#             */
-/*   Updated: 2023/10/12 11:55:28 by raruiz-r         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:38:19 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void    *free_ms(t_main *ms)
 {
     if (ms->filename)
         ms->filename = x_free(ms->filename);
-    mlx_terminate(ms->mlx); //keep this here?
+    // mlx_terminate(ms->mlx); //keep this here?
     ms = x_free(ms);
     return(ms);
 }
