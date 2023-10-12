@@ -1,14 +1,14 @@
 #include "../inc/cub3d.h"
 
-void	init_ms(t_main *ms, char **av)
+void	init_ms(t_main **ms, char **av)
 {
-	ms = ft_calloc(1, sizeof(t_main));
-	if (!ms)
-		error_and_exit(E_MALLOC, ms);
-	ms->filename = ft_strdup(av[1]);
-	ms->fd = open(av[1], O_RDONLY);
-	if (ms->fd < 0)
-		error_and_exit(E_OPEN, ms);
+	*ms = ft_calloc(1, sizeof(t_main));
+	if (!*ms)
+		error_and_exit(E_MALLOC, *ms);
+	(*ms)->filename = ft_strdup(av[1]);
+	(*ms)->fd = open(av[1], O_RDONLY);
+	if ((*ms)->fd < 0)
+		error_and_exit("error. failed to open file\n", *ms);
 	// ms->map = malloc(sizeof(t_map));
 	// if (!ms->map)
 	// 	error_and_exit(E_MALLOC, ms); // would need to free colors too - maybe add code to the function?	
@@ -25,28 +25,28 @@ void	init_ms(t_main *ms, char **av)
 	// map->p_x = 0;
 	// map->e_y = 0;
 	// map->e_x = 0;
-	init_color(ms->colors);
-	init_texture(ms->texture);
-	init_map(ms->map);
+	init_color(&(*ms)->colors);
+	// init_texture((*ms)->texture);
+	// init_map(&ms->map);
 	return ;
 }
 
-void	init_color(t_color *color)
+void	init_color(t_color **color)
 {
-	color = malloc(sizeof(t_color));
-	if (!color)
-		error_and_exit(E_MALLOC, color->ms);	
-	color->floor_ceiling = ft_calloc(2, sizeof(char *));
-	if (!color->floor_ceiling)
-		error_and_exit(E_MALLOC, color->ms);	
-	color->f_red = 0;
-	color->f_blue = 0;
-	color->f_green = 0;
-	color->c_red = 0;
-	color->c_blue = 0;
-	color->c_green = 0;
-	color->f_color = 0;
-	color->c_color = 0;
+	*color = malloc(sizeof(t_color));
+	if (!*color)
+		error_and_exit(E_MALLOC, (*color)->ms);
+	(*color)->floor_ceiling = ft_calloc(2, sizeof(char *));
+	if (!(*color)->floor_ceiling)
+		error_and_exit(E_MALLOC, (*color)->ms);
+	(*color)->f_red = 0;
+	(*color)->f_blue = 0;
+	(*color)->f_green = 0;
+	(*color)->c_red = 0;
+	(*color)->c_blue = 0;
+	(*color)->c_green = 0;
+	(*color)->f_color = 0;
+	(*color)->c_color = 0;
 	return ;
 }
 
