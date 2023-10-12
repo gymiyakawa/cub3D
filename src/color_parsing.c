@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:12:01 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/11 17:07:47 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/11 21:32:36 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,37 +28,78 @@
 
 */
 
+
 int parse_colors(t_main *ms)
+{
+	if (set_floor_ceiling(ms) != 0)
+		error_and_exit(E_PRS_COL, ms);
+	if (parse_floor(ms->colors, ms->colors->floor_ceiling[0]) != 0)
+		error_and_exit(E_PRS_COL, ms);
+	if (parse_ceiling(ms->colors, ms->colors->floor_ceiling[1]) != 0)
+		error_and_exit(E_PRS_COL, ms);
+	return (0);
+}
+
+int	set_floor_ceiling(t_main *ms)
 {
 	char	*arg;
 
+
+
+
+	
 	arg = find_identifier(ms, 'F');
-	if (arg == NULL)
-		error_and_exit(E_PRS_COL, ms);
-									printf("arg: %s\n", arg);
-	if (parse_floor(ms->colors, arg) != 0)
-		error_and_exit(E_PRS_COL, ms);
+	if (!arg)
+		return (-1);
+	ms->colors->floor_ceiling[0] = ft_strdup(arg);
 	if (arg)
 		arg = x_free(arg);
-
+							printf("is it here?\n");
 	arg = find_identifier(ms, 'C');
-	if (arg == NULL)
-		error_and_exit(E_PRS_COL, ms);
-									printf("arg: %s\n", arg);
-	if (parse_ceiling(ms->colors, arg) != 0)
-		error_and_exit(E_PRS_COL, ms);
+	if (!arg)
+		return (-1);
+	ms->colors->floor_ceiling[1] = ft_strdup(arg);
 	if (arg)
 		arg = x_free(arg);
 	return (0);
 }
+
+
+
+
+
+					// roguhly working but ill try a different approach.
+// int parse_colors(t_main *ms)
+// {
+// 	char	*arg;
+
+// 	arg = find_identifier(ms, 'F');
+// 	if (arg == NULL)
+// 		error_and_exit(E_PRS_COL, ms);
+// 									printf("arg: %s\n", arg);
+// 	if (parse_floor(ms->colors, arg) != 0)
+// 		error_and_exit(E_PRS_COL, ms);
+// 	// if (arg)
+// 	// 	arg = x_free(arg);
+
+// 	arg = find_identifier(ms, 'C');
+// 	if (arg == NULL)
+// 		error_and_exit(E_PRS_COL, ms);
+// 									printf("arg: %s\n", arg);
+// 	if (parse_ceiling(ms->colors, arg) != 0)
+// 		error_and_exit(E_PRS_COL, ms);
+// 	if (arg)
+// 		arg = x_free(arg);
+// 	return (0);
+// }
 
 int	parse_ceiling(t_color *c, char *arg)
 {
 	int	i;
 
 	i = 0;
-	// while (arg[i] != 'C' && arg[i])
-	// 	i++;
+	while (arg[i] != 'C' && arg[i])
+		i++;
 	if (set_color_bit(arg, &c->c_red, &i) != 0)
 		return (-1);
 	if (set_color_bit(arg, &c->c_green, &i) != 0)
@@ -75,8 +116,8 @@ char *find_identifier(t_main *ms, char identifier)
 	char	*tmp;
 	int		i;
 
-	close(ms->fd);
-	ms->fd = open(ms->filename, O_RDONLY);
+	// close(ms->fd);
+	// ms->fd = open(ms->filename, O_RDONLY);
 
 	line = get_next_line(ms->fd);
 	while (line)
@@ -90,7 +131,7 @@ char *find_identifier(t_main *ms, char identifier)
 			{
 				if (valid_up_to_identifier(tmp, &line[i]) == false)
 					break;
-				return (&line[i]);			// set
+				return (line);
 			}
 			i++;
 		}
@@ -119,8 +160,8 @@ int	parse_floor(t_color *c, char *arg)
 	int	i;
 
 	i = 0;
-	// while (arg[i] != 'F' && arg[i])
-	// 	i++;
+	while (arg[i] != 'F' && arg[i])
+		i++;
 	if (set_color_bit(arg, &c->f_red, &i) != 0)
 		return (-1);
 	if (set_color_bit(arg, &c->f_green, &i) != 0)
@@ -154,3 +195,14 @@ int	set_color_bit(char *arg, int *color_bit, int *i)
 	else
 		return (0);
 }
+
+// char	*skip_to_identifier(char *line, char identifier)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (line[i] != identifier)
+// 		i++;
+	
+// }
+

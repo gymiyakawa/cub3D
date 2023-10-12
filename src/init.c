@@ -10,7 +10,7 @@ void	init_structs(t_main *main, char **av)
 
 void	init_color(t_color *color)
 {
-	// (void)color;
+	color->floor_ceiling = ft_calloc(2, sizeof(char *));
 	color->f_red = 0;
 	color->f_blue = 0;
 	color->f_green = 0;

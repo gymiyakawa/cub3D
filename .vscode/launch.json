@@ -8,9 +8,9 @@
 			"type": "lldb",
 			"request": "launch",
 			"name": "Debug",
-			"program": "/Users/gmiyakaw/Documents/Common_Core_Projects/cub3d/cub3d",
+			"program": "cub3d",
 			"args": ["./maps/small.cub"],
-			"cwd": "/Users/gmiyakaw/Documents/Common_Core_Projects/cub3d"
+			"cwd": "./"
 		}
 	]
 }

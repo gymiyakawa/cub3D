@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:12:44 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/11 16:42:22 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/11 21:08:13 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 typedef struct s_color
 {
+	char **floor_ceiling;
+
 	int	f_red;
 	int	f_blue;
 	int	f_green;

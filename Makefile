@@ -6,7 +6,7 @@
 #    By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/10 09:58:15 by gmiyakaw          #+#    #+#              #
-#    Updated: 2023/10/11 16:02:24 by gmiyakaw         ###   ########.fr        #
+#    Updated: 2023/10/11 21:03:29 by gmiyakaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,14 @@ all: mlx $(NAME)
 
 $(NAME): $(OBJECTS) | $(OBJ_DIR)
 	@make -C $(LIBFT_DIR)
-	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_CC)
+#	MacOs compilaion
+# @$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_CC)
+	
+	
+#	Linux compilation
+	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_DIR)/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
+
+	
 	@echo "$(GREEN) cub3d compiled successfully!$(RESET)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
