@@ -2,45 +2,57 @@
 
 #include "../inc/cub3d.h"
 
-// int	check_map(t_main *ms)
-// {
-// 	check_top_and_bottom_walls(ms->map);
+int	parse_map(t_main *ms)
+{
+	(void)ms;
+	// ms->map->maze = set_maze(ms); //returns the whole maze
+	// check_maze_chars(ms->map); // checks if the whole maze only has NSEW10 or spaces
+	// check_if_closed(ms->map); //checks if the borders are composed of only 1 or spaces (Tristan and Sam's idea of checking 8 points around 0s)
+// open_and_allocate_map(str, ms);// 	
+// check_top_and_bottom_walls(ms->map);
 // 	check_right_and_left_walls(ms->map);
 // 	check_map_inside(ms->map);
 // 	check_assets(ms->map);
 // 	check_valid_path(ms->map);
-// 	return (0);
-// }
 
-int	open_and_allocate_map(char *str, t_main *ms)
-{
-	char	*temp;
-	int		fd;
-
-	// ms->map = ft_calloc(sizeof(char *), MAX_WIDTH);
-	// if (!ms->map)
-	// 	error_and_exit(E_MALLOC, ms);
-	// ms->map->maze = ft_calloc(sizeof(char **), 1);
-	// if (!ms->map->maze)
-	// 	error_and_exit(E_MALLOC, ms); //should free map here as well use code?
-	fd = open(str, O_RDONLY);
-	if (fd == -1)
-		error_and_exit(E_OPEN, ms); //free previously malloced stuff ? use code?
-	temp = get_next_line(fd);
-	// printf("Y MAX: %d\n", ms->map->y_max);
-	while (temp && ms->map->y_max < MAX_WIDTH)
-	{
-		ms->map->maze[ms->map->y_max] = ft_strdup(temp);
-		ms->map->y_max++;
-		free(temp);
-		temp = get_next_line(fd);
-	}
-	close(fd);
-	free(temp);
-	if (ms->map->y_max >= MAX_WIDTH)
-		error_and_exit(E_BIG, ms); // or error and error to free ms?
+// if (ms->map->y_max >= MAX_WIDTH)
+// 		error_and_exit(E_BIG, ms);
 	return (0);
 }
+
+// char	*set_maze(t_main *ms)
+// {
+// 	char	*temp;
+// 	int		fd;
+
+// 	temp = find_identifier(ms, '1');
+// 	if (!temp[0])
+// 		return (-1);
+// 	// // ms->map = ft_calloc(sizeof(char *), MAX_WIDTH);
+// 	// // if (!ms->map)
+// 	// // 	error_and_exit(E_MALLOC, ms);
+// 	// // ms->map->maze = ft_calloc(sizeof(char **), 1);
+// 	// // if (!ms->map->maze)
+// 	// // 	error_and_exit(E_MALLOC, ms); //should free map here as well use code?
+// 	// // fd = open(str, O_RDONLY);
+// 	// // if (fd == -1)
+// 	// // 	error_and_exit(E_OPEN, ms); //free previously malloced stuff ? use code?
+// 	// temp = get_next_line(ms->fd);
+// 	// // printf("Y MAX: %d\n", ms->map->y_max);
+// 	// while (temp && ms->map->y_max < MAX_WIDTH)
+// 	// {
+// 	// 	ms->map->maze[ms->map->y_max] = ft_strdup(temp);
+// 	// 	ms->map->y_max++;
+// 	// 	free(temp);
+// 	// 	temp = get_next_line(fd);
+// 	// }
+// 	// close(fd);
+// 	// free(temp);
+// 	// if (ms->map->y_max >= MAX_WIDTH)
+// 	// 	error_and_exit(E_BIG, ms);
+// 	// return (temp);
+// }
+
 
 int	check_input_extension(char *str, t_main *ms)
 {

@@ -6,7 +6,7 @@
 /*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:13:29 by raruiz-r          #+#    #+#             */
-/*   Updated: 2023/10/12 11:32:19 by raruiz-r         ###   ########.fr       */
+/*   Updated: 2023/10/12 11:55:28 by raruiz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ void    error_and_exit(char *str, t_main *ms)
 void    *free_color(t_color *colors)
 {
     if (colors->floor_ceiling)
-        colors->floor_ceiling = x_free((*colors).floor_ceiling);
+    {
+        colors->floor_ceiling[0] = x_free(colors->floor_ceiling[0]);
+        colors->floor_ceiling[1] = x_free(colors->floor_ceiling[1]);
+        colors->floor_ceiling = x_free(colors->floor_ceiling);
+    }
     colors = x_free(colors);
     return(colors);
 }
@@ -46,7 +50,10 @@ void    *free_texture(t_texture *texture)
 void    *free_map(t_map *map)
 {
     if (map->maze)
+    {
+        //liberar cada linha depois da leitura
         map->maze = x_free((*map).maze);
+    }
     //need to do anything about void *win? check mlx functions
     map = x_free(map);
     return(map);

@@ -2,18 +2,39 @@
 
 #include "../inc/cub3d.h"
 
+char	**copy_file(char *str, t_main *ms)
+{
+	char 	**file_copy;
+	char	*temp;
+	int		i;
+
+	i = 0;
+	temp = get_next_line(ms->fd);
+	while (file_copy[i])
+	{
+		file_copy[i] = ft_strdup(temp);
+		i++;
+		free(temp);
+		temp = get_next_line(ms->fd);
+	}
+	close(ms->fd);
+	free(temp);
+	file_copy[i] = NULL;
+							printf("TESTANDO: %s\n", file_copy[25]); //delete
+	return (file_copy);
+}
+
 bool	parsing(char *str, t_main *ms)
 {
-	// check_input_extension(str, ms);
-	//color & texture parsing
-	//keep a pointer to end of color & texture input and send it to the next function?
-	// open_and_allocate_map(str, ms);
-	// check_map(ms);
-
-	(void)str;
+	check_input_extension(str, ms);
+	ms->file_copy = copy_file(str, ms);
 	if (parse_colors(ms) != 0)
-		error_and_exit("parsing error\n", ms);
-	print_color_struct(ms->colors);
+		error_and_exit(E_PARS, ms);
+									print_color_struct(ms->colors); //we are deleting this later
+	// if (parse_texture(ms) != 0)
+	// 	error_and_exit(E_PARS, ms);
+	// if (parse_map(ms) != 0)
+	// 	error_and_exit(E_PARS, ms);
 	return (TRUE);
 }
 

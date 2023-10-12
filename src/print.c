@@ -1,7 +1,7 @@
 #include "../inc/cub3d.h"
 
 void	print_color_struct(t_color *c)
-{
+{//remember to delete this function
 		printf("\nfloor colors\n");
 		printf("f R: %d\n", c->f_red);
 		printf("f G: %d\n", c->f_green);

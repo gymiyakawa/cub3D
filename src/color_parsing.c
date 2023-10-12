@@ -76,6 +76,7 @@ char *find_identifier(t_main *ms, char identifier)
 			{
 				if (valid_up_to_identifier(tmp, &line[i]) == false)
 					break;
+											// printf("line %s\n", line);
 				return (line);
 			}
 			i++;
@@ -84,6 +85,7 @@ char *find_identifier(t_main *ms, char identifier)
 			line = x_free(line);
 		line = get_next_line(ms->fd);
 	}
+	close(ms->fd); //so we can open again for the texture and map bits??
 	return (NULL);
 }
 
