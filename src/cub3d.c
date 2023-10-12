@@ -50,6 +50,9 @@ int	main(int ac, char **av)
 }
 	// else
 	// 	perror(AC_E);
+	
+
+	
 	// add headers
 	//norminette
 	//test with valgrind and leaks
