@@ -23,6 +23,7 @@ int	set_floor_ceiling(t_main *ms)
 	ms->colors->floor_ceiling[0] = ft_strdup(arg);
 	if (arg)
 		arg = x_free(arg);
+	
 	arg = find_identifier(ms, 'C');
 	if (!arg)
 		return (-1);
@@ -31,7 +32,6 @@ int	set_floor_ceiling(t_main *ms)
 		arg = x_free(arg);
 	return (0);
 }
-
 
 int	parse_ceiling(t_color *c, char *arg)
 {
@@ -50,50 +50,6 @@ int	parse_ceiling(t_color *c, char *arg)
 	return (0);
 }
 
-char *find_identifier(t_main *ms, char identifier)
-{
-	char	*line;
-	char	*tmp;
-	int		i;
-
-	close(ms->fd);
-	ms->fd = open(ms->filename, O_RDONLY);
-
-	line = get_next_line(ms->fd);
-	while (line)
-	{
-		tmp = line;
-		i = 0;
-		while (line[i])
-		{
-			if (line[i] == identifier)
-			{
-				if (valid_up_to_identifier(tmp, &line[i]) == false)
-					break;
-				return (line);
-			}
-			i++;
-		}
-		if (line)
-			line = x_free(line);
-		line = get_next_line(ms->fd);
-	}
-	return (NULL);
-}
-
-bool	valid_up_to_identifier(char *initial, char *identifier)
-{
-	while (initial != identifier)
-	{
-		if (*initial != ' ')
-		{
-			return (false);
-		}
-		initial++;
-	}
-	return (true);
-}
-
 int	parse_floor(t_color *c, char *arg)
 {
 	int	i;
@@ -110,12 +66,6 @@ int	parse_floor(t_color *c, char *arg)
 	c->f_color = create_trgb(0, c->f_red, c->f_green, c->f_blue);
 	return (0);
 }
-
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
 
 int	set_color_bit(char *arg, int *color_bit, int *i)
 {

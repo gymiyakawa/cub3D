@@ -25,6 +25,7 @@
 #define E_OPEN "Error opening fd\n"
 #define E_BIG "Map too big for this screen\n"
 #define E_PRS_COL "Invalid color parameter\n"
+#define E_PRS_TXT "Invalid texture parameter\n"
 
 // FUNCTION PROTOTYPES
 
@@ -41,20 +42,34 @@ bool	parsing(char *str, t_main *ms);
 
 //init.c
 void    init_ms(t_main **ms, char **av);
-void	init_color(t_color **color);
-void	init_texture(t_texture *texture);
+void	init_color(t_color **color, t_main *ms);
+void	init_texture(t_texture **texture, t_main *ms);
 void	init_map(t_map **map);
 
 //color_parsing.c
 int		parse_colors(t_main *ms);
 int		set_floor_ceiling(t_main *ms);
-char	*find_identifier(t_main *ms, char identifier);
-bool	valid_up_to_identifier(char *initial, char *identifier);
 int		parse_floor(t_color *c, char *arg);
 int		parse_ceiling(t_color *c, char *arg);
 int		set_color_bit(char *arg, int *color_bit, int *i);
+
+//texture parsing
+int		parse_texture(t_main *ms);
+int		parse_indiv_textures(t_main *ms, char *direction);
+t_img	*which_texture(t_main *ms, char *direction);
+
+char	*find_identifier_variant(t_main *ms, char *identifier);
+
+//parsing utils.c
+char	*find_identifier(t_main *ms, char identifier);
+bool	valid_up_to_identifier(char *initial, char *identifier);
 int		create_trgb(int t, int r, int g, int b);
 
-	// printing functions
+char *find_identifier_array(t_main *ms, char *identifier);
+
+//printing functions
 void	print_color_struct(t_color *c);
+
+
+
 

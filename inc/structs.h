@@ -6,19 +6,15 @@ typedef struct s_main t_main;
 typedef struct s_color
 {
 	char **floor_ceiling;
-
 	int	f_red;
 	int	f_blue;
 	int	f_green;
-	
 	int	c_red;
 	int c_blue;
 	int	c_green;
-	
 	int	f_color;
 	int	c_color;
 	t_main	*ms;
-	
 }	t_color;
 
 
@@ -77,6 +73,7 @@ typedef struct s_map
 
 typedef struct s_main
 {
+	char		**file_copy;
 	t_color		*colors;
 	t_map		*map;
 	t_texture	*texture;

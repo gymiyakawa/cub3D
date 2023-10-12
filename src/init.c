@@ -25,20 +25,22 @@ void	init_ms(t_main **ms, char **av)
 	// map->p_x = 0;
 	// map->e_y = 0;
 	// map->e_x = 0;
-	init_color(&(*ms)->colors);
-	// init_texture((*ms)->texture);
+	
+	init_color(&(*ms)->colors, *ms);
+	init_texture(&(*ms)->texture, *ms);
+	
 	// init_map(&ms->map);
 	return ;
 }
 
-void	init_color(t_color **color)
+void	init_color(t_color **color, t_main *ms)
 {
-	*color = malloc(sizeof(t_color));
+	*color = ft_calloc(1, sizeof(t_color));
 	if (!*color)
-		error_and_exit(E_MALLOC, (*color)->ms);
+		error_and_exit(E_MALLOC, ms);
 	(*color)->floor_ceiling = ft_calloc(2, sizeof(char *));
 	if (!(*color)->floor_ceiling)
-		error_and_exit(E_MALLOC, (*color)->ms);
+		error_and_exit(E_MALLOC, ms);
 	(*color)->f_red = 0;
 	(*color)->f_blue = 0;
 	(*color)->f_green = 0;
@@ -47,12 +49,27 @@ void	init_color(t_color **color)
 	(*color)->c_green = 0;
 	(*color)->f_color = 0;
 	(*color)->c_color = 0;
+	(*color)->ms = ms;
 	return ;
 }
 
-void	init_texture(t_texture *texture)
+void	init_texture(t_texture **texture, t_main *ms)
 {
-	(void)texture;
+	*texture = ft_calloc(1, sizeof(t_texture));
+	if (!*texture)
+		error_and_exit(E_MALLOC, ms);
+	(*texture)->n_tex.height = 0;
+	(*texture)->n_tex.width = 0;
+	
+	(*texture)->s_tex.height = 0;
+	(*texture)->s_tex.width = 0;
+	
+	(*texture)->e_tex.height = 0;
+	(*texture)->e_tex.width = 0;
+	
+	(*texture)->w_tex.height = 0;
+	(*texture)->w_tex.width = 0;
+	(*texture)->ms = ms;
 	return ;
 }
 
@@ -60,7 +77,7 @@ void	init_map(t_map **map)
 {
 	(*map) = ft_calloc(sizeof(char *), MAX_WIDTH);
 	if (!map)
-		error_and_exit(E_MALLOC, (*map)->ms);
+		error_and_exit(E_MALLOC, (*map)->ms);		// needs to be changed to just ms. must include ms * to the function
 	(*map)->maze = ft_calloc(sizeof(char **), 1);
 	if (!(*map)->maze)
 		error_and_exit(E_MALLOC, (*map)->ms); //should free map here as well /use code?

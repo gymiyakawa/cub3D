@@ -3,9 +3,9 @@ SO ./path_to_the_south_texture
 WE ./path_to_the_west_texture
 EA ./path_to_the_east_texture
 
-C 22 5,3   0,   0
   F 2 20,3   0,    0
 
+C 22 5,13   0,   0
 
 
 
