@@ -18,6 +18,12 @@
 #define FALSE 0
 #define MAX_FILES 256
 
+//	indexes relative to texture directions
+#define NO_INDEX 0
+#define SO_INDEX 1
+#define EA_INDEX 2
+#define WE_INDEX 3
+
 // ERROR MESSAGES
 
 #define E_MAP "Input file inexistent or not conforming to .cub extension\n"
@@ -69,22 +75,22 @@ int		parse_colors(t_main *ms);
 int		set_floor_ceiling(t_main *ms);
 int		parse_floor(t_color *c, char *arg);
 int		parse_ceiling(t_color *c, char *arg);
-int		set_color_bit(char *arg, int *color_bit, int *i);
+int		set_color_bit(char *arg, u_int32_t *color_bit, int *i);
 
 //texture parsing
 int		parse_texture(t_main *ms);
-int		parse_indiv_textures(t_main *ms, char *direction);
-t_img	*which_texture(t_main *ms, char *direction);
-int	    texture_pathfinder(char *arg, t_main *ms, t_img *img);
-void	check_valid_path(char *path, t_main *ms, t_img *img);
+int		parse_indiv_textures(t_texture *t, char *direction);
+int		texture_pathfinder(char *arg, t_main *ms, int path_index);
+void	check_valid_path(char *path, t_main *ms);
+int		which_path(char *direction);
 
 //parsing utils.c
-char	*find_identifier(t_main *ms, char *identifier);
-bool	valid_up_to_identifier(char *initial, char *identifier);
-int		create_trgb(int t, int r, int g, int b);
+char		*find_identifier(t_main *ms, char *identifier);
+bool		valid_up_to_identifier(char *initial, char *identifier);
+u_int32_t	create_rgba(int r, int g, int b, int a);
 
 //printing functions
 void	print_color_struct(t_color *c);
 void	print_textures(t_texture *t);
-void	print_img_struct(t_img *img);
+
 
