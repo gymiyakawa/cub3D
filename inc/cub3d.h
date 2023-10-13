@@ -55,6 +55,7 @@ void    *free_ms(t_main *ms);
 int     line_count(char *str, t_main *ms);
 char	**copy_file(char *str, t_main *ms);
 bool	parsing(char *str, t_main *ms);
+void	close_fds(void);
 
 //init.c
 int     open_fd(char *str, t_main *ms);
@@ -81,7 +82,6 @@ void	check_valid_path(char *path, t_main *ms, t_img *img);
 char	*find_identifier(t_main *ms, char *identifier);
 bool	valid_up_to_identifier(char *initial, char *identifier);
 int		create_trgb(int t, int r, int g, int b);
-char    *find_identifier_array(t_main *ms, char *identifier);
 
 //printing functions
 void	print_color_struct(t_color *c);

@@ -6,7 +6,7 @@ int	parse_map(t_main *ms)
 {
 	char	*temp;
 	//allow for lowercase nsew????
-	temp = find_identifier_array(ms, "1");
+	temp = find_identifier(ms, "1");
 	if (!temp)
 		return (-1);
 	ms->map->maze = copy_maze(temp, ms);

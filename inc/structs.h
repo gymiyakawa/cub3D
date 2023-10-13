@@ -1,5 +1,6 @@
-
 #pragma once
+
+#include "MLX42/include/MLX42/MLX42.h"
 
 typedef struct s_main t_main;
 

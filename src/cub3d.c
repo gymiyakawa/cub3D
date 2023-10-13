@@ -111,7 +111,7 @@ int	main(int ac, char **av)
 	// (void)av;
 }
 
-void	close_fd(void)
+void	close_fds(void)
 {
 	int i;
 
