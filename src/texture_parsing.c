@@ -1,6 +1,26 @@
 
 #include "../inc/cub3d.h"
 
+/*
+	Texture parsing is organized around identifying and populating
+	the right index of the array:
+	
+	typedef struct s_texture
+	{
+		char			**paths;
+		mlx_texture_t	**mlx_textures;
+		t_main	*ms;
+	}	t_texture;
+
+	both paths and mlx_textures contain 4 elements, coded in the same
+	order. North, south, east, west.
+	once identfied by which_path(), an integer will be given. 
+	This integer (defined in cub3d.h) is the index for both arrays.
+	From then on it's a simple process of parsing the correct file path
+	and valdating that it leads to a file, assigning it to the correct
+	element in the array if all is good.
+*/
+
 int	parse_texture(t_main *ms)
 {
 	if (parse_indiv_textures(ms->texture, "NO") != 0)
@@ -70,4 +90,3 @@ int	which_path(char *direction)
 	else
 		return (-1);
 }
-

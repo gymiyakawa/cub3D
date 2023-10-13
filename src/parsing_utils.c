@@ -14,6 +14,8 @@ bool	valid_up_to_identifier(char *initial, char *identifier)
 	return (true);
 }
 
+//	creates a color integer, using bit shifting as per MLX42
+//	standards
 u_int32_t	create_rgba(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
@@ -58,36 +60,3 @@ void	check_valid_path(char *path, t_main *ms)
 	close (fd);
 	return ;
 }
-
-				// old, deprecated keeping for backup
-// char *find_identifier(t_main *ms, char identifier)
-// {
-// 	char	*line;
-// 	char	*tmp;
-// 	int		i;
-
-// 	close(ms->fd);
-// 	ms->fd = open(ms->filename, O_RDONLY);
-
-// 	line = get_next_line(ms->fd);
-// 	while (line)
-// 	{
-// 		tmp = line;
-// 		i = 0;
-// 		while (line[i])
-// 		{
-// 			if (line[i] == identifier)
-// 			{
-// 				if (valid_up_to_identifier(tmp, &line[i]) == false)
-// 					break;
-// 				return (line);
-// 			}
-// 			i++;
-// 		}
-// 		if (line)
-// 			line = x_free(line);
-// 		line = get_next_line(ms->fd);
-// 	}
-// 	close(ms->fd);
-// 	return (NULL);
-// }

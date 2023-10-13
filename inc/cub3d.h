@@ -18,7 +18,7 @@
 #define FALSE 0
 #define MAX_FILES 256
 
-//	indexes relative to texture directions
+//	index values for texture parsing
 #define NO_INDEX 0
 #define SO_INDEX 1
 #define EA_INDEX 2

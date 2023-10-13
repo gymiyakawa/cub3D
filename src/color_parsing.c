@@ -1,8 +1,19 @@
 
 #include "../inc/cub3d.h"
 
+/*
+	color parsing starts by identifying the lines in the file that contain
+	the identifiers F and C, storing these lines in floor_ceiling[0] and [1],
+	respectively.
+	from there, both parse_floor() and parse_ceiling() are called where each
+	bit that makes up a color number will be parsed and set before being
+	assembled, via bit shifting, into the format MLX42 requires:
 
-int parse_colors(t_main *ms)
+						RED		GREEN		BLUE		A(transparency)
+						24 <<	16 <<		8 <<
+*/
+
+int	parse_colors(t_main *ms)
 {
 	if (set_floor_ceiling(ms) != 0)
 		error_and_exit(E_PRS_COL, ms);
