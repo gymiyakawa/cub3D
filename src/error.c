@@ -1,22 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 16:13:29 by raruiz-r          #+#    #+#             */
-/*   Updated: 2023/10/12 16:30:53 by gmiyakaw         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "../inc/cub3d.h"
 
 void    error_and_exit(char *str, t_main *ms)
 {
+                        // printf("MS: %p\n", ms);
     printf("Error\n");
     printf("%s\n",str);
-				(void)ms; // delete this once free ms is functional
     if (ms->colors)
         ms->colors = free_color(ms->colors);
     if (ms->texture)
@@ -63,11 +53,13 @@ void    *free_map(t_map *map)
     return(map);
 }
 
+// void    *free_ms(t_main *ms);
 void    *free_ms(t_main *ms)
 {
     if (ms->filename)
         ms->filename = x_free(ms->filename);
     // mlx_terminate(ms->mlx); //keep this here?
-    ms = x_free(ms);
-    return(ms);
+    if (ms)
+        ms = x_free(ms);
+    return(NULL);
 }

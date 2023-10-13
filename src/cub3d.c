@@ -5,19 +5,18 @@
 int	line_count(char *str, t_main *ms)
 {
 	char	*temp;
-	int 	fd;
 	int		i;
 
 	i = 0;
-	fd = open_fd(str, ms);
-	temp = get_next_line(fd);
+	ms->fd = open_fd(str, ms);
+	temp = get_next_line(ms->fd);
 	while (temp)
 	{
 		i++;
-		temp = get_next_line(fd);
+		temp = get_next_line(ms->fd);
 		free(temp);
 	}
-	close(fd);
+	close(ms->fd);
 	free(temp);
 	return (i);
 }
@@ -26,12 +25,11 @@ char	**copy_file(char *str, t_main *ms)
 {
 	char 	**file_copy;
 	char	*temp;
-	int 	len;
 	int		i;
 
 	i = 0;
-	len = line_count(str, ms);
-	file_copy = ft_calloc(len + 1, sizeof(char *));
+	ms->line_count = line_count(str, ms);
+	file_copy = ft_calloc(ms->line_count + 1, sizeof(char *));
 	if(!file_copy)
 		error_and_exit(E_MALLOC, ms);
 	ms->fd = open_fd(str, ms);
@@ -56,13 +54,10 @@ bool	parsing(char *str, t_main *ms)
 	if (parse_colors(ms) != 0)
 		error_and_exit(E_PARS, ms);
 									print_color_struct(ms->colors); //we are deleting this later
-	if (parse_texture(ms) != 0)
-		error_and_exit(E_PARS, ms);
-									print_textures(ms->texture);
-	
-		
-	// if (parse_map(ms) != 0)
+	// if (parse_texture(ms) != 0)
 	// 	error_and_exit(E_PARS, ms);
+	if (parse_map(ms) != 0)
+		error_and_exit(E_PARS, ms);
 	return (TRUE);
 }
 
@@ -107,6 +102,7 @@ int	main(int ac, char **av)
 	return 0;
 	// else
 	// 	perror(AC_E);
+	
 	
 	// add headers
 	//norminette

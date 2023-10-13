@@ -44,6 +44,7 @@ typedef struct s_map
 	int		flag;
 	int		x;
 	int		y;
+	int		p_view;
 	int		p_y;
 	int		p_x;
 	// int		e_x;
@@ -75,10 +76,11 @@ typedef struct s_main
 	t_color		*colors;
 	t_map		*map;
 	t_texture	*texture;
-	void		*mlx;
+	mlx_t		*mlx;
 	int			fd;
 	char		**file_copy;
 	char		*filename;
+	int			line_count;
 }	t_main;
 
 			// from so_long
