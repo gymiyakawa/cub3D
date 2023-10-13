@@ -5,16 +5,16 @@
 int	parse_map(t_main *ms)
 {
 	char	*temp;
-
+	//allow for lowercase nsew????
 	temp = find_identifier_array(ms, "1");
 	if (!temp)
 		return (-1);
 	ms->map->maze = copy_maze(temp, ms);
-	// check_if_closed(ms->map); //checks if the borders are composed of only 1 or spaces (Tristan and Sam's idea of checking 8 points around 0s)	
-	//check walls first
-	if (!find_player_start(ms->map->maze))
+	// check_if_closed(ms); //checks if the borders are composed of only 1 or spaces (Tristan and Sam's idea of checking 8 points around 0s)	
+	//check walls first //need to check the player, if it is close to an opening as well
+	if (!find_player_start(ms->map->maze, ms))
 	{
-		;
+		; //rethink the error handling in the find_player_start function
 	}
 		//error and exit // free maze here or in error and exit call?
 // check_top_and_bottom_walls(ms->map);
@@ -25,6 +25,11 @@ int	parse_map(t_main *ms)
 	return (0);
 }
 
+// void	check_if_closed(t_main *ms)
+// {
+
+// }
+
 char **copy_maze(char *str, t_main *ms)
 {
 	char	**maze;
@@ -33,7 +38,7 @@ char **copy_maze(char *str, t_main *ms)
 
 	i = 0;
 	j = 0;
-	maze = ft_calloc(ms->line_count + 1, sizeof(char *));
+	maze = ft_calloc(ms->line_count + 1, sizeof(char *)); //the line count is actually for the whole .cub file; should I substract and realloc after we find out the size of the maze itself? or no need before we x_free(maze) in the end anyway?
 	if (!maze)
 		error_and_exit(E_MALLOC, ms);
 	while (ft_strncmp(str, ms->file_copy[j], ft_strlen(str)) != 0 && ms->file_copy[j] != NULL)
@@ -41,27 +46,27 @@ char **copy_maze(char *str, t_main *ms)
 	while (ms->file_copy[j] != NULL && ms->file_copy[j][0] != '\0') 
 	{
 		if (!validate_maze_line(ms->file_copy[j]))
-		{
 			handle_maze_line_error(maze, ms, j);
-			return (NULL);
-		}
 		maze[i] = ft_strdup(ms->file_copy[j]);
 		if(!maze[i])
-		{
-			while (i >= 0) //put this in separate function?
-			{
-				maze[i] = x_free(maze[i]);
-				i--;
-			}
-			maze = x_free(maze);
-			error_and_exit(E_MALLOC, ms);
-			return (NULL);
-		}
+			free_partial_maze(maze, ms, i);
+										// printf("MAZEY MAZE: %s\n", maze[i]);
 		i++;
 		j++;
 	}
 	maze[i] = NULL; 
 	return(maze);
+}
+
+void	free_partial_maze(char **maze, t_main *ms, int i)
+{
+	while (i >= 0)
+	{
+		maze[i] = x_free(maze[i]);
+		i--;
+	}
+	maze = x_free(maze);
+	error_and_exit(E_MALLOC, ms);
 }
 
 bool	validate_maze_line(char *line)
@@ -71,22 +76,22 @@ bool	validate_maze_line(char *line)
 	i = 0;
 	while (line && line[i])
 	{
-		if (!ft_strchr("NSEW10 ", line[i]))
+		if (!ft_strchr("NSEW10 \n", line[i]))
 			return (FALSE);
 		i++;
 	}
 	return (TRUE);
 }
 
-void	handle_maze_line_error(char **maze, t_main *ms, int i)
+void	handle_maze_line_error(char **maze, t_main *ms, int j)
 {
-	int j;
+	int i;
 
-	j = 0;
-	while (j < i)
+	i = 0;
+	while (i < j)
 	{
-		maze[j] = x_free(maze[j]);
-			j++;
+		maze[i] = x_free(maze[i]);
+			i++;
 	}
 	maze = x_free(maze);
 	error_and_exit(E_INV_CHAR, ms);
@@ -113,7 +118,7 @@ int	check_input_extension(char *str, t_main *ms)
 	return (0);
 }
 
-bool	find_player_start(char **maze)
+bool	find_player_start(char **maze, t_main *ms)
 {//consider the bool and printfs in this function. how do I want to handle errors?
 	int	i;
 	int	j;
@@ -128,23 +133,18 @@ bool	find_player_start(char **maze)
 		{
 			if (ft_strchr("NSEW", maze[i][j]))
 			{
-				if (count == 0)
-					count++;
-				else
-				{
-					printf("Error\n Multiple starting positions found.\n");
-					return (FALSE);
-				}
+				ms->map->p_view = maze[i][j]; 
+												// printf("PLAYER VIEW: %c\n", maze[i][j]);
+				ms->map->p_y = j;
+				ms->map->p_x = i;						//set player position here
+				count++;
 			}
 			j++;
 		}
 		i++;
 	}
-	if (count == 0)
-	{
-		printf("Error\n No starting position found.\n");
-		return (FALSE);
-	}
+	if (count != 1)
+		error_and_exit(E_PLAY, ms);
 	return (TRUE);
 }
 

@@ -5,19 +5,18 @@
 int	line_count(char *str, t_main *ms)
 {
 	char	*temp;
-	int 	fd;
 	int		i;
 
 	i = 0;
-	fd = open_fd(str, ms);
-	temp = get_next_line(fd);
+	ms->fd = open_fd(str, ms);
+	temp = get_next_line(ms->fd);
 	while (temp)
 	{
 		i++;
-		temp = get_next_line(fd);
+		temp = get_next_line(ms->fd);
 		free(temp);
 	}
-	close(fd);
+	close(ms->fd);
 	free(temp);
 	return (i);
 }
@@ -101,7 +100,7 @@ int	main(int ac, char **av)
 	// else
 	// 	perror(AC_E);
 	
-
+//fix segfault when error message is called
 	
 	// add headers
 	//norminette

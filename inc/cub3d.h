@@ -28,6 +28,7 @@
 #define E_PRS_TXT "Invalid texture parameter\n"
 #define E_PARS "Parsing error\n"
 #define E_INV_CHAR "Invalid character in maze line\n"
+#define E_PLAY "Wrong or insufficient number for the player\n"
 
 // FUNCTION PROTOTYPES
 
@@ -38,7 +39,8 @@ int     check_input_extension(char *str, t_main *ms);
 char    **copy_maze(char *str, t_main *ms);
 bool	validate_maze_line(char *line);
 void	handle_maze_line_error(char **maze, t_main *ms, int i);
-bool	find_player_start(char **maze);
+bool	find_player_start(char **maze, t_main *ms);
+void	free_partial_maze(char **maze, t_main *ms, int i);
 // char	*set_maze(t_main *ms);
 
 //error.c

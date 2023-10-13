@@ -2,12 +2,10 @@
 
 int	open_fd(char *str, t_main *ms)
 {
-	int fd;
-
-	fd = open(str, O_RDONLY);
-	if (fd < 0)
+	ms->fd = open(str, O_RDONLY);
+	if (ms->fd < 0)
 		error_and_exit(E_OPEN, ms);
-	return(fd);
+	return(ms->fd);
 }
 
 void	init_ms(t_main **ms, char **av)
@@ -73,6 +71,9 @@ void	init_map(t_map **map, t_main *ms)
 		error_and_exit(E_MALLOC, ms); 
 	(*map)->y_max = 0;
 	(*map)->x_max = 0;
+	(*map)->p_view = 0;
+	(*map)->p_y = 0;
+	(*map)->p_x = 0;
 	//add more stuff as needed
 	(*map)->ms = ms;
 	return ;
