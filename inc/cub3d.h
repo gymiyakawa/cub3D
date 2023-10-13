@@ -35,14 +35,14 @@
 
 //map_parsing.c
 int	    parse_map(t_main *ms);
-// int	    open_and_allocate_map(char *str, t_main *ms);
 int     check_input_extension(char *str, t_main *ms);
 char    **copy_maze(char *str, t_main *ms);
 bool	validate_maze_line(char *line);
 void	handle_maze_line_error(char **maze, t_main *ms, int i);
 bool	find_player_start(char **maze, t_main *ms);
 void	free_partial_maze(char **maze, t_main *ms, int i);
-// char	*set_maze(t_main *ms);
+void	check_if_closed(t_main *ms, char **maze);
+void	check_for_limits(t_map *map, t_main *ms);
 
 //error.c
 void    error_and_exit(char *str, t_main *ms);

@@ -5,31 +5,40 @@
 int	parse_map(t_main *ms)
 {
 	char	*temp;
-	//allow for lowercase nsew????
+
 	temp = find_identifier(ms, "1");
 	if (!temp)
 		return (-1);
 	ms->map->maze = copy_maze(temp, ms);
-	// check_if_closed(ms); //checks if the borders are composed of only 1 or spaces (Tristan and Sam's idea of checking 8 points around 0s)	
-	//check walls first //need to check the player, if it is close to an opening as well
-	if (!find_player_start(ms->map->maze, ms))
-	{
-		; //rethink the error handling in the find_player_start function
-	}
-		//error and exit // free maze here or in error and exit call?
-// check_top_and_bottom_walls(ms->map);
-// 	check_right_and_left_walls(ms->map);
-
-// if (ms->map->y_max >= MAX_WIDTH)
-// 		error_and_exit(E_BIG, ms);
+	check_if_closed(ms, ms->map);
+	if (find_player_start(ms->map->maze, ms)) //rethink the error handling in the find_player_start function?
+		check_for_limits(ms->map, ms); //maybe this should be called sooner
 	return (0);
 }
 
-// void	check_if_closed(t_main *ms)
-// {
+//goes through the maze and finds the longest string/ sets y_max for width
+//also finds maze height and sets x_max for height; checks screen limits
+void	check_for_limits(t_map *map, t_main *ms)
+{
+	int i;
+	int j;
 
-// }
+	i = 0;
+	j = 0;
+	while(map->maze[i] != NULL)
+	{
+		j = ft_strlen(map->maze[i]);
+		if (j > map->y_max)
+			map->y_max = j;
+		i++;
+	}
+	map->x_max = i;
+	if (map->y_max >= MAX_WIDTH || map->x_max >= MAX_HEIGHT)
+		error_and_exit(E_BIG, ms);
+}
 
+//extracts the maze from the file_copy, calling the function that checks 
+//if each line has only the accepted characters, freeing if needed
 char **copy_maze(char *str, t_main *ms)
 {
 	char	**maze;
@@ -38,19 +47,18 @@ char **copy_maze(char *str, t_main *ms)
 
 	i = 0;
 	j = 0;
-	maze = ft_calloc(ms->line_count + 1, sizeof(char *)); //the line count is actually for the whole .cub file; should I substract and realloc after we find out the size of the maze itself? or no need before we x_free(maze) in the end anyway?
+	maze = ft_calloc(ms->line_count + 1, sizeof(char *)); //the line count is actually for the whole .cub file; should I substract and realloc after we find out the size of the maze itself? or no need because we x_free(maze) in the end anyway?
 	if (!maze)
 		error_and_exit(E_MALLOC, ms);
 	while (ft_strncmp(str, ms->file_copy[j], ft_strlen(str)) != 0 && ms->file_copy[j] != NULL)
 		j++;
-	while (ms->file_copy[j] != NULL && ms->file_copy[j][0] != '\0') 
+	while (ms->file_copy && ms->file_copy[j] && ms->file_copy[j][0] != '\0') 
 	{
 		if (!validate_maze_line(ms->file_copy[j]))
 			handle_maze_line_error(maze, ms, j);
 		maze[i] = ft_strdup(ms->file_copy[j]);
 		if(!maze[i])
 			free_partial_maze(maze, ms, i);
-										// printf("MAZEY MAZE: %s\n", maze[i]);
 		i++;
 		j++;
 	}
@@ -69,6 +77,7 @@ void	free_partial_maze(char **maze, t_main *ms, int i)
 	error_and_exit(E_MALLOC, ms);
 }
 
+//checks if each line has only the accepted characters
 bool	validate_maze_line(char *line)
 {
 	int i;
@@ -118,15 +127,17 @@ int	check_input_extension(char *str, t_main *ms)
 	return (0);
 }
 
+//checks if there is only one player 
+//determines the player's position and orientation
 bool	find_player_start(char **maze, t_main *ms)
-{//consider the bool and printfs in this function. how do I want to handle errors?
+{//consider the bool in this function
 	int	i;
 	int	j;
 	int	count;
 
 	i = 0;
 	count = 0;
-	while (maze[i])
+	while (maze && maze[i])
 	{
 		j = 0;
 		while (maze[i][j])
@@ -134,9 +145,8 @@ bool	find_player_start(char **maze, t_main *ms)
 			if (ft_strchr("NSEW", maze[i][j]))
 			{
 				ms->map->p_view = maze[i][j]; 
-												// printf("PLAYER VIEW: %c\n", maze[i][j]);
 				ms->map->p_y = j;
-				ms->map->p_x = i;						//set player position here
+				ms->map->p_x = i;
 				count++;
 			}
 			j++;
@@ -148,6 +158,11 @@ bool	find_player_start(char **maze, t_main *ms)
 	return (TRUE);
 }
 
+// void	check_if_closed(t_main *ms, char **maze)
+// {//checks if the borders are composed of only 1 or spaces (Tristan and Sam's idea of checking 8 points around 0s)	
+// 	check walls first //need to check the player, if it is close to an opening as well
+	
+// }
 
 // int	check_top_and_bottom_walls(t_map *map)
 // {
