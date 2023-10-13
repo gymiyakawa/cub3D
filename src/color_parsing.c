@@ -23,7 +23,6 @@ int	set_floor_ceiling(t_main *ms)
 	ms->colors->floor_ceiling[0] = ft_strdup(arg);
 	if (arg)
 		arg = x_free(arg);
-	
 	arg = find_identifier(ms, "C");
 	if (!arg)
 		return (-1);
@@ -46,7 +45,7 @@ int	parse_ceiling(t_color *c, char *arg)
 		return (-2);
 	if (set_color_bit(arg, &c->c_blue, &i) != 0)
 		return (-3);
-	c->c_color = create_trgb(0, c->c_red, c->c_green, c->c_blue);
+	c->c_color = create_rgba(c->c_red, c->c_green, c->c_blue, 255);
 	return (0);
 }
 
@@ -63,11 +62,11 @@ int	parse_floor(t_color *c, char *arg)
 		return (-2);
 	if (set_color_bit(arg, &c->f_blue, &i) != 0)
 		return (-3);
-	c->f_color = create_trgb(0, c->f_red, c->f_green, c->f_blue);
+	c->f_color = create_rgba(c->f_red, c->f_green, c->f_blue, 255);
 	return (0);
 }
 
-int	set_color_bit(char *arg, int *color_bit, int *i)
+int	set_color_bit(char *arg, u_int32_t *color_bit, int *i)
 {
 	while (arg[++*i] != ',' && arg[*i] != '\n')
 	{

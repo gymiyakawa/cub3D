@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:13:29 by raruiz-r          #+#    #+#             */
-/*   Updated: 2023/10/12 16:30:53 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/13 13:57:11 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,26 @@ void    *free_color(t_color *colors)
     return(colors);
 }
 
-void    *free_texture(t_texture *texture)
+void    *free_texture(t_texture *t)
 {
     //need to free images? see if there's a mlx function for it
-	texture->n_tex.path = x_free(texture->n_tex.path);
-	texture->s_tex.path = x_free(texture->s_tex.path);
-	texture->w_tex.path = x_free(texture->w_tex.path);
-	texture->e_tex.path = x_free(texture->e_tex.path);
-    texture = x_free(texture);
-    return(texture);
+	if (t->paths)
+	{
+		t->paths[0] = x_free(t->paths[0]);
+		t->paths[1] = x_free(t->paths[1]);
+		t->paths[2] = x_free(t->paths[2]);
+		t->paths[3] = x_free(t->paths[3]);
+		t->paths = x_free(t->paths);
+	}
+	if (t->mlx_textures)
+	{
+		t->mlx_textures[0] = x_free(t->mlx_textures[0]);
+		t->mlx_textures[1] = x_free(t->mlx_textures[1]);
+		t->mlx_textures[2] = x_free(t->mlx_textures[2]);
+		t->mlx_textures[3] = x_free(t->mlx_textures[3]);
+	}
+    t = x_free(t);
+    return(NULL);
 }
 
 void    *free_map(t_map *map)

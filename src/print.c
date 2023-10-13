@@ -7,12 +7,12 @@ void	print_color_struct(t_color *c)
 		printf("f R: %d\n", c->f_red);
 		printf("f G: %d\n", c->f_green);
 		printf("f B: %d\n", c->f_blue);
-		printf("f color: %d\n", c->f_color);
+		printf("f color: %u\n", c->f_color);
 		printf("\nceiling colors\n");
 		printf("c R: %d\n", c->c_red);
 		printf("c G: %d\n", c->c_green);
 		printf("c B: %d\n", c->c_blue);
-		printf("c color: %d\n", c->c_color);
+		printf("c color: %u\n", c->c_color);
 		return ;
 }
 
@@ -20,21 +20,28 @@ void	print_textures(t_texture *t)
 {
 	printf("\nprinting textures\n");
 	printf("NO\n");
-	print_img_struct(&t->n_tex);
+	printf("%s\n", t->paths[0]);
+	printf("width: %d\n", t->mlx_textures[0]->width);
+	printf("height: %d\n", t->mlx_textures[0]->height);
+	printf("bbp: %d\n", t->mlx_textures[0]->bytes_per_pixel);
+	printf("pixels: %s\n", t->mlx_textures[0]->pixels);
 	printf("\nSO\n");
-	print_img_struct(&t->s_tex);
-	printf("\nWE\n");
-	print_img_struct(&t->w_tex);
+	printf("%s\n", t->paths[1]);
+	printf("width: %d\n", t->mlx_textures[1]->width);
+	printf("height: %d\n", t->mlx_textures[1]->height);
+	printf("bbp: %d\n", t->mlx_textures[1]->bytes_per_pixel);
+	printf("pixels: %s\n", t->mlx_textures[1]->pixels);
 	printf("\nEA\n");
-	print_img_struct(&t->e_tex);
+	printf("%s\n", t->paths[2]);
+	printf("width: %d\n", t->mlx_textures[2]->width);
+	printf("height: %d\n", t->mlx_textures[2]->height);
+	printf("bbp: %d\n", t->mlx_textures[2]->bytes_per_pixel);
+	printf("pixels: %s\n", t->mlx_textures[2]->pixels);
+	printf("\nWE\n");
+	printf("%s\n", t->paths[3]);
+	printf("width: %d\n", t->mlx_textures[3]->width);
+	printf("height: %d\n", t->mlx_textures[3]->height);
+	printf("bbp: %d\n", t->mlx_textures[3]->bytes_per_pixel);
+	printf("pixels: %s\n", t->mlx_textures[3]->pixels);
 	return;
-}
-
-void	print_img_struct(t_img *img)
-{
-	printf("HEIGHT: %d\n", img->height);
-	printf("WIDTH: %d\n", img->width);
-	printf("PATH: %s", img->path);
-	printf("FD: %d\n", img->text_fd);
-	return ;
 }

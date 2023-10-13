@@ -46,24 +46,14 @@ void	init_color(t_color **color, t_main *ms)
 void	init_texture(t_texture **texture, t_main *ms)
 {
 	*texture = ft_calloc(1, sizeof(t_texture));
-	if (!*texture)
+	if ((*texture) == NULL)
 		error_and_exit(E_MALLOC, ms);
-	(*texture)->n_tex.height = 0;
-	(*texture)->n_tex.width = 0;
-	(*texture)->n_tex.text_fd = 0;
-	(*texture)->n_tex.path = NULL;
-	(*texture)->s_tex.height = 0;
-	(*texture)->s_tex.width = 0;
-	(*texture)->s_tex.text_fd = 0;
-	(*texture)->s_tex.path = NULL;
-	(*texture)->e_tex.height = 0;
-	(*texture)->e_tex.width = 0;
-	(*texture)->e_tex.text_fd = 0;
-	(*texture)->e_tex.path = NULL;
-	(*texture)->w_tex.height = 0;
-	(*texture)->w_tex.width = 0;
-	(*texture)->w_tex.text_fd = 0;
-	(*texture)->w_tex.path = NULL;
+	(*texture)->paths = ft_calloc(4, sizeof(char *));
+	if ((*texture)->paths == NULL)
+		error_and_exit(E_MALLOC, ms);
+	(*texture)->mlx_textures = ft_calloc(4, sizeof(mlx_texture_t *));
+	// if ((*texture)->mlx_textures)		// how to check malloc? currently flaggig error
+	// 	error_and_exit(E_MALLOC, ms);
 	(*texture)->ms = ms;
 	return ;
 }

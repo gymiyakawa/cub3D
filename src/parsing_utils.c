@@ -14,9 +14,9 @@ bool	valid_up_to_identifier(char *initial, char *identifier)
 	return (true);
 }
 
-int	create_trgb(int t, int r, int g, int b)
+u_int32_t	create_rgba(int r, int g, int b, int a)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	return (r << 24 | g << 16 | b << 8 | a);
 }
 
 char *find_identifier(t_main *ms, char *identifier)
@@ -45,17 +45,17 @@ char *find_identifier(t_main *ms, char *identifier)
 }
 
 // checks if the path to an img is valid and assigns fd at the correct img structure
-void	check_valid_path(char *path, t_main *ms, t_img *img)
+void	check_valid_path(char *path, t_main *ms)
 {
 	int	fd;
 
 	fd = open(path, O_RDONLY);
-	if (!fd)
+	if (fd < 0)
 	{
 		path = x_free(path);
 		error_and_exit(E_OPEN, ms);
 	}
-	(*img).text_fd = fd;
+	close (fd);
 	return ;
 }
 

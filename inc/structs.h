@@ -1,37 +1,30 @@
 
 #pragma once
 
+#include "MLX42/include/MLX42/MLX42.h"
+
 typedef struct s_main t_main;
 
 typedef struct s_color
 {
-	char **floor_ceiling;
-	int	f_red;
-	int	f_blue;
-	int	f_green;
-	int	c_red;
-	int c_blue;
-	int	c_green;
-	int	f_color;
-	int	c_color;
-	t_main	*ms;
+	char		**floor_ceiling;
+	u_int32_t	f_red;
+	u_int32_t	f_blue;
+	u_int32_t	f_green;
+	u_int32_t	c_red;
+	u_int32_t	c_blue;
+	u_int32_t	c_green;
+	u_int32_t	f_color;
+	u_int32_t	c_color;
+	t_main		*ms;
 }	t_color;
 
-typedef struct s_img
-{
-	//pointer/instance/context/count??
-	int		height;
-	int		width;
-	char	*path;
-	int		text_fd;
-}	t_img;
 
+//	direction order: NO, SO, EA, WE;
 typedef struct s_texture
 {
-	t_img	n_tex;
-	t_img	s_tex;
-	t_img	e_tex;
-	t_img	w_tex;
+	char			**paths;
+	mlx_texture_t	**mlx_textures;
 	t_main	*ms;
 }	t_texture;
 
@@ -75,7 +68,7 @@ typedef struct s_main
 	t_color		*colors;
 	t_map		*map;
 	t_texture	*texture;
-	void		*mlx;
+	mlx_t		*mlx;
 	int			fd;
 	char		**file_copy;
 	char		*filename;
