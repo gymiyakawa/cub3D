@@ -53,9 +53,10 @@ bool	parsing(char *str, t_main *ms)
 	ms->file_copy = copy_file(str, ms);
 	if (parse_colors(ms) != 0)
 		error_and_exit(E_PARS, ms);
-									print_color_struct(ms->colors); //we are deleting this later
-	// if (parse_texture(ms) != 0)
-	// 	error_and_exit(E_PARS, ms);
+									// print_color_struct(ms->colors); //we are deleting this later
+	if (parse_texture(ms) != 0)
+		error_and_exit(E_PARS, ms);
+									// print_textures(ms->texture);
 	if (parse_map(ms) != 0)
 		error_and_exit(E_PARS, ms);
 	return (TRUE);
