@@ -10,7 +10,7 @@ int	parse_map(t_main *ms)
 	if (!temp)
 		return (-1);
 	ms->map->maze = copy_maze(temp, ms);
-	check_if_closed(ms, ms->map);
+	check_if_closed(ms, ms->map->maze);
 	if (find_player_start(ms->map->maze, ms)) //rethink the error handling in the find_player_start function?
 		check_for_limits(ms->map, ms); //maybe this should be called sooner
 	return (0);
@@ -145,8 +145,8 @@ bool	find_player_start(char **maze, t_main *ms)
 			if (ft_strchr("NSEW", maze[i][j]))
 			{
 				ms->map->p_view = maze[i][j]; 
-				ms->map->p_y = j;
 				ms->map->p_x = i;
+				ms->map->p_y = j;
 				count++;
 			}
 			j++;
@@ -158,11 +158,41 @@ bool	find_player_start(char **maze, t_main *ms)
 	return (TRUE);
 }
 
-// void	check_if_closed(t_main *ms, char **maze)
-// {//checks if the borders are composed of only 1 or spaces (Tristan and Sam's idea of checking 8 points around 0s)	
-// 	check walls first //need to check the player, if it is close to an opening as well
-	
-// }
+//checks if the 0s and the player do not touch a space
+void check_if_closed(t_main *ms, char **m)
+{//work on this function
+    int x;
+    int y;
+
+    x = 0;
+	y = 0;
+    while (m[y])
+    {
+        x = 0;
+        while (m[y][x] != '\0')
+        {
+            if (m[y][x] == '0' || (y == ms->map->p_y && x == ms->map->p_x))
+            {
+                if (x + 1 < ms->map->y_max && (check(m[y][x + 1], ' '))
+                	|| x - 1 >= 0 && (check(m[y][x - 1], ' '))
+                	|| y + 1 < ms->map->x_max && (m[y + 1] && check(m[y + 1][x], ' '))
+                 	|| y - 1 >= 0 && (check(m[y - 1][x], ' '))
+                 	|| y + 1 < ms->map->x_max && (x + 1 < ms->map->y_max && m[y + 1] && check(m[y + 1][x + 1], ' '))
+                 	|| y - 1 >= 0 && (x + 1 < ms->map->y_max && check(m[y - 1][x + 1], ' '))
+                 	|| y - 1 >= 0 && (x - 1 >= 0 && check(m[y - 1][x - 1], ' '))
+                 	|| y + 1 < ms->map->x_max && (x - 1) >= 0 && m[y + 1] && check(m[y + 1][x - 1], ' ')))
+                    error_and_exit(E_MAZ_OP, ms);
+            }
+            x++;
+        }
+        y++;
+    }
+}
+// Check if 'a' is not the null terminator and if it equals 'c'
+bool check(char a, char c)
+{
+    return (a != '\0' && a == c);
+}
 
 // int	check_top_and_bottom_walls(t_map *map)
 // {

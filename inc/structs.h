@@ -46,8 +46,8 @@ typedef struct s_map
 	int		x;
 	int		y;
 	int		p_view;
-	int		p_y;
 	int		p_x;
+	int		p_y;
 	// int		e_x;
 	// int		e_y;
 	// int		exit_check;

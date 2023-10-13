@@ -30,6 +30,7 @@
 #define E_PARS "Parsing error\n"
 #define E_INV_CHAR "Invalid character in maze line\n"
 #define E_PLAY "Wrong or insufficient number for the player\n"
+#define E_MAZ_OP "Maze or player is not within closed walls\n"
 
 // FUNCTION PROTOTYPES
 
@@ -43,6 +44,7 @@ bool	find_player_start(char **maze, t_main *ms);
 void	free_partial_maze(char **maze, t_main *ms, int i);
 void	check_if_closed(t_main *ms, char **maze);
 void	check_for_limits(t_map *map, t_main *ms);
+bool	check(char a, char c);
 
 //error.c
 void    error_and_exit(char *str, t_main *ms);
