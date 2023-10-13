@@ -36,7 +36,9 @@
 #define E_PARS "Parsing error\n"
 #define E_INV_CHAR "Invalid character in maze line\n"
 #define E_PLAY "Wrong or insufficient number for the player\n"
-
+#define E_MSS_ELEM "Missing required element: NO, SO, EA, WE, F, C or Map\n"
+#define E_WRG_ORD "Wrong order of elements. Map must be last\n"
+#define	E_RPT_ELEM "No element can be repeated\n"
 // FUNCTION PROTOTYPES
 
 //map_parsing.c
@@ -86,8 +88,16 @@ int		which_path(char *direction);
 
 //parsing utils.c
 char		*find_identifier(t_main *ms, char *identifier);
+char		*find_identifier_index(t_main *ms, char *identifier);
 bool		valid_up_to_identifier(char *initial, char *identifier);
 u_int32_t	create_rgba(int r, int g, int b, int a);
+
+//checks.c
+void	element_checks(t_main *ms);
+bool	check_loose_char(t_main *ms);
+char	**find_valid_lines(t_main *ms);
+bool	is_map_last(t_main *ms);
+bool	are_there_repeats(t_main *ms);
 
 //printing functions
 void	print_color_struct(t_color *c);

@@ -21,6 +21,9 @@ u_int32_t	create_rgba(int r, int g, int b, int a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
+
+//	finds the line which contains the identifier, checks if it is
+// has only space before it and returns a pointer to that line.
 char *find_identifier(t_main *ms, char *identifier)
 {
 	char	*line;
@@ -39,6 +42,32 @@ char *find_identifier(t_main *ms, char *identifier)
 				if (valid_up_to_identifier(&line[0], &line[i]) == false)
 					break;
 				return (line);
+			}
+			i++;
+		}
+	}
+	return (NULL);
+}
+
+//	same as find_identifier() but returns the index of found line
+char *find_identifier_index(t_main *ms, char *identifier)
+{
+	char	*line;
+	int		i;
+	int		j;
+
+	j = -1;
+	while (ms->file_copy[++j] != NULL)
+	{
+		line = ms->file_copy[j];
+		i = 0;
+		while (line[i])
+		{
+			if (ft_strncmp(&line[i], identifier, ft_strlen(identifier)) == 0)
+			{
+				if (valid_up_to_identifier(&line[0], &line[i]) == false)
+					break;
+				return (i);
 			}
 			i++;
 		}

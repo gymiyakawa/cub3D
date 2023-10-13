@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:52:20 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/08/02 16:02:02 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:52:41 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 	// itself at the end
 #include "libft.h"
 
-void	ft_free_array(char **array)
+void	*ft_free_array(char **array)
 {
 	size_t	i;
 
@@ -29,5 +29,5 @@ void	ft_free_array(char **array)
 	}
 	if (array)
 		array = x_free(array);
-	return ;
+	return (NULL);
 }

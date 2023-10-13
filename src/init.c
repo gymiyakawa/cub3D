@@ -15,6 +15,8 @@ void	init_ms(t_main **ms, char **av)
 		error_and_exit(E_MALLOC, *ms);
 	(*ms)->filename = ft_strdup(av[1]);
 	(*ms)->fd = open_fd(av[1], *ms);
+	(*ms)->file_copy = copy_file(av[1], ms);
+	(*ms)->valid_lines = NULL;
 	init_color(&(*ms)->colors, *ms);
 	init_texture(&(*ms)->texture, *ms);
 	init_map(&(*ms)->map, *ms);
