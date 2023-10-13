@@ -27,6 +27,7 @@
 #define E_PRS_COL "Invalid color parameter\n"
 #define E_PRS_TXT "Invalid texture parameter\n"
 #define E_PARS "Parsing error\n"
+#define E_INV_CHAR "Invalid character in maze line\n"
 
 // FUNCTION PROTOTYPES
 
@@ -35,6 +36,9 @@ int	    parse_map(t_main *ms);
 // int	    open_and_allocate_map(char *str, t_main *ms);
 int     check_input_extension(char *str, t_main *ms);
 char    **copy_maze(char *str, t_main *ms);
+bool	validate_maze_line(char *line);
+void	handle_maze_line_error(char **maze, t_main *ms, int i);
+bool	find_player_start(char **maze);
 // char	*set_maze(t_main *ms);
 
 //error.c

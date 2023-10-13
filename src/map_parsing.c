@@ -10,15 +10,15 @@ int	parse_map(t_main *ms)
 	if (!temp)
 		return (-1);
 	ms->map->maze = copy_maze(temp, ms);
-	// ms->map->maze = set_maze(ms); //returns the whole maze
-	// check_maze_chars(ms->map); // checks if the whole maze only has NSEW10 or spaces
-	// check_if_closed(ms->map); //checks if the borders are composed of only 1 or spaces (Tristan and Sam's idea of checking 8 points around 0s)
-// open_and_allocate_map(str, ms);// 	
+	// check_if_closed(ms->map); //checks if the borders are composed of only 1 or spaces (Tristan and Sam's idea of checking 8 points around 0s)	
+	//check walls first
+	if (!find_player_start(ms->map->maze))
+	{
+		;
+	}
+		//error and exit // free maze here or in error and exit call?
 // check_top_and_bottom_walls(ms->map);
 // 	check_right_and_left_walls(ms->map);
-// 	check_map_inside(ms->map);
-// 	check_assets(ms->map);
-// 	check_valid_path(ms->map);
 
 // if (ms->map->y_max >= MAX_WIDTH)
 // 		error_and_exit(E_BIG, ms);
@@ -28,7 +28,6 @@ int	parse_map(t_main *ms)
 char **copy_maze(char *str, t_main *ms)
 {
 	char	**maze;
-	int		len;
 	int		i;
 	int		j;
 
@@ -37,60 +36,61 @@ char **copy_maze(char *str, t_main *ms)
 	maze = ft_calloc(ms->line_count + 1, sizeof(char *));
 	if (!maze)
 		error_and_exit(E_MALLOC, ms);
-	len = ft_strlen(str);
-	while(i <= ms->line_count)
+	while (ft_strncmp(str, ms->file_copy[j], ft_strlen(str)) != 0 && ms->file_copy[j] != NULL)
+		j++;
+	while (ms->file_copy[j] != NULL && ms->file_copy[j][0] != '\0') 
 	{
-		if (!ft_strncmp(str, ms->file_copy[j], len))
+		if (!validate_maze_line(ms->file_copy[j]))
 		{
-			//I am only copying the first line here again. need to copy the whole thing
-			maze[i] = ft_strdup(ms->file_copy[j]);
-									printf("MAZE %s\n", maze[i]);
-			if(!maze[i])
-			{
-				maze = x_free(maze);
-				return(NULL);
-			}
-			i++;
+			handle_maze_line_error(maze, ms, j);
+			return (NULL);
 		}
+		maze[i] = ft_strdup(ms->file_copy[j]);
+		if(!maze[i])
+		{
+			while (i >= 0) //put this in separate function?
+			{
+				maze[i] = x_free(maze[i]);
+				i--;
+			}
+			maze = x_free(maze);
+			error_and_exit(E_MALLOC, ms);
+			return (NULL);
+		}
+		i++;
 		j++;
 	}
-	maze[i] = NULL;
+	maze[i] = NULL; 
 	return(maze);
 }
 
-// char	*set_maze(t_main *ms)
-// {
-// 	char	*temp;
-// 	int		fd;
+bool	validate_maze_line(char *line)
+{
+	int i;
 
-// 	temp = find_identifier(ms, '1');
-// 	if (!temp[0])
-// 		return (-1);
-// 	// // ms->map = ft_calloc(sizeof(char *), MAX_WIDTH);
-// 	// // if (!ms->map)
-// 	// // 	error_and_exit(E_MALLOC, ms);
-// 	// // ms->map->maze = ft_calloc(sizeof(char **), 1);
-// 	// // if (!ms->map->maze)
-// 	// // 	error_and_exit(E_MALLOC, ms); //should free map here as well use code?
-// 	// // fd = open(str, O_RDONLY);
-// 	// // if (fd == -1)
-// 	// // 	error_and_exit(E_OPEN, ms); //free previously malloced stuff ? use code?
-// 	// temp = get_next_line(ms->fd);
-// 	// // printf("Y MAX: %d\n", ms->map->y_max);
-// 	// while (temp && ms->map->y_max < MAX_WIDTH)
-// 	// {
-// 	// 	ms->map->maze[ms->map->y_max] = ft_strdup(temp);
-// 	// 	ms->map->y_max++;
-// 	// 	free(temp);
-// 	// 	temp = get_next_line(fd);
-// 	// }
-// 	// close(fd);
-// 	// free(temp);
-// 	// if (ms->map->y_max >= MAX_WIDTH)
-// 	// 	error_and_exit(E_BIG, ms);
-// 	// return (temp);
-// }
+	i = 0;
+	while (line && line[i])
+	{
+		if (!ft_strchr("NSEW10 ", line[i]))
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
 
+void	handle_maze_line_error(char **maze, t_main *ms, int i)
+{
+	int j;
+
+	j = 0;
+	while (j < i)
+	{
+		maze[j] = x_free(maze[j]);
+			j++;
+	}
+	maze = x_free(maze);
+	error_and_exit(E_INV_CHAR, ms);
+}
 
 int	check_input_extension(char *str, t_main *ms)
 {
@@ -111,6 +111,41 @@ int	check_input_extension(char *str, t_main *ms)
 		j--;
 	}
 	return (0);
+}
+
+bool	find_player_start(char **maze)
+{//consider the bool and printfs in this function. how do I want to handle errors?
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (maze[i])
+	{
+		j = 0;
+		while (maze[i][j])
+		{
+			if (ft_strchr("NSEW", maze[i][j]))
+			{
+				if (count == 0)
+					count++;
+				else
+				{
+					printf("Error\n Multiple starting positions found.\n");
+					return (FALSE);
+				}
+			}
+			j++;
+		}
+		i++;
+	}
+	if (count == 0)
+	{
+		printf("Error\n No starting position found.\n");
+		return (FALSE);
+	}
+	return (TRUE);
 }
 
 
@@ -164,59 +199,6 @@ int	check_input_extension(char *str, t_main *ms)
 // 			error_and_message(4, map);
 // 		}
 // 		map->y++;
-// 	}
-// 	return (0);
-// }
-
-// int	check_map_inside(t_map *map)
-// {
-// 	map->y = 1;
-// 	while (map->maze[map->y] != map->maze[map->y_max - 1])
-// 	{
-// 		map->x = 0;
-// 		while (map->maze[map->y][map->x] != '\n')
-// 		{
-// 			if (ft_strchr("P", map->maze[map->y][map->x]))
-// 			{
-// 				map->p_y = map->y;
-// 				map->p_x = map->x;
-// 			}
-// 			else if (ft_strchr("E", map->maze[map->y][map->x]))
-// 			{
-// 				map->e_y = map->y;
-// 				map->e_x = map->x;
-// 			}
-// 			else if (!(ft_strchr("01CEP", map->maze[map->y][map->x])))
-// 				error_and_message(5, map);
-// 			map->x++;
-// 		}
-// 		map->y++;
-// 	}
-// 	return (0);
-// }
-
-// int	check_assets(t_map *map)
-// {
-// 	map->y = 1;
-// 	while (map->maze[map->y] != map->maze[map->y_max - 1])
-// 	{
-// 		map->x = 1;
-// 		while (map->maze[map->y][map->x] != '\n')
-// 		{
-// 			if (map->maze[map->y][map->x] == 'P')
-// 				map->player++;
-// 			if (map->maze[map->y][map->x] == 'C')
-// 				map->coin++;
-// 			if (map->maze[map->y][map->x] == 'E')
-// 				map->exit++;
-// 			map->x++;
-// 		}
-// 		map->y++;
-// 	}
-// 	if (map->player == 0 || map->coin == 0 || map->exit == 0 || map->player > 1
-// 		|| map->exit > 1)
-// 	{
-// 		error_and_message(5, map);
 // 	}
 // 	return (0);
 // }
