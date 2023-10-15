@@ -43,6 +43,9 @@ $(NAME): $(OBJECTS) | $(OBJ_DIR)
 #	Linux compilation
 #	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_DIR)/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
 
+#	WSL (Linux) compilation
+#	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_DIR)build/CMakeFiles/3.22.1/CompilerIdC/a.out -Iinclude -ldl -lXext -lX11 -lm -pthread
+
 	@echo "$(GREEN) cub3d compiled successfully!$(RESET)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)

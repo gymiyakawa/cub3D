@@ -120,3 +120,15 @@ void	close_fds(void)
 		close(i);
 	return;
 }
+//need help with compilation
+//makefile message MLX42 built and compiled successfully! is showing even though I couldn't compile at home
+
+//In computer graphics (and 2D arrays in C), y usually references the row (vertical),
+//and x references the column (horizontal). So m[y][x] implies m[row][column]. 
+/*Rows are indeed horizontal and typically represent the y-coordinate. When you increment the row number, you go down vertically on the 2D grid.
+
+Columns are vertical and typically represent the x-coordinate. When you increment the column number, you move horizontally to the right on the 2D grid.
+
+So, m[y][x] is m[row][column], with y being the vertical coordinate (going down as it increases) and x being the horizontal coordinate (going right as it increases). 
+
+This might seem somewhat inverted if you're used to Cartesian coordinates, but it's a common way to address 2D arrays and grids in computing because screens render from the top-left corner. So (0,0) is usually top-left.*/

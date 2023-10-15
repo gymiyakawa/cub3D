@@ -16,8 +16,9 @@ int	parse_map(t_main *ms)
 	return (0);
 }
 
-//goes through the maze and finds the longest string/ sets y_max for width
-//also finds maze height and sets x_max for height; checks screen limits
+//this function checks screen limits; it goes through the maze,
+//finds the longest string and sets y_max for width 
+//also finds maze height and sets x_max for height
 void	check_for_limits(t_map *map, t_main *ms)
 {
 	int i;
@@ -38,7 +39,7 @@ void	check_for_limits(t_map *map, t_main *ms)
 }
 
 //extracts the maze from the file_copy, calling the function that checks 
-//if each line has only the accepted characters, freeing if needed
+//if each line has only the accepted characters, freeing lines if needed
 char **copy_maze(char *str, t_main *ms)
 {
 	char	**maze;
@@ -144,9 +145,9 @@ bool	find_player_start(char **maze, t_main *ms)
 		{
 			if (ft_strchr("NSEW", maze[i][j]))
 			{
-				ms->map->p_view = maze[i][j]; 
-				ms->map->p_x = i;
-				ms->map->p_y = j;
+				ms->map->p_view = maze[i][j]; //double check the position of our x and y according to the mlx (and see check if closed function below)
+				ms->map->p_x = j;
+				ms->map->p_y = i;
 				count++;
 			}
 			j++;
@@ -169,29 +170,24 @@ void check_if_closed(t_main *ms, char **m)
     while (m[y])
     {
         x = 0;
-        while (m[y][x] != '\0')
+        while (m[y][x] != '\n')
         {
             if (m[y][x] == '0' || (y == ms->map->p_y && x == ms->map->p_x))
             {
-                if (x + 1 < ms->map->y_max && (check(m[y][x + 1], ' '))
-                	|| x - 1 >= 0 && (check(m[y][x - 1], ' '))
-                	|| y + 1 < ms->map->x_max && (m[y + 1] && check(m[y + 1][x], ' '))
-                 	|| y - 1 >= 0 && (check(m[y - 1][x], ' '))
-                 	|| y + 1 < ms->map->x_max && (x + 1 < ms->map->y_max && m[y + 1] && check(m[y + 1][x + 1], ' '))
-                 	|| y - 1 >= 0 && (x + 1 < ms->map->y_max && check(m[y - 1][x + 1], ' '))
-                 	|| y - 1 >= 0 && (x - 1 >= 0 && check(m[y - 1][x - 1], ' '))
-                 	|| y + 1 < ms->map->x_max && (x - 1) >= 0 && m[y + 1] && check(m[y + 1][x - 1], ' ')))
+                if ((x + 1 < ms->map->x_max && m[y][x + 1] != '\n' && m[y][x + 1] == ' ')
+                	|| (x - 1 >= 0 && m[y][x - 1] == ' ')
+                	|| (y + 1 < ms->map->y_max && m[y + 1][x] != '\n' && m[y + 1][x] == ' ') // check if I need to control for \0 as well - send many different mazes
+                 	|| (y - 1 >= 0 && m[y - 1][x] == ' ')
+                 	|| (y + 1 < ms->map->y_max && x + 1 < ms->map->x_max && m[y + 1][x + 1] != '\n' && m[y + 1][x + 1] == ' ') //same here
+                 	|| (y - 1 >= 0 && x + 1 < ms->map->x_max && m[y - 1][x + 1] != '\n' && m[y - 1][x + 1] == ' ')
+                 	|| (y - 1 >= 0 && x - 1 >= 0 && m[y - 1][x - 1] == ' ')
+                 	|| (y + 1 < ms->map->y_max && x - 1 >= 0 && m[y + 1][x - 1] != '\n' && m[y + 1][x - 1] == ' '))
                     error_and_exit(E_MAZ_OP, ms);
             }
             x++;
         }
         y++;
     }
-}
-// Check if 'a' is not the null terminator and if it equals 'c'
-bool check(char a, char c)
-{
-    return (a != '\0' && a == c);
 }
 
 // int	check_top_and_bottom_walls(t_map *map)
