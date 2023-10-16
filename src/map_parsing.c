@@ -69,7 +69,8 @@ char **copy_maze(char *str, t_main *ms)
 }
 
 //deletes the extra strings at the end of the maze
-char	**clean_maze(char **maze, int lines, t_main *ms)
+//and calls function that trims end of strings
+char **clean_maze(char **maze, int lines, t_main *ms)
 {
 	int		i;
 	int		last_line;
@@ -83,39 +84,54 @@ char	**clean_maze(char **maze, int lines, t_main *ms)
 			last_line = i;
 		i++;
 	}
-	clean_maze = ft_calloc(last_line + 1, sizeof(char *));
+	clean_maze = ft_calloc(last_line + 2, sizeof(char *));
 	if (!clean_maze)
 		error_and_exit(E_MALLOC, ms);
 	i = 0;
-	while(i < last_line)
+	while(i <= last_line)
 	{
-		clean_maze[i] = ft_strdup(maze[i]);
+		clean_maze[i] = trim_end_spaces(maze[i]);
 		if(!clean_maze[i])
 			free_partial_maze(clean_maze, ms, i);
 		maze[i] = x_free(maze[i]);
 		i++;
 	}
-	ms->map->y_max = last_line + 1;
+	ms->map->y_max = last_line + 1; //maybe I don't need this because check_for_limits comes after
 	maze = x_free(maze);
 	clean_maze[last_line + 1] = NULL;
 	return(clean_maze);
 }
 
-bool only_spaces_or_new_lines(char *str)
+char	*trim_end_spaces(char *str)
 {
-    int i;
+	int		end;
+	char	*trimmed_str;
 
-	i = 0;
-	if (str == NULL)
+	if (!str)
+		return (NULL);
+	trimmed_str = NULL;
+	end = ft_strlen(str) - 1;
+	while (end >= 0 && str[end] == ' ')
+		end--;
+	trimmed_str = ft_substr(str, 0, end + 1);
+	return(trimmed_str);
+}
+
+bool only_spaces_or_new_lines(char *str)
+{//check this function
+    int i = 0;
+
+    if (!str || str[0] == '\0' || (str[0] == '\n' && str[1] == '\0'))
         return (TRUE);
-    while(str && str[i] != '\0')
-	{
+    while (str[i] != '\0')
+    {
         if (str[i] != ' ' && str[i] != '\n')
             return (FALSE);
-		i++;
-	}
-    return (TRUE); 
+        i++;
+    }
+    return (TRUE);
 }
+
 
 void	free_partial_maze(char **maze, t_main *ms, int i)
 {
