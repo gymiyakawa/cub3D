@@ -28,8 +28,8 @@
 #define E_PRS_COL "Invalid color parameter\n"
 #define E_PRS_TXT "Invalid texture parameter\n"
 #define E_PARS "Parsing error\n"
-#define E_INV_CHAR "Invalid character in maze line\n"
-#define E_PLAY "Wrong or insufficient number for the player\n"
+#define E_INV_CHAR "Invalid character in maze line or .cub out of order\n"
+#define E_PLAY "Wrong or insufficient player number\n"
 #define E_MAZ_OP "Maze or player is not within closed walls\n"
 
 // FUNCTION PROTOTYPES
@@ -42,9 +42,11 @@ bool	validate_maze_line(char *line);
 void	handle_maze_line_error(char **maze, t_main *ms, int i);
 bool	find_player_start(char **maze, t_main *ms);
 void	free_partial_maze(char **maze, t_main *ms, int i);
+char	**clean_maze(char **maze, int lines, t_main *ms);
+bool    only_spaces_or_new_lines(char *str);
 void	check_if_closed(t_main *ms, char **maze);
 void	check_for_limits(t_map *map, t_main *ms);
-bool	check(char a, char c);
+
 
 //error.c
 void    error_and_exit(char *str, t_main *ms);

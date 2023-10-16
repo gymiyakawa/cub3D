@@ -10,9 +10,9 @@ int	parse_map(t_main *ms)
 	if (!temp)
 		return (-1);
 	ms->map->maze = copy_maze(temp, ms);
-	check_if_closed(ms, ms->map->maze);
 	if (find_player_start(ms->map->maze, ms)) //rethink the error handling in the find_player_start function?
 		check_for_limits(ms->map, ms); //maybe this should be called sooner
+	check_if_closed(ms, ms->map->maze);
 	return (0);
 }
 
@@ -63,8 +63,58 @@ char **copy_maze(char *str, t_main *ms)
 		i++;
 		j++;
 	}
-	maze[i] = NULL; 
+	maze[i] = NULL;
+	maze = clean_maze(maze, i, ms); // I should delete the extra spaces at the end of the strings too
 	return(maze);
+}
+
+//deletes the extra strings at the end of the maze
+char	**clean_maze(char **maze, int lines, t_main *ms)
+{
+	int		i;
+	int		last_line;
+	char	**clean_maze;
+
+	i = 0;
+	last_line = 0;
+	while(i < lines)
+	{
+		if (!only_spaces_or_new_lines(maze[i]))
+			last_line = i;
+		i++;
+	}
+	clean_maze = ft_calloc(last_line + 1, sizeof(char *));
+	if (!clean_maze)
+		error_and_exit(E_MALLOC, ms);
+	i = 0;
+	while(i < last_line)
+	{
+		clean_maze[i] = ft_strdup(maze[i]);
+		if(!clean_maze[i])
+			free_partial_maze(clean_maze, ms, i);
+		maze[i] = x_free(maze[i]);
+		i++;
+	}
+	ms->map->y_max = last_line + 1;
+	maze = x_free(maze);
+	clean_maze[last_line + 1] = NULL;
+	return(clean_maze);
+}
+
+bool only_spaces_or_new_lines(char *str)
+{
+    int i;
+
+	i = 0;
+	if (str == NULL)
+        return (TRUE);
+    while(str && str[i] != '\0')
+	{
+        if (str[i] != ' ' && str[i] != '\n')
+            return (FALSE);
+		i++;
+	}
+    return (TRUE); 
 }
 
 void	free_partial_maze(char **maze, t_main *ms, int i)
@@ -104,7 +154,7 @@ void	handle_maze_line_error(char **maze, t_main *ms, int j)
 			i++;
 	}
 	maze = x_free(maze);
-	error_and_exit(E_INV_CHAR, ms);
+	error_and_exit(E_INV_CHAR, ms); //how come this is signaling the wrong order of elements?
 }
 
 int	check_input_extension(char *str, t_main *ms)
@@ -132,27 +182,27 @@ int	check_input_extension(char *str, t_main *ms)
 //determines the player's position and orientation
 bool	find_player_start(char **maze, t_main *ms)
 {//consider the bool in this function
-	int	i;
-	int	j;
+	int	y;
+	int	x;
 	int	count;
 
-	i = 0;
+	y = 0;
 	count = 0;
-	while (maze && maze[i])
+	while (maze && maze[y])
 	{
-		j = 0;
-		while (maze[i][j])
+		x = 0;
+		while (maze[y][x])
 		{
-			if (ft_strchr("NSEW", maze[i][j]))
+			if (ft_strchr("NSEW", maze[y][x]))
 			{
-				ms->map->p_view = maze[i][j]; //double check the position of our x and y according to the mlx (and see check if closed function below)
-				ms->map->p_x = j;
-				ms->map->p_y = i;
+				ms->map->p_view = maze[y][x]; //double check the position of our x and y according to the mlx (and see check if closed function below)
+				ms->map->p_x = x;
+				ms->map->p_y = y;
 				count++;
 			}
-			j++;
+			x++;
 		}
-		i++;
+		y++;
 	}
 	if (count != 1)
 		error_and_exit(E_PLAY, ms);
@@ -170,18 +220,12 @@ void check_if_closed(t_main *ms, char **m)
     while (m[y])
     {
         x = 0;
-        while (m[y][x] != '\n')
+        while (m[y][x] && m[y][x] != '\n')
         {
             if (m[y][x] == '0' || (y == ms->map->p_y && x == ms->map->p_x))
             {
-                if ((x + 1 < ms->map->x_max && m[y][x + 1] != '\n' && m[y][x + 1] == ' ')
-                	|| (x - 1 >= 0 && m[y][x - 1] == ' ')
-                	|| (y + 1 < ms->map->y_max && m[y + 1][x] != '\n' && m[y + 1][x] == ' ') // check if I need to control for \0 as well - send many different mazes
-                 	|| (y - 1 >= 0 && m[y - 1][x] == ' ')
-                 	|| (y + 1 < ms->map->y_max && x + 1 < ms->map->x_max && m[y + 1][x + 1] != '\n' && m[y + 1][x + 1] == ' ') //same here
-                 	|| (y - 1 >= 0 && x + 1 < ms->map->x_max && m[y - 1][x + 1] != '\n' && m[y - 1][x + 1] == ' ')
-                 	|| (y - 1 >= 0 && x - 1 >= 0 && m[y - 1][x - 1] == ' ')
-                 	|| (y + 1 < ms->map->y_max && x - 1 >= 0 && m[y + 1][x - 1] != '\n' && m[y + 1][x - 1] == ' '))
+                if (y == 0 || y == ms->map->y_max || x == 0
+					|| (x + 1) == ms->map->x_max)
                     error_and_exit(E_MAZ_OP, ms);
             }
             x++;
