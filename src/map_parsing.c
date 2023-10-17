@@ -226,80 +226,28 @@ bool	find_player_start(char **maze, t_main *ms)
 }
 
 //checks if the 0s and the player do not touch a space
-void check_if_closed(t_main *ms, char **m)
-{//work on this function
-    int x;
-    int y;
+// void check_if_closed(t_main *ms, char **m)
+// {//work on this function
+//     int x;
+//     int y;
 
-    x = 0;
-	y = 0;
-    while (m[y])
-    {
-        x = 0;
-        while (m[y][x] && m[y][x] != '\n')
-        {
-            if (m[y][x] == '0' || (y == ms->map->p_y && x == ms->map->p_x))
-            {
-                if (y == 0 || y == ms->map->y_max || x == 0
-					|| (x + 1) == ms->map->x_max)
-                    error_and_exit(E_MAZ_OP, ms);
-            }
-            x++;
-        }
-        y++;
-    }
-}
-
-// int	check_top_and_bottom_walls(t_map *map)
-// {
-// 	int	i;
-
-// 	i = ft_strlen(map->maze[0]);
-// 	map->x_max = ft_strlen(map->maze[map->y_max - 1]);
-// 	if (i > 40 || map->x_max > 40)
-// 		error_and_message(2, map);
-// 	else if (i - 1 != map->x_max)
-// 	{
-// 		error_and_message(3, map);
-// 		return (1);
-// 	}
-// 	else
-// 		map->x_max = 0;
-// 	while (map->maze[0][map->x_max] != '\n')
-// 	{
-// 		if (map->maze[0][map->x_max] != '1')
-// 			error_and_message(4, map);
-// 		if (map->maze[map->y_max - 1][map->x_max] != '1')
-// 			error_and_message(4, map);
-// 		map->x_max++;
-// 	}
-// 	return (0);
+//     x = 0;
+// 	y = 0;
+//     while (m[y])
+//     {
+//         x = 0;
+//         while (m[y][x] && m[y][x] != '\n')
+//         {
+//             if (m[y][x] == '0' || (y == ms->map->p_y && x == ms->map->p_x))
+//             {
+//                 if (y == 0 || y == ms->map->y_max || x == 0
+// 					|| (x + 1) == ms->map->x_max)
+//                     error_and_exit(E_MAZ_OP, ms);
+//             }
+//             x++;
+//         }
+//         y++;
+//     }
 // }
 
-// int	check_right_and_left_walls(t_map *map)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = ft_strlen(map->maze[0]);
-// 	j = ft_strlen(map->maze[map->y_max - 1]) - 1;
-// 	map->y = 1;
-// 	while (map->maze[map->y] != map->maze[map->y_max - 1])
-// 	{
-// 		if (ft_strlen(map->maze[map->y]) != i)
-// 		{
-// 			error_and_message(3, map);
-// 		}
-// 		map->y++;
-// 	}
-// 	map->y = 1;
-// 	while (map->maze[map->y] != map->maze[map->y_max - 1])
-// 	{
-// 		if (map->maze[map->y][0] != '1' || map->maze[map->y][j] != '1')
-// 		{
-// 			error_and_message(4, map);
-// 		}
-// 		map->y++;
-// 	}
-// 	return (0);
-// }
+//APPLY FLOOD FILL BECAUSE THE OTHER APPROACH IS NOT WORKING (ACTUALLY, TEST TRISTAN AND SAM'S CODE TO SEE IF IT WORKS)

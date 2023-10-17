@@ -121,8 +121,8 @@ void	close_fds(void)
 		close(i);
 	return;
 }
-//need help with compilation
-//makefile message MLX42 built and compiled successfully! is showing even though I couldn't compile at home
+//run valgrind on all parsing cases before proceeding
+
 
 //In computer graphics (and 2D arrays in C), y usually references the row (vertical),
 //and x references the column (horizontal). So m[y][x] implies m[row][column]. 

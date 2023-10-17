@@ -45,7 +45,7 @@ void	free_partial_maze(char **maze, t_main *ms, int i);
 char	**clean_maze(char **maze, int lines, t_main *ms);
 bool    only_spaces_or_new_lines(char *str);
 char	*trim_end_spaces(char *str);
-void	check_if_closed(t_main *ms, char **maze);
+void	check_if_closed(t_main *ms, char **m);
 void	check_for_limits(t_map *map, t_main *ms);
 
 

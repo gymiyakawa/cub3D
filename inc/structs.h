@@ -35,24 +35,23 @@ typedef struct s_texture
 	t_img	w_tex;
 	t_main	*ms;
 }	t_texture;
-
 typedef struct s_map
 {
 	// mlx_t*	mlx;
 	// void	*mlx;
-	void	*win;
-	char	**maze;
-	int		flag;
-	int		x;
-	int		y;
-	int		p_view;
-	int		p_x;
-	int		p_y;
+	void		*win;
+	char		**maze;
+	int			flag;
+	// int			x;
+	// int			y;
+	int			p_view;
+	int			p_x;
+	int			p_y;
 	// int		e_x;
 	// int		e_y;
 	// int		exit_check;
-	int		x_max;
-	int		y_max;
+	int			x_max;
+	int			y_max;
 	// void	*img_p;
 	// void	*img_e;
 	// void	*img_e2;
@@ -65,10 +64,10 @@ typedef struct s_map
 	// int		coin;
 	// int		exit;
 	// int		moves;
-	int		pixel;
+	// int		pixel;
 	// int		pixel_max;
 	// bool	is_dead;
-	t_main	*ms;
+	t_main		*ms;
 	
 }	t_map;
 
