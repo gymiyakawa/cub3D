@@ -36,24 +36,24 @@ int	parse_texture(t_main *ms)
 
 int	parse_indiv_textures(t_texture *t, char *direction)
 {
-	int		path_index;
+	int		path_i;
 	char	*arg;
 
-	path_index = which_path(direction);
-	if (path_index < 0)
+	path_i = which_path(direction);
+	if (path_i < 0)
 		error_and_exit(E_PRS_TXT, t->ms);
 	arg = find_identifier(t->ms, direction);
 	if (!arg)
 		return (-1);
-	if (texture_pathfinder(arg, t->ms, path_index) != 0)
+	if (texture_pathfinder(arg, t->ms, path_i, direction) != 0)
 		return (-2);
-	t->mlx_textures[path_index] = mlx_load_png(t->paths[path_index]);
-	if (t->mlx_textures[path_index] == NULL)
+	t->mlx_textures[path_i] = mlx_load_png(t->paths[path_i]);
+	if (t->mlx_textures[path_i] == NULL)
 		error_and_exit(E_PRS_TXT, t->ms);
 	return (0);
 }
 
-int	texture_pathfinder(char *arg, t_main *ms, int path_index)
+int	texture_pathfinder(char *arg, t_main *ms, int path_i, char *dir)
 {
 	int		i;
 	int		j;
@@ -62,8 +62,8 @@ int	texture_pathfinder(char *arg, t_main *ms, int path_index)
 	path = ft_calloc(ft_strlen(arg), sizeof(char));
 	if (!path)
 		error_and_exit(E_MALLOC, ms);
-	i = 2;
 	j = 0;
+	i = find_identifier_pos(ms, dir) + 2;
 	while (arg[++i])
 	{
 		if (arg[i] == ' ' || arg[i] == '\n')
@@ -72,7 +72,7 @@ int	texture_pathfinder(char *arg, t_main *ms, int path_index)
 			path[j++] = arg[i];
 	}
 	check_valid_path(path, ms);
-	ms->texture->paths[path_index] = ft_strdup(path);
+	ms->texture->paths[path_i] = ft_strdup(path);
 	path = x_free(path);
 	return (0);
 }

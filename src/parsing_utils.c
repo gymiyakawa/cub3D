@@ -49,8 +49,8 @@ char *find_identifier(t_main *ms, char *identifier)
 	return (NULL);
 }
 
-//	same as find_identifier() but returns the index of found line
-char *find_identifier_index(t_main *ms, char *identifier)
+	// same as find_identifier() but returns the pos of identifier on the line
+int	find_identifier_pos(t_main *ms, char *identifier)
 {
 	char	*line;
 	int		i;
@@ -72,7 +72,7 @@ char *find_identifier_index(t_main *ms, char *identifier)
 			i++;
 		}
 	}
-	return (NULL);
+	return (-1);
 }
 
 // checks if the path to an img is valid and assigns fd at the correct img structure

@@ -27,6 +27,7 @@
 // ERROR MESSAGES
 
 #define E_MAP "Input file inexistent or not conforming to .cub extension\n"
+#define E_MAP_NFD "Map not found\n"
 #define E_AC "Only two arguments for cub3d (the first is the program's name)\n"
 #define E_MALLOC "Error on malloc\n"
 #define E_OPEN "Error opening fd\n"
@@ -39,6 +40,7 @@
 #define E_MSS_ELEM "Missing required element: NO, SO, EA, WE, F, C or Map\n"
 #define E_WRG_ORD "Wrong order of elements. Map must be last\n"
 #define	E_RPT_ELEM "No element can be repeated\n"
+#define E_INV_LINE "All non-identified lines must be empty\n"
 // FUNCTION PROTOTYPES
 
 //map_parsing.c
@@ -51,6 +53,7 @@ void	handle_maze_line_error(char **maze, t_main *ms, int i);
 bool	find_player_start(char **maze, t_main *ms);
 void	free_partial_maze(char **maze, t_main *ms, int i);
 // char	*set_maze(t_main *ms);
+int		get_first_line_i(t_map *map);
 
 //error.c
 void    error_and_exit(char *str, t_main *ms);
@@ -82,20 +85,21 @@ int		set_color_bit(char *arg, u_int32_t *color_bit, int *i);
 //texture parsing
 int		parse_texture(t_main *ms);
 int		parse_indiv_textures(t_texture *t, char *direction);
-int		texture_pathfinder(char *arg, t_main *ms, int path_index);
+int		texture_pathfinder(char *arg, t_main *ms, int path_i, char *dir);
 void	check_valid_path(char *path, t_main *ms);
 int		which_path(char *direction);
 
 //parsing utils.c
 char		*find_identifier(t_main *ms, char *identifier);
-char		*find_identifier_index(t_main *ms, char *identifier);
 bool		valid_up_to_identifier(char *initial, char *identifier);
 u_int32_t	create_rgba(int r, int g, int b, int a);
+int			find_identifier_pos(t_main *ms, char *identifier);
 
 //checks.c
-void	element_checks(t_main *ms);
-bool	check_loose_char(t_main *ms);
+void	elements_check(t_main *ms);
+bool	detect_loose_char(t_main *ms);
 char	**find_valid_lines(t_main *ms);
+bool	is_valid_line(char *line);
 bool	is_map_last(t_main *ms);
 bool	are_there_repeats(t_main *ms);
 

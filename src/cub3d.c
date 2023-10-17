@@ -50,6 +50,15 @@ char	**copy_file(char *str, t_main *ms)
 bool	parsing(char *str, t_main *ms)
 {
 	check_input_extension(str, ms);
+	
+	
+	if (parse_map(ms) != 0)
+		error_and_exit(E_PARS, ms);
+	
+	elements_check(ms);
+	
+	
+	
 	// ms->file_copy = copy_file(str, ms);  <-moved to init_ms()
 	if (parse_colors(ms) != 0)
 		error_and_exit(E_PARS, ms);
@@ -57,8 +66,6 @@ bool	parsing(char *str, t_main *ms)
 	if (parse_texture(ms) != 0)
 		error_and_exit(E_PARS, ms);
 									print_textures(ms->texture);
-	if (parse_map(ms) != 0)
-		error_and_exit(E_PARS, ms);
 	return (TRUE);
 }
 
@@ -75,8 +82,6 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		init_ms(&ms, av);
-		
-		elements_check(ms);
 		
 		
 		if (parsing(av[1], ms))

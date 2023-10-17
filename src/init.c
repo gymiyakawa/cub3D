@@ -15,7 +15,7 @@ void	init_ms(t_main **ms, char **av)
 		error_and_exit(E_MALLOC, *ms);
 	(*ms)->filename = ft_strdup(av[1]);
 	(*ms)->fd = open_fd(av[1], *ms);
-	(*ms)->file_copy = copy_file(av[1], ms);
+	(*ms)->file_copy = copy_file(av[1], *ms);
 	(*ms)->valid_lines = NULL;
 	init_color(&(*ms)->colors, *ms);
 	init_texture(&(*ms)->texture, *ms);
@@ -73,5 +73,19 @@ void	init_map(t_map **map, t_main *ms)
 	(*map)->p_x = 0;
 	//add more stuff as needed
 	(*map)->ms = ms;
+	(*map)->i_first_line = 0;
 	return ;
+}
+
+int	get_first_line_i(t_map *map)
+{
+	int	i;
+
+	i = -1;
+	while (map->ms->file_copy[++i])
+	{
+		if (!ft_strcmp(map->ms->file_copy[i], map->maze[0]))
+			return (i);
+	}
+	return (-1);
 }

@@ -59,8 +59,8 @@ typedef struct s_map
 	int		pixel;
 	// int		pixel_max;
 	// bool	is_dead;
+	int		i_first_line;
 	t_main	*ms;
-	
 }	t_map;
 
 typedef struct s_main

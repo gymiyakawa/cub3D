@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:46:34 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/13 16:52:56 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:12:09 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		ft_isascii(int c);
 int		ft_isdigit(char c);
 bool	ft_isprint(int c);
 int		ft_is_nbr(char *str);
+bool	is_empty_line(char *line);
 
 /*-------------------- WRITE/PRINT FUNCTIONS ------------------------*/
 void	ft_putchar(char c);

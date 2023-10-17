@@ -10,12 +10,13 @@ int	parse_map(t_main *ms)
 	if (!temp)
 		return (-1);
 	ms->map->maze = copy_maze(temp, ms);
+	ms->map->i_first_line = get_first_line_i(ms->map);
 	// check_if_closed(ms); //checks if the borders are composed of only 1 or spaces (Tristan and Sam's idea of checking 8 points around 0s)	
 	//check walls first //need to check the player, if it is close to an opening as well
-	if (!find_player_start(ms->map->maze, ms))
-	{
+	// if (!find_player_start(ms->map->maze, ms))
+	// {
 		; //rethink the error handling in the find_player_start function
-	}
+	// }
 		//error and exit // free maze here or in error and exit call?
 // check_top_and_bottom_walls(ms->map);
 // 	check_right_and_left_walls(ms->map);
