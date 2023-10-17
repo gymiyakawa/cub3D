@@ -31,6 +31,8 @@
 #define E_INV_CHAR "Invalid character in maze line or .cub out of order\n"
 #define E_PLAY "Wrong or insufficient player number\n"
 #define E_MAZ_OP "Maze or player is not within closed walls\n"
+#define E_DUP "Unable to duplicate maze\n"
+#define TEST "TESTY TEST!\n" //delete this later
 
 // FUNCTION PROTOTYPES
 
@@ -45,7 +47,7 @@ void	free_partial_maze(char **maze, t_main *ms, int i);
 char	**clean_maze(char **maze, int lines, t_main *ms);
 bool    only_spaces_or_new_lines(char *str);
 char	*trim_end_spaces(char *str);
-void	check_if_closed(t_main *ms, char **m);
+bool	check_if_closed(t_main *ms, char **m);
 void	check_for_limits(t_map *map, t_main *ms);
 
 

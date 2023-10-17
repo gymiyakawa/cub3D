@@ -1,85 +1,71 @@
 #include "../inc/cub3d.h"
 
-// char	**duplicate_map(t_map *map)
+// char	**duplicate_maze(char **maze, t_main *ms)
 // {
-// 	char	**dup_map;
 // 	int		i;
+// 	char	**dup_maze;
 
 // 	i = 0;
-// 	dup_map = ft_calloc(sizeof(char *), (map->y_max + 1));
-// 	if (!dup_map)
+// 	dup_maze = ft_calloc(sizeof(char *), (ms->map->y_max + 1));
+// 	if (!dup_maze)
 // 		return (NULL);
-// 	while (i < map->y_max)
+// 	while (i < ms->map->y_max)
 // 	{
-// 		dup_map[i] = ft_strdup(map->map[i]);
+// 		dup_maze[i] = ft_strdup(maze[i]);
 // 		i++;
 // 	}
-// 	return (dup_map);
+//     dup_maze[i] = NULL;
+// 	return (dup_maze);
 // }
 
-// int	exit_check(t_map *map, char **dup_map, int y, int x)
-// {
-// 	if (dup_map[y][x + 1] == 'E')
-// 		map->exit_check++;
-// 	if (dup_map[y][x - 1] == 'E')
-// 		map->exit_check++;
-// 	if (dup_map[y + 1][x] == 'E')
-// 		map->exit_check++;
-// 	if (dup_map[y - 1][x] == 'E')
-// 		map->exit_check++;
-// 	return (0);
-// }
+//flood fill - checks if the 0s and the player do not touch a space
+int	look_for_spaces(t_main *ms, char **dup, int y, int x)
+{
+    if (y < 0 || x < 0 || y > ms->map->y_max || x > ms->map->x_max)
+        return (0);
+	if (ft_strchr(" ", dup[y][x + 1]) || ft_strchr(" ", dup[y][x - 1])    
+        || (ft_strchr(" ", dup[y + 1][x]) || ft_strchr(" ", dup[y - 1][x])
+        || ft_strchr(" ", dup[y][x + 1]) || ft_strchr(" ", dup[y][x - 1])
+        || ft_strchr(" ", dup[y + 1][x]) || ft_strchr(" ", dup[y - 1][x])))
+        error_and_exit(TEST, ms);
+	look_for_spaces(ms, dup, y, x + 1); 
+    look_for_spaces(ms, dup, y, x - 1);
+	look_for_spaces(ms, dup, y + 1, x);
+	look_for_spaces(ms, dup, y - 1, x);
+	look_for_spaces(ms, dup, y + 1, x + 1);
+	look_for_spaces(ms, dup, y - 1, x - 1);
+	look_for_spaces(ms, dup, y + 1, x - 1);
+	look_for_spaces(ms, dup, y - 1, x + 1);
+	return (0);
+}
 
-// int	replace_assets(t_map *map, char **dup_map, int y, int x)
-// {
-// 	exit_check(map, dup_map, y, x);
-// 	if (ft_strchr("0C", dup_map[y][x + 1]))
-// 	{
-// 		dup_map[y][x + 1] = 'A';
-// 		replace_assets(map, dup_map, y, x + 1);
-// 	}
-// 	if (ft_strchr("0C", dup_map[y][x - 1]))
-// 	{
-// 		dup_map[y][x - 1] = 'A';
-// 		replace_assets(map, dup_map, y, x - 1);
-// 	}
-// 	if (ft_strchr("0C", dup_map[y + 1][x]))
-// 	{
-// 		dup_map[y + 1][x] = 'A';
-// 		replace_assets(map, dup_map, y + 1, x);
-// 	}
-// 	if (ft_strchr("0C", dup_map[y - 1][x]))
-// 	{
-// 		dup_map[y - 1][x] = 'A';
-// 		replace_assets(map, dup_map, y - 1, x);
-// 	}
-// 	return (0);
-// }
+bool	check_if_closed(t_main *ms, char **m)
+{//work on this function
+    int 	y;
+    int 	x;
+	// char	**dup_maze;
 
-// int	check_valid_path(t_map *map)
-// {
-// 	char	**dup_map;
-// 	int		y;
-// 	int		x;
-
-// 	y = 1;
-// 	x = 1;
-// 	dup_map = duplicate_map(map);
-// 	replace_assets(map, dup_map, map->p_y, map->p_x);
-// 	while (y < map->y_max)
-// 	{
-// 		x = 1;
-// 		while (x < map->x_max)
-// 		{
-// 			if (dup_map[y][x] == 'C' || map->exit_check == 0)
-// 			{
-// 				free_table(dup_map);
-// 				error_and_message(6, map);
-// 			}
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// 	free_table(dup_map);
-// 	return (0);
-// }
+	y = 0;
+    x = 0;
+	// dup_maze = duplicate_maze(m, ms);
+	// if(!dup_maze)
+	// 	error_and_exit(E_DUP, ms);
+	while (m[y])
+    {
+        x = 0;
+        while (m[y][x] != '\n')
+        {
+            if (m[y][x] == '0' || (y == ms->map->p_y && x == ms->map->p_x))
+			{
+                if (y == 0 || y == ms->map->y_max || (x + 1) == ms->map->x_max) //omitting x == 0 because it could be a space
+                    return(FALSE);
+                else
+                    look_for_spaces(ms, m, y, x);
+            }
+            x++;
+        }
+        y++;
+    }
+	// dup_maze = x_free(dup_maze);
+	return (TRUE);
+}

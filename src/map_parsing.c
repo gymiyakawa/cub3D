@@ -8,16 +8,17 @@ int	parse_map(t_main *ms)
 
 	temp = find_identifier(ms, "1");
 	if (!temp)
-		return (-1);
+		return (-1);//pensar isso
 	ms->map->maze = copy_maze(temp, ms);
 	if (find_player_start(ms->map->maze, ms)) //rethink the error handling in the find_player_start function?
 		check_for_limits(ms->map, ms); //maybe this should be called sooner
-	check_if_closed(ms, ms->map->maze);
+	if (!check_if_closed(ms, ms->map->maze))
+		error_and_exit(E_MAZ_OP, ms);
 	return (0);
 }
 
 //this function checks screen limits; it goes through the maze,
-//finds the longest string and sets y_max for width 
+//finds the longest string and sets y_max for width; 
 //also finds maze height and sets x_max for height
 void	check_for_limits(t_map *map, t_main *ms)
 {
@@ -29,12 +30,12 @@ void	check_for_limits(t_map *map, t_main *ms)
 	while(map->maze[i] != NULL)
 	{
 		j = ft_strlen(map->maze[i]);
-		if (j > map->y_max)
-			map->y_max = j;
+		if (j > map->x_max)
+			map->x_max = j;
 		i++;
 	}
-	map->x_max = i;
-	if (map->y_max >= MAX_WIDTH || map->x_max >= MAX_HEIGHT)
+	map->y_max = i;
+	if (map->y_max >= MAX_WIDTH || map->y_max >= MAX_HEIGHT)
 		error_and_exit(E_BIG, ms);
 }
 
@@ -64,7 +65,7 @@ char **copy_maze(char *str, t_main *ms)
 		j++;
 	}
 	maze[i] = NULL;
-	maze = clean_maze(maze, i, ms); // I should delete the extra spaces at the end of the strings too
+	maze = clean_maze(maze, i, ms);
 	return(maze);
 }
 
@@ -96,7 +97,7 @@ char **clean_maze(char **maze, int lines, t_main *ms)
 		maze[i] = x_free(maze[i]);
 		i++;
 	}
-	ms->map->y_max = last_line + 1; //maybe I don't need this because check_for_limits comes after
+	// ms->map->y_max = last_line + 1; //maybe I don't need this because check_for_limits comes after
 	maze = x_free(maze);
 	clean_maze[last_line + 1] = NULL;
 	return(clean_maze);
@@ -131,7 +132,6 @@ bool only_spaces_or_new_lines(char *str)
     }
     return (TRUE);
 }
-
 
 void	free_partial_maze(char **maze, t_main *ms, int i)
 {
@@ -224,30 +224,3 @@ bool	find_player_start(char **maze, t_main *ms)
 		error_and_exit(E_PLAY, ms);
 	return (TRUE);
 }
-
-//checks if the 0s and the player do not touch a space
-// void check_if_closed(t_main *ms, char **m)
-// {//work on this function
-//     int x;
-//     int y;
-
-//     x = 0;
-// 	y = 0;
-//     while (m[y])
-//     {
-//         x = 0;
-//         while (m[y][x] && m[y][x] != '\n')
-//         {
-//             if (m[y][x] == '0' || (y == ms->map->p_y && x == ms->map->p_x))
-//             {
-//                 if (y == 0 || y == ms->map->y_max || x == 0
-// 					|| (x + 1) == ms->map->x_max)
-//                     error_and_exit(E_MAZ_OP, ms);
-//             }
-//             x++;
-//         }
-//         y++;
-//     }
-// }
-
-//APPLY FLOOD FILL BECAUSE THE OTHER APPROACH IS NOT WORKING (ACTUALLY, TEST TRISTAN AND SAM'S CODE TO SEE IF IT WORKS)
