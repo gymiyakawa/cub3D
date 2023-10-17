@@ -19,9 +19,11 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "lldb",
       "request": "launch",
-      "args": [],
-      "cwd": "/Users/gmiyakaw/Documents/Common_Core_Projects/cub3d",
-      "program": "/Users/gmiyakaw/Documents/Common_Core_Projects/cub3d/build/Debug/outDebug"
+	  "args": [
+        "./maps/small.cub"
+      ],
+      "cwd": "${workspaceFolder}",
+	  "program": "${workspaceFolder}/cub3d",
     }
   ]
 }

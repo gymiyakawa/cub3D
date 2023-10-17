@@ -32,16 +32,15 @@ int	set_floor_ceiling(t_main *ms)
 	if (!arg)
 		return (-1);
 	ms->colors->floor_ceiling[0] = ft_strdup(arg);
-	if (arg)
-		arg = x_free(arg);
+	arg = NULL;
 	arg = find_identifier(ms, "C");
 	if (!arg)
 		return (-1);
 	ms->colors->floor_ceiling[1] = ft_strdup(arg);
-	if (arg)
-		arg = x_free(arg);
+	arg = NULL;
 	return (0);
 }
+
 
 int	parse_ceiling(t_color *c, char *arg)
 {

@@ -20,6 +20,7 @@ void	init_ms(t_main **ms, char **av)
 	init_color(&(*ms)->colors, *ms);
 	init_texture(&(*ms)->texture, *ms);
 	init_map(&(*ms)->map, *ms);
+	(*ms)->mlx = NULL;
 	return ;
 }
 
@@ -48,12 +49,13 @@ void	init_texture(t_texture **texture, t_main *ms)
 	*texture = ft_calloc(1, sizeof(t_texture));
 	if ((*texture) == NULL)
 		error_and_exit(E_MALLOC, ms);
-	(*texture)->paths = ft_calloc(4, sizeof(char *));
+	(*texture)->paths = ft_calloc(5, sizeof(char *));
 	if ((*texture)->paths == NULL)
 		error_and_exit(E_MALLOC, ms);
+	(*texture)->paths[4] = NULL;
 	(*texture)->mlx_textures = ft_calloc(4, sizeof(mlx_texture_t *));
-	// if ((*texture)->mlx_textures)		// how to check malloc? currently flaggig error
-	// 	error_and_exit(E_MALLOC, ms);
+	if ((*texture)->mlx_textures == NULL)
+		error_and_exit(E_MALLOC, ms);
 	(*texture)->ms = ms;
 	return ;
 }
@@ -75,17 +77,4 @@ void	init_map(t_map **map, t_main *ms)
 	(*map)->ms = ms;
 	(*map)->i_first_line = 0;
 	return ;
-}
-
-int	get_first_line_i(t_map *map)
-{
-	int	i;
-
-	i = -1;
-	while (map->ms->file_copy[++i])
-	{
-		if (!ft_strcmp(map->ms->file_copy[i], map->maze[0]))
-			return (i);
-	}
-	return (-1);
 }

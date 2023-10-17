@@ -55,8 +55,22 @@ char **copy_maze(char *str, t_main *ms)
 		i++;
 		j++;
 	}
-	maze[i] = NULL; 
+	maze[i] = NULL;
+										// print_str_array(maze);
 	return(maze);
+}
+
+int	get_first_line_i(t_map *map)
+{
+	int	i;
+
+	i = -1;
+	while (map->ms->file_copy[++i])
+	{
+		if (!ft_strcmp(map->ms->file_copy[i], map->maze[0]))
+			return (i);
+	}
+	return (-1);
 }
 
 void	free_partial_maze(char **maze, t_main *ms, int i)

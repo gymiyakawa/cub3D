@@ -57,6 +57,9 @@ int		get_first_line_i(t_map *map);
 
 //error.c
 void    error_and_exit(char *str, t_main *ms);
+
+//exit.c
+void	clean_exit(t_main *ms);
 void    *free_color(t_color *colors);
 void    *free_texture(t_texture *texture);
 void    *free_map(t_map *map);

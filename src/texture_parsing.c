@@ -34,6 +34,7 @@ int	parse_texture(t_main *ms)
 	return (0);
 }
 
+
 int	parse_indiv_textures(t_texture *t, char *direction)
 {
 	int		path_i;

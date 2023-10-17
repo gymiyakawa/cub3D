@@ -12,13 +12,14 @@ OBJ_DIR = ./obj
 MLX_DIR = ./inc/MLX42/
 MLX_CC = $(MLX_DIR)/build/libmlx42.a -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 MLX_GIT = https://github.com/codam-coding-college/MLX42.git
+MLX_SUPP_FILE = ./suppresion/MLX42leak_suppresion.supp
 
 ####    LIBFT    ####
 LIBFT_DIR = ./inc/libft/
 
 ####    FILES    ####
 RAW_SRC = cub3d.c color_parsing.c init.c error.c map_parsing.c \
-		print.c parsing_utils.c texture_parsing.c checks.c
+		print.c parsing_utils.c texture_parsing.c checks.c exit.c
 
 RAW_INC = cub3d.h structs.h
 
@@ -63,6 +64,7 @@ mlx:
 
 clean:
 	@rm -rf $(NAME) $(OBJ_DIR)
+	@rm valgrind.log
 
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean
@@ -70,9 +72,9 @@ fclean: clean
 	@echo "$(RED)MLX42 folder deleted $(RESET)"
 	@echo "$(RED)cub3d cleaned$(RESET)"
 
-leaks:
+leak:
 	make
-	valgrind --leak-check=full --show-leak-kinds=all ./cub3d ./maps/small.cub
+	valgrind --leak-check=full --show-leak-kinds=all --suppressions=$(MLX_SUPP_FILE) --log-file=valgrind.log ./cub3d ./maps/small.cub
 
 run:
 	@make

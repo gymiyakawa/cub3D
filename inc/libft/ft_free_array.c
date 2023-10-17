@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:52:20 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/13 16:52:41 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:49:44 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_free_array(char **array)
 	size_t	i;
 
 	i = 0;
-	while (array[i])
+	while (array[i] != NULL)
 	{
 		if (array[i])
 		{
