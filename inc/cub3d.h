@@ -21,6 +21,7 @@
 // ERROR MESSAGES
 
 #define E_MAP "Input file inexistent or not conforming to .cub extension\n"
+#define E_INV_MAP "Invalid map\n"
 #define E_AC "Only two arguments for cub3d (the first is the program's name)\n"
 #define E_MALLOC "Error on malloc\n"
 #define E_OPEN "Error opening fd\n"
@@ -38,7 +39,6 @@
 
 //map_parsing.c
 int	    parse_map(t_main *ms);
-int     check_input_extension(char *str, t_main *ms);
 char    **copy_maze(char *str, t_main *ms);
 bool	validate_maze_line(char *line);
 void	handle_maze_line_error(char **maze, t_main *ms, int i);
@@ -83,12 +83,13 @@ int		parse_texture(t_main *ms);
 int		parse_indiv_textures(t_main *ms, char *direction);
 t_img	*which_texture(t_main *ms, char *direction);
 int	    texture_pathfinder(char *arg, t_main *ms, t_img *img);
-void	check_valid_path(char *path, t_main *ms, t_img *img);
 
 //parsing utils.c
-char	*find_identifier(t_main *ms, char *identifier);
 bool	valid_up_to_identifier(char *initial, char *identifier);
 int		create_trgb(int t, int r, int g, int b);
+char	*find_identifier(t_main *ms, char *identifier);
+void	check_valid_path(char *path, t_main *ms, t_img *img);
+int     check_input_extension(char *str, t_main *ms);
 
 //printing functions
 void	print_color_struct(t_color *c);

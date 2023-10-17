@@ -8,7 +8,8 @@ int	parse_map(t_main *ms)
 
 	temp = find_identifier(ms, "1");
 	if (!temp)
-		return (-1);//pensar isso
+		error_and_exit(E_INV_MAP, ms);
+	//should I add an identify first line of maze function here? sending temp and doing a ft_strncmp (so I can allocate properly in the function below)
 	ms->map->maze = copy_maze(temp, ms);
 	if (find_player_start(ms->map->maze, ms)) //rethink the error handling in the find_player_start function?
 		check_for_limits(ms->map, ms); //maybe this should be called sooner
@@ -171,27 +172,6 @@ void	handle_maze_line_error(char **maze, t_main *ms, int j)
 	}
 	maze = x_free(maze);
 	error_and_exit(E_INV_CHAR, ms); //how come this is signaling the wrong order of elements?
-}
-
-int	check_input_extension(char *str, t_main *ms)
-{
-	char	*comp;
-	int		i;
-	int		j;
-
-	comp = ".cub";
-	i = ft_strlen(str) - 1;
-	j = 3;
-	if (!str)
-        error_and_exit(E_MAP, ms);
-	while (comp && str && j >= 0)
-	{
-		if (comp[j] != str[i])
-		    error_and_exit(E_MAP, ms);
-		i--;
-		j--;
-	}
-	return (0);
 }
 
 //checks if there is only one player 

@@ -41,7 +41,7 @@ typedef struct s_map
 	// void	*mlx;
 	void		*win;
 	char		**maze;
-	int			flag;
+	// int			flag;
 	// int			x;
 	// int			y;
 	int			p_view;

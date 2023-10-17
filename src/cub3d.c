@@ -51,7 +51,6 @@ bool	parsing(char *str, t_main *ms)
 {
 	check_input_extension(str, ms);
 	ms->file_copy = copy_file(str, ms);
-	// check_false_input(ms); //use find identifier to find those that are not
 	if (parse_colors(ms) != 0)
 		error_and_exit(E_PARS, ms);
 									print_color_struct(ms->colors); //we are deleting this later
@@ -61,10 +60,6 @@ bool	parsing(char *str, t_main *ms)
 		error_and_exit(E_PARS, ms);
 	return (TRUE);
 }
-
-
-
-
 
 //void mlx_key_hook(mlx_t* mlx, mlx_keyfunc func, void* param)
 int	main(int ac, char **av)

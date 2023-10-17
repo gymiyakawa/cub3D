@@ -13,8 +13,10 @@ void	init_ms(t_main **ms, char **av)
 	*ms = ft_calloc(1, sizeof(t_main));
 	if (!*ms)
 		error_and_exit(E_MALLOC, *ms);
-	(*ms)->filename = ft_strdup(av[1]);
 	(*ms)->fd = open_fd(av[1], *ms);
+	(*ms)->file_copy = NULL;
+	(*ms)->filename = ft_strdup(av[1]);
+	(*ms)->line_count = 0;
 	init_color(&(*ms)->colors, *ms);
 	init_texture(&(*ms)->texture, *ms);
 	init_map(&(*ms)->map, *ms);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:46:34 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/11 11:18:12 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:58:43 by raruiz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_list
 /*----------------------- MALLOC FUNCTIONS --------------------------*/
 void	*ft_calloc(size_t count, size_t size);
 void	*x_calloc(size_t size);
-void	ft_free_array(char **array);
+void	*ft_free_array(char **array);
 int		*ft_make_int_arr(int length);
 
 /*----------------------- MEMORY FUNCTIONS --------------------------*/
