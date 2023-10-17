@@ -20,8 +20,18 @@ void	init_ms(t_main **ms, char **av)
 	init_color(&(*ms)->colors, *ms);
 	init_texture(&(*ms)->texture, *ms);
 	init_map(&(*ms)->map, *ms);
+	init_background(*ms);
 	(*ms)->mlx = NULL;
 	return ;
+}
+
+void	init_background(t_main *ms)
+{
+	ms->bg = ft_calloc(1, sizeof(t_background));
+	if (ms->bg == NULL)
+		error_and_exit(E_MALLOC, ms);
+	ms->bg->ceiling = NULL;
+	ms->bg->floor = NULL;
 }
 
 void	init_color(t_color **color, t_main *ms)

@@ -10,10 +10,10 @@
 #include <stdbool.h> 
 #include <fcntl.h>
 
-#define MAX_WIDTH 50
-#define MAX_HEIGHT 35
-#define WIDTH 30
-#define HEIGHT 30
+#define MAX_WIDTH 1920
+#define MAX_HEIGHT 1080
+#define WIDTH 1200
+#define HEIGHT 800
 #define TRUE 1
 #define FALSE 0
 #define MAX_FILES 256
@@ -41,6 +41,7 @@
 #define E_WRG_ORD "Wrong order of elements. Map must be last\n"
 #define	E_RPT_ELEM "No element can be repeated\n"
 #define E_INV_LINE "All non-identified lines must be empty\n"
+#define E_MLX_INI "MLX42 failed to initialize\n"
 // FUNCTION PROTOTYPES
 
 //map_parsing.c
@@ -77,6 +78,7 @@ void    init_ms(t_main **ms, char **av);
 void	init_color(t_color **color, t_main *ms);
 void	init_texture(t_texture **texture, t_main *ms);
 void	init_map(t_map **map, t_main *ms);
+void	init_background(t_main *ms);
 
 //color_parsing.c
 int		parse_colors(t_main *ms);
@@ -103,8 +105,12 @@ void	elements_check(t_main *ms);
 bool	detect_loose_char(t_main *ms);
 char	**find_valid_lines(t_main *ms);
 bool	is_valid_line(char *line);
-bool	is_map_last(t_main *ms);
+bool	is_map_last(t_main *ms);  // even needed at this point?
 bool	are_there_repeats(t_main *ms);
+
+//mlx_control.c
+void	key_bindings(mlx_key_data_t input, void *ms);
+void	make_background(mlx_t *mlx, t_color *c, t_background *bg);
 
 //printing functions
 void	print_color_struct(t_color *c);

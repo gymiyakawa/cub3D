@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/17 17:06:55 by gmiyakaw          #+#    #+#             */
+/*   Updated: 2023/10/17 17:07:16 by gmiyakaw         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
 
 #include "MLX42/include/MLX42/MLX42.h"
 
-typedef struct s_main t_main;
+typedef struct	s_main t_main;
 
 typedef struct s_color
 {
@@ -18,6 +30,11 @@ typedef struct s_color
 	t_main		*ms;
 }	t_color;
 
+typedef struct s_background
+{
+	mlx_image_t *floor;
+	mlx_image_t *ceiling;
+} t_background;
 
 //	direction order: NO, SO, EA, WE;
 typedef struct s_texture
@@ -68,6 +85,7 @@ typedef struct s_main
 	t_color		*colors;
 	t_map		*map;
 	t_texture	*texture;
+	t_background *bg;
 	mlx_t		*mlx;
 	int			fd;
 	char		**file_copy;

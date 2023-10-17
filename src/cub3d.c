@@ -68,6 +68,7 @@ bool	parsing(char *str, t_main *ms)
 }
 
 
+
 //void mlx_key_hook(mlx_t* mlx, mlx_keyfunc func, void* param)
 int	main(int ac, char **av)
 {
@@ -77,16 +78,23 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		init_ms(&ms, av);
-		
-		
 		if (parsing(av[1], ms))
 		{
+			ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", TRUE);
+			if (!ms->mlx)
+				error_and_exit(E_MLX_INI, ms);
+			mlx_image_t *test = mlx_texture_to_image(ms->mlx, ms->texture->mlx_textures[0]);
+			
+			int32_t instance_index;
+			instance_index = mlx_image_to_window(ms->mlx, test, WIDTH / 2, HEIGHT / 2);
+			
+			make_background(ms->mlx, ms->colors, ms->bg);
 			
 			
-			// ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", TRUE);
-		// 	// if (!ms->mlx)
-		// 		// exit(0);
-		// 	// map.win = mlx_new_window(map.mlx, (map.x_max * 64), (map.y_max * 64),
+			mlx_key_hook(ms->mlx, &key_bindings, ms);
+			mlx_loop(ms->mlx);
+			
+			// map.win = mlx_new_window(map.mlx, (map.x_max * 64), (map.y_max * 64),
 		// 	// 		"./so_long");
 		// 	// if (!map.win)
 		// 	// 	exit(0);
@@ -97,16 +105,12 @@ int	main(int ac, char **av)
 		// 	// mlx_loop_hook(map.win, 17, 2, exit_win, &map); //change parameters //bool mlx_loop_hook(mlx_t* mlx, void (*f)(void*), void* param)
 		// 	// mlx_loop(map.mlx); //this seems fine; parameter is mlx_t* mlx
 		// 	//free ms here?
-			
+			 
 			
 			
 		}
 	}
-	// if (ms->mlx)
-	// {
-	// 	mlx_terminate(ms->mlx);
-	// 	ms->mlx = NULL;
-	// }
+
 	
 	clean_exit(ms);
 	return 0;

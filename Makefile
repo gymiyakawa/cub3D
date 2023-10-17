@@ -19,7 +19,8 @@ LIBFT_DIR = ./inc/libft/
 
 ####    FILES    ####
 RAW_SRC = cub3d.c color_parsing.c init.c error.c map_parsing.c \
-		print.c parsing_utils.c texture_parsing.c checks.c exit.c
+		print.c parsing_utils.c texture_parsing.c checks.c exit.c \
+		mlx_control.c
 
 RAW_INC = cub3d.h structs.h
 
@@ -64,7 +65,7 @@ mlx:
 
 clean:
 	@rm -rf $(NAME) $(OBJ_DIR)
-	@rm valgrind.log
+	@if [ -e valgrind.log ]; then rm valgrind.log; fi
 
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean
@@ -84,4 +85,4 @@ run:
 	
 re: fclean all
 
-.PHONY: all clean fclean re leaks run mlx
+.PHONY: all clean fclean re leak run mlx
