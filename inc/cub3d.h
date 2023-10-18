@@ -53,7 +53,7 @@ void	check_for_limits(t_map *map, t_main *ms);
 //flood_fill.c
 char	**duplicate_maze(char **maze, t_main *ms);
 bool    flood_fill(t_main *ms, char **dup, int y, int x);
-bool	check_if_closed(t_main *ms, char **m);
+bool    check_if_closed(t_main *ms, char **m, int y, int x);
 void	pad_maze(t_main *ms, char **maze);
 char    *add_padding(char *str, int len);
 

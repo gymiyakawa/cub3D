@@ -17,49 +17,35 @@ char	**duplicate_maze(char **maze, t_main *ms)
 		i++;
 	}
     dup_maze[i] = NULL;
+                                                 i = 0;
+                                                while(maze[i])
+                                                {
+                                                    printf("DUP MAZE '%s' and length %zu\n", dup_maze[i], ft_strlen(dup_maze[i]));
+                                                    i++;
+                                                }
 	return (dup_maze);
 }
 
 bool flood_fill(t_main *ms, char **dup, int y, int x)
 {
-    if (y < 0 || y >= ms->map->y_max || x < 0 || x >= ms->map->x_max)
-    {
+    if (y <= 0 || y >= ms->map->y_max - 1 || x <= 0 || x >= ms->map->x_max)
         return(FALSE);
-    }
-    if (dup[y][x] == '1' || dup[y][x] == 'A')
-    {
+    if (dup[y][x] == 'A')
         return TRUE;
-    }
-    if (ft_strchr("NSEW", dup[y][x]) || dup[y][x] == '0')
-    {
-        if (y == 0 || y == ms->map->y_max - 1 || x == 0
-            || x == ms->map->x_max - 1)
-        {
-            return(FALSE);
-        }
-        if (dup[y-1][x-1] == ' ' || dup[y-1][x+1] == ' '
-            || dup[y+1][x-1] == ' ' || dup[y+1][x+1] == ' ')
-        {
-            return(FALSE);
-        }
-    }
+    if (dup[y - 1][x - 1] == ' ' || dup[y - 1][x + 1] == ' '
+        || dup[y + 1][x - 1] == ' ' || dup[y + 1][x + 1] == ' ')
+        return(FALSE);
     dup[y][x] = 'A';
     if (!flood_fill(ms, dup, y - 1, x) || !flood_fill(ms, dup, y + 1, x)
         || !flood_fill(ms, dup, y, x - 1) || !flood_fill(ms, dup, y, x + 1))
-    {
-        return FALSE;
-    }
-    return TRUE;
+        return (FALSE);
+    return (TRUE);
 }
 
-bool check_if_closed(t_main *ms, char **m)
+bool check_if_closed(t_main *ms, char **m, int y, int x)
 {
-    int     y;
-    int     x;
     char    **dup_maze;
 
-    y = 0;
-    x = 0;
     dup_maze = duplicate_maze(m, ms);
     if (!dup_maze) 
         error_and_exit(E_DUP, ms);
@@ -70,13 +56,7 @@ bool check_if_closed(t_main *ms, char **m)
         {
             if (m[y][x] == '0' || (y == ms->map->p_y && x == ms->map->p_x))
             {
-                if (y == 0 || (y + 1) == ms->map->y_max
-                    || (x + 1) == ms->map->x_max || x == 0)
-                {
-                    dup_maze = ft_free_array(dup_maze);
-                    return (FALSE);
-                }
-                else if (!flood_fill(ms, dup_maze, y, x))
+                if (!flood_fill(ms, dup_maze, y, x))
                 {
                     dup_maze = ft_free_array(dup_maze);
                     return (FALSE);
@@ -97,7 +77,14 @@ void	pad_maze(t_main *ms, char **maze)
 
 	i = 0;
 	padded = NULL;
-	while(maze[i])
+	                                            //  i = 0;
+                                                // while(maze[i])
+                                                // {
+                                                //     printf("BEFORE '%s' and length %zu\n", maze[i], ft_strlen(maze[i]));
+                                                //     i++;
+                                                // }
+                                                // i = 0;
+    while(maze[i])
 	{
 		padded = add_padding(maze[i], ms->map->x_max);
 		if (!padded)
@@ -106,28 +93,51 @@ void	pad_maze(t_main *ms, char **maze)
 		maze[i] = padded;
 		i++;
 	}
+                                                //  i = 0;
+                                                // while(maze[i])
+                                                // {
+                                                //     printf("AFTER '%s' and length %zu\n", maze[i], ft_strlen(maze[i]));
+                                                //     i++;
+                                                // }
 }
 
+// char *add_padding(char *str, int len)
+// {
+//     int		i;
+// 	char	*new;
+//     int		original_len;
+//     int		padding_start;
+
+// 	i = 0;
+// 	original_len = ft_strlen(str);
+//     if (original_len == len) //>= before
+//         return (ft_strdup(str));
+//     new = ft_calloc(len + 1, sizeof(char));
+//     if (!new)
+//         return (NULL);
+//     padding_start = (len - original_len) / 2;
+//     while(i < padding_start)
+//         new[i++] = ' ';
+//     ft_strlcpy(new + padding_start, str, original_len + 1);
+// 	i = padding_start + original_len;
+// 	while(i < len)
+//         new[i++] = ' ';
+//     return (new);
+// }
 char *add_padding(char *str, int len)
 {
-    int		i;
-	char	*new;
-    int		original_len;
-    int		padding_start;
+    int i;
+    char *new;
+    // int original_len;
 
-	i = 0;
-	original_len = ft_strlen(str);
-    if (original_len >= len)
-        return (ft_strdup(str));
+    i = ft_strlen(str);
+    if (i == len) 
+        return ft_strdup(str);
     new = ft_calloc(len + 1, sizeof(char));
     if (!new)
-        return (NULL);
-    padding_start = (len - original_len) / 2;
-    while(i < padding_start)
+        return NULL;
+    while(i < len)
         new[i++] = ' ';
-    ft_strlcpy(new + padding_start, str, original_len + 1);
-	i = padding_start + original_len;
-	while(i < len)
-        new[i++] = ' ';
+    ft_strlcpy(new, str, len + 1);
     return (new);
 }

@@ -14,7 +14,7 @@ int	parse_map(t_main *ms)
 	if (find_player_start(ms->map->maze, ms)) //rethink the error handling in the find_player_start function?
 		check_for_limits(ms->map, ms); //maybe this should be called sooner
 	pad_maze(ms, ms->map->maze);
-	if (!check_if_closed(ms, ms->map->maze))
+	if (!check_if_closed(ms, ms->map->maze, 0, 0))
 		error_and_exit(E_MAZ_OP, ms);
 	return (0);
 }
@@ -75,13 +75,6 @@ char **copy_maze(char *str, t_main *ms)
     //     i++;
     // }
 	maze = clean_maze(maze, i, ms);
-	// i = 0;
-    // j = 0;
-    // while(maze[i])
-    // {
-    //     printf("AFTER CLEAN %s and length %zu\n", maze[i], ft_strlen(maze[i]));
-    //     i++;
-    // }
 	return(maze);
 }
 
