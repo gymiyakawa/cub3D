@@ -25,7 +25,9 @@ int	look_for_spaces(t_main *ms, char **dup, int y, int x)
 {
     if (y < 0 || x < 0 || y >= ms->map->y_max || x >= ms->map->x_max
         || dup[y][x] == 'A')
+    {
         return (0);
+    }
 	if (ft_strchr(" ", dup[y][x]))
         error_and_exit(E_MAZ_OP, ms);
     dup[y][x] = 'A';
@@ -51,13 +53,13 @@ bool	check_if_closed(t_main *ms, char **m)
 	dup_maze = duplicate_maze(m, ms);
 	if(!dup_maze)
 		error_and_exit(E_DUP, ms);
-	int i = 0;
-    int j = 0;
-    while(dup_maze[i] && (dup_maze[i][j] != '\n' || dup_maze[i][j] != '\0'))
-    {
-        printf("DUP MAZE %s and length %zu\n", dup_maze[i], ft_strlen(dup_maze[i]));
-        i++;
-    }
+	// int i = 0;
+    // int j = 0;
+    // while(dup_maze[i] && dup_maze[i][j] != '\n' && dup_maze[i][j] != '\0')
+    // {
+    //     printf("DUP MAZE %s and length %zu\n", dup_maze[i], ft_strlen(dup_maze[i]));
+    //     i++;
+    // }
     while (m[y] != NULL)
     {
         x = 0;

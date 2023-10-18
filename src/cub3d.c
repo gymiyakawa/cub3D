@@ -99,6 +99,7 @@ int	main(int ac, char **av)
 	// else
 	// 	perror(AC_E);
 	
+	//spaces after maze are accepted or not?
 	
 	// add headers
 	//norminette
@@ -106,6 +107,26 @@ int	main(int ac, char **av)
 	// (void)ac;
 	// (void)av;
 }
+
+// void test_only_spaces_or_new_lines() {
+//     printf("Test: [%s] Result: %d\n", "     ", only_spaces_or_new_lines("     "));
+//     printf("Test: [%s] Result: %d\n", "\n", only_spaces_or_new_lines("\n"));
+//     printf("Test: [%s] Result: %d\n", "  \n  ", only_spaces_or_new_lines("  \n  "));
+//     printf("Test: [%s] Result: %d\n", "   a  ", only_spaces_or_new_lines("   a  "));
+//     printf("Test: [%s] Result: %d\n", "", only_spaces_or_new_lines(""));
+//     printf("Test: [%s] Result: %d\n", "   \n   \n   ", only_spaces_or_new_lines("   \n   \n   "));
+// }
+
+// int main() {
+//     test_only_spaces_or_new_lines();
+// 	char test[] = "test    ";
+// char *result = trim_end_spaces(test);
+// printf("Trimmed result: '%s'\n", result);
+// free(result);  // Remember to free to avoid memory leaks.
+
+//     return 0;
+// }
+
 
 void	close_fds(void)
 {

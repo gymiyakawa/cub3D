@@ -66,7 +66,21 @@ char **copy_maze(char *str, t_main *ms)
 		j++;
 	}
 	maze[i] = NULL;
+	// i = 0;
+    // j = 0;
+    // while(maze[i])
+    // {
+    //     printf("DUP MAZE %s and length %zu\n", maze[i], ft_strlen(maze[i]));
+    //     i++;
+    // }
 	maze = clean_maze(maze, i, ms);
+	// i = 0;
+    // j = 0;
+    // while(maze[i])
+    // {
+    //     printf("AFTER CLEAN %s and length %zu\n", maze[i], ft_strlen(maze[i]));
+    //     i++;
+    // }
 	return(maze);
 }
 
@@ -76,7 +90,7 @@ char **clean_maze(char **maze, int lines, t_main *ms)
 {
 	int		i;
 	int		last_line;
-	char	**clean_maze;
+	// char	**clean_maze;
 
 	i = 0;
 	last_line = 0;
@@ -86,37 +100,61 @@ char **clean_maze(char **maze, int lines, t_main *ms)
 			last_line = i;
 		i++;
 	}
-	clean_maze = ft_calloc(last_line + 2, sizeof(char *));
-	if (!clean_maze)
-		error_and_exit(E_MALLOC, ms);
+	// clean_maze = ft_calloc(last_line + 2, sizeof(char *));
+	// if (!clean_maze)
+	// 	error_and_exit(E_MALLOC, ms);
+	// i = 0;
+    // while(maze[i])
+    // {
+    //     printf("AFTER ONLY SPACES %s and length %zu\n", maze[i], ft_strlen(maze[i]));
+    //     i++;
+    // }
 	i = 0;
 	while(i <= last_line)
 	{
-		clean_maze[i] = trim_end_spaces(maze[i]);
-		if(!clean_maze[i])
-			free_partial_maze(clean_maze, ms, i);
-		maze[i] = x_free(maze[i]);
+		// clean_maze[i] = trim_end_spaces(maze[i]);
+		// if(!clean_maze[i])
+		// 	free_partial_maze(clean_maze, ms, i);
+		// maze[i] = x_free(maze[i]);
+		maze[i] = trim_end_spaces(maze[i]);
+		// trim_end_spaces_in_place(maze[i]);
+		// printf("Trimmed result: %s and length %zu\n", maze[i], ft_strlen(maze[i]));
+
+		if(!maze[i])
+			free_partial_maze(maze, ms, i);
 		i++;
 	}
 	// ms->map->y_max = last_line + 1; //maybe I don't need this because check_for_limits comes after
-	maze = x_free(maze);
-	clean_maze[last_line + 1] = NULL;
-	return(clean_maze);
+	// maze = x_free(maze);
+	// clean_maze[last_line + 1] = NULL;
+	// return(clean_maze);
+	maze[last_line + 1] = NULL;
+	return(maze);
 }
 
 char	*trim_end_spaces(char *str)
 {
 	int		end;
 	char	*trimmed_str;
-
+// printf("Before trimming: [%s]\n", str);
 	if (!str)
 		return (NULL);
 	trimmed_str = NULL;
 	end = ft_strlen(str) - 1;
-	while (end >= 0 && str[end] == ' ')
+	while (end >= 0 && (str[end] == ' ' || str[end] == '\n'))
 		end--;
 	trimmed_str = ft_substr(str, 0, end + 1);
+	//  printf("After trimming: [%s]\n", trimmed_str);
 	return(trimmed_str);
+}
+
+void 	trim_end_spaces_in_place(char *str)
+{
+	int		end;
+
+	end = ft_strlen(str) - 1;
+	while (end >= 0 && str[end] == ' ')
+		str[end--] = '\0';
 }
 
 bool only_spaces_or_new_lines(char *str)
