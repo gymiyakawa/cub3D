@@ -68,7 +68,6 @@ bool	parsing(char *str, t_main *ms)
 }
 
 
-
 //void mlx_key_hook(mlx_t* mlx, mlx_keyfunc func, void* param)
 int	main(int ac, char **av)
 {
@@ -80,50 +79,43 @@ int	main(int ac, char **av)
 		init_ms(&ms, av);
 		if (parsing(av[1], ms))
 		{
+			// mlx_set_setting(MLX_STRETCH_IMAGE, true);
 			ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", TRUE);
 			if (!ms->mlx)
 				error_and_exit(E_MLX_INI, ms);
-			mlx_image_t *test = mlx_texture_to_image(ms->mlx, ms->texture->mlx_textures[0]);
-			
-			int32_t instance_index;
-			instance_index = mlx_image_to_window(ms->mlx, test, WIDTH / 2, HEIGHT / 2);
-			
 			make_background(ms->mlx, ms->colors, ms->bg);
 			
 			
+			
+			// for testing purposes only, feel free to delete/relocate
+			// int test_map[] = {
+			// 1, 1, 1, 1, 1, 1, 1, 1,
+			// 1, 0, 0, 0, 0, 0, 0, 1,
+			// 1, 0, 0, 0, 0, 0, 0, 1,
+			// 1, 0, 0, 0, 0, 0, 0, 1,
+			// 1, 0, 0, 0, 0, 0, 0, 1,
+			// 1, 0, 0, 0, 0, 0, 0, 1,
+			// 1, 0, 0, 0, 0, 0, 0, 1,
+			// 1, 0, 0, 0, 0, 0, 0, 1,
+			// 1, 1, 1, 1, 1, 1, 1, 1,
+			// };
+			//  ms->map->test_map = test_map;
+			// raycasting(ms->ray, ms->plyr);
+	
+			// ms->map->m_img = make_test_map_img(ms, ms->map);
+			// int32_t testmap = mlx_image_to_window(ms->mlx, ms->map->m_img, 0, 0);
+			// 						printf("did it get to here?\n");
+			// (void)testmap;
+		
+		
 			mlx_key_hook(ms->mlx, &key_bindings, ms);
 			mlx_loop(ms->mlx);
-			
-			// map.win = mlx_new_window(map.mlx, (map.x_max * 64), (map.y_max * 64),
-		// 	// 		"./so_long");
-		// 	// if (!map.win)
-		// 	// 	exit(0);
-		// 	// if (assets_to_images(&map) == false)
-		// 	// 	error_and_message(1, &map);
-		// 	// images_to_screen(&map);
-		// 	// mlx_key_hook(map.win, alicia_keys, &map); //same name; check parameters
-		// 	// mlx_loop_hook(map.win, 17, 2, exit_win, &map); //change parameters //bool mlx_loop_hook(mlx_t* mlx, void (*f)(void*), void* param)
-		// 	// mlx_loop(map.mlx); //this seems fine; parameter is mlx_t* mlx
-		// 	//free ms here?
-			 
-			
-			
 		}
 	}
-
-	
 	clean_exit(ms);
 	return 0;
-	// else
-	// 	perror(AC_E);
-	
-	
-	// add headers
-	//norminette
-	//test with valgrind and leaks
-	// (void)ac;
-	// (void)av;
 }
+
 
 void	close_fds(void)
 {

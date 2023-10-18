@@ -13,10 +13,14 @@
 #define MAX_WIDTH 1920
 #define MAX_HEIGHT 1080
 #define WIDTH 1200
-#define HEIGHT 800
+#define HEIGHT 1200
 #define TRUE 1
 #define FALSE 0
 #define MAX_FILES 256
+#define PI 3.1415826535
+#define P2 PI / 2
+#define P3 3 * PI / 2
+
 
 //	index values for texture parsing
 #define NO_INDEX 0
@@ -78,7 +82,9 @@ void    init_ms(t_main **ms, char **av);
 void	init_color(t_color **color, t_main *ms);
 void	init_texture(t_texture **texture, t_main *ms);
 void	init_map(t_map **map, t_main *ms);
-void	init_background(t_main *ms);
+void	init_background(t_background **bg, t_main *ms);
+void	init_ray(t_ray **ray, t_main *ms);
+void	init_player(t_player **plyr, t_main	*ms);
 
 //color_parsing.c
 int		parse_colors(t_main *ms);
@@ -113,7 +119,13 @@ void	key_bindings(mlx_key_data_t input, void *ms);
 void	make_background(mlx_t *mlx, t_color *c, t_background *bg);
 
 //printing functions
-void	print_color_struct(t_color *c);
-void	print_textures(t_texture *t);
+void		print_color_struct(t_color *c);
+void		print_textures(t_texture *t);
+mlx_image_t	*make_test_map_img(t_main *ms, t_map *map);
+void	print_square(mlx_image_t *img, int x, int y, u_int32_t color);
 
-
+// ray casting tests
+int	raycasting(t_ray *ray, t_player *plyr);
+void	check_horizontal(t_ray *ray, t_player *plyr);
+// float	calc_dist(float ax, float ay, float bx, float by, float ang); // original, but not using ang for some reason
+float	calc_dist(float ax, float ay, float bx, float by);

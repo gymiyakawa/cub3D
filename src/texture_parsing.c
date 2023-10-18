@@ -46,7 +46,7 @@ int	parse_indiv_textures(t_texture *t, char *direction)
 	arg = find_identifier(t->ms, direction);
 	if (!arg)
 		return (-1);
-	if (texture_pathfinder(arg, t->ms, path_i, direction) != 0)
+	if (texture_pathfinder(arg, t->ms, path_i, direction) != 0) // change to pathsetter
 		return (-2);
 	t->mlx_textures[path_i] = mlx_load_png(t->paths[path_i]);
 	if (t->mlx_textures[path_i] == NULL)

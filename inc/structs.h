@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:06:55 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/17 17:07:16 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/18 14:43:42 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ typedef struct s_color
 
 typedef struct s_background
 {
-	mlx_image_t *floor;
-	mlx_image_t *ceiling;
+	mlx_image_t	*floor;
+	mlx_image_t	*ceiling;
+	t_main		*ms;
 } t_background;
 
 //	direction order: NO, SO, EA, WE;
@@ -41,7 +42,7 @@ typedef struct s_texture
 {
 	char			**paths;
 	mlx_texture_t	**mlx_textures;
-	t_main	*ms;
+	t_main			*ms;
 }	t_texture;
 
 typedef struct s_map
@@ -56,9 +57,12 @@ typedef struct s_map
 	int		p_view;
 	int		p_y;
 	int		p_x;
+	int		m_size;
 	// int		e_x;
 	// int		e_y;
 	// int		exit_check;
+	mlx_image_t	*m_img;
+	int		*test_map;
 	int		x_max;
 	int		y_max;
 	// void	*img_p;
@@ -80,19 +84,59 @@ typedef struct s_map
 	t_main	*ms;
 }	t_map;
 
+typedef	struct s_player
+{
+	int		pos_x;
+	int		pos_y;
+	int		delta_x;
+	int		delta_y;
+	int		angle;
+	t_main	*ms;
+} t_player;
+
+typedef struct s_ray
+{
+	// origin position in the map
+	int		mx;
+	int		my;
+	int		mp;
+	int		dof;
+	float	rx;
+	float	ry;
+	float	angle;
+	// offsets
+	float	xo;
+	float	yo;
+	//horizontal checks
+	float	h_dist;
+	float	hx;
+	float	hy;
+	//vertical checks
+	float	v_dist;
+	float	vx;
+	float	vy;
+	t_main	*ms;
+} t_ray;
+
 typedef struct s_main
 {
 	t_color		*colors;
 	t_map		*map;
 	t_texture	*texture;
 	t_background *bg;
+	t_player	*plyr;
+	t_ray		*ray;
 	mlx_t		*mlx;
 	int			fd;
+	bool		game_over;
 	char		**file_copy;
 	char		*filename;
 	int			line_count;
 	char		**valid_lines;
 }	t_main;
+
+
+
 
 			// from so_long
 // typedef struct s_map

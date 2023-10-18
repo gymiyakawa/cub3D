@@ -1,0 +1,189 @@
+
+
+
+
+Needed Variables
+player struct {
+	pos x
+	pos y
+	
+for player rotation:
+	delta x
+	delta y
+	angle
+	
+}
+
+	MAP 
+	in this example the map is a 8 / 8 square
+	meaning it has 64 squares
+
+ 
+RAYS
+struct {
+	int r, mx, my
+	mp, dof
+	dof = depth of field. Or whats the max number of squares we could
+		check before being outside the map. (loose personal definition)
+	
+	float
+	rx, ry, ra, xo, yo
+	ra = rays angle. set it to player's angle
+	xo, yo = offset. to check the next point of contact;
+	
+	
+#define PI 3.1415826535
+#define P2 PI / 2
+#define P3 3*PI / 2
+	
+	
+---------------- checking HORIZONTAL line ---
+	dof = 0 
+	float distHorizontal = 1000000;
+	float hx = px;
+	float hy = py;
+	
+	
+	
+	float aTan = 1 / Tan(ra); angle tangent is the inverse of the tangent of the ray angle
+	rx ry = the coordinates where the ray first horizontal line
+	
+	
+	PI = number Pi. // we use PI to check angles in C
+		
+	// means the player is looking up
+	if (ra > PI) 
+
+					formula is the player is looking up
+					round the ray position to the neares 64 value;
+					formula below:
+		ry = (((int)Player_y >> 6) << 6) - 0.0001;
+		rx = (Player_y - ry) * aTan+px
+		yo = -64;
+		xo = yo * aTan;
+		
+					formula is the player is looking down
+	
+		if (ra < PI) // means player is looking down
+		ry = (((int)Player_y >> 6) << 6) + 64;
+		rx = (Player_y - ry) * aTan+px
+		yo = 64;
+		xo = yo * aTan;
+		
+					formula for looking straight left of right
+		if (ra == 0 || ra == PI)  // means its looking in a straight horizontal line
+		rx = px;
+		ry = py;
+		dof = 8;
+		while (dof < 8)
+		{
+			mx = (int) (rx) >> 6;
+			my = (int) (ry) >> 6;
+			mp = my *mapX + mx;
+			if (mp > 0 && mp < mapX * mapY && map[mp] == 1) // ray hits a wall
+			{
+					// this section calculates the distance to the player from where it hit the wall
+				hx = rx;
+				hy = ry;
+				distHorizontal = calc_dist(px, py, hx, hy, ra);
+				
+				
+				dof = 8;
+			}
+			else	// advances to the next line, adding the offset and incrementing dof
+			{
+				rx = xo;
+				ry = yo;
+				dof += 1;
+			}
+			
+		}
+
+
+
+
+
+------- checking VERTICAL line ---
+	dof = 0 
+	
+	float distVertical = 1000000;
+	float vx = px;
+	float vy = py;
+	
+	
+	
+	float nTan = -tan(ra); uses the negative tangent
+	
+	PI = number Pi. // we use PI to check angles in C
+		
+		// means the player is looking left
+		if (ra > P2 && ra > P3) 
+
+					formula is the player is looking left
+					round the ray position to the neares 64 value;
+					formula below:
+		rx = (((int)Player_x >> 6) << 6) - 0.0001;
+		ry = (Player_x - rx) * nTan + py
+		xo = -64;
+		yo = xo * nTan;
+		
+					formula is the player is looking right
+	
+		if (ra < P2 || ra > P3) // means player is looking right NOTE THE OR SYMBOL
+		rx = (((int)Player_x >> 6) << 6) + 64;
+		ry = (Player_x - rx) * nTan+py
+		xo = 64;
+		yo = xo * nTan;
+		
+					formula for looking straight up or down
+		if (ra == 0 || ra == PI)  // means its looking in a straight horizontal line
+		rx = px;
+		ry = py;
+		dof = 8;
+		while (dof < 8)
+		{
+			mx = (int) (rx) >> 6;
+			my = (int) (ry) >> 6;
+			mp = my *mapX + mx;
+			if (mp > 0 && mp < mapX * mapY && map[mp] == 1) // ray hits a wall
+			{
+					// this section calculates the distance to the player from where it hit the wall
+				vx = rx;
+				vy = ry;
+				distVertical = calc_dist(px, py, vx, vy, ra);
+				
+				
+				
+				dof = 8;
+			}
+			else	// advances to the next line, adding the offset and incrementing dof
+			{
+				rx = xo;
+				ry = yo;
+				dof += 1;
+			}
+			
+		}
+
+if (distVertical < distHorizontal)
+{
+	rx = vx;
+	ry = xy;
+}
+if (distHorizontal < distVertical)
+{
+	rx = hx;
+	ry = hy;
+}
+
+
+PRINT RAY(or print ray's consequence)
+
+
+
+--------- function to check distance ----
+// maybe too many variables, send a struct instead
+float	calc_dist(float ax, float ay, float bx, float by, float ang)
+{
+	return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
+}

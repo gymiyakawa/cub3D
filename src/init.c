@@ -17,21 +17,65 @@ void	init_ms(t_main **ms, char **av)
 	(*ms)->fd = open_fd(av[1], *ms);
 	(*ms)->file_copy = copy_file(av[1], *ms);
 	(*ms)->valid_lines = NULL;
+	(*ms)->game_over = false;
 	init_color(&(*ms)->colors, *ms);
 	init_texture(&(*ms)->texture, *ms);
 	init_map(&(*ms)->map, *ms);
-	init_background(*ms);
+	init_background(&(*ms)->bg, *ms);
+	init_player(&(*ms)->plyr, *ms);
+	init_ray(&(*ms)->ray, *ms);
 	(*ms)->mlx = NULL;
 	return ;
 }
 
-void	init_background(t_main *ms)
+void	init_ray(t_ray **ray, t_main *ms)
 {
-	ms->bg = ft_calloc(1, sizeof(t_background));
-	if (ms->bg == NULL)
+	*ray = ft_calloc(1, sizeof(t_ray));
+	if (!*ray)
 		error_and_exit(E_MALLOC, ms);
-	ms->bg->ceiling = NULL;
-	ms->bg->floor = NULL;
+	(*ray)->dof = 0;
+	(*ray)->mx = 0;
+	(*ray)->my = 0;
+	(*ray)->mp = 0;
+	(*ray)->h_dist = 0;
+	(*ray)->hx = 0;
+	(*ray)->hy = 0;
+	(*ray)->angle = 0;
+	(*ray)->rx = 0;
+	(*ray)->ry = 0;
+	(*ray)->v_dist = 0;
+	(*ray)->vx	= 0;
+	(*ray)->vy = 0;
+	(*ray)->xo = 0;
+	(*ray)->yo = 0;
+	(*ray)->ms = ms;
+	return ;
+}
+
+
+void	init_player(t_player **plyr, t_main	*ms)
+{
+	*plyr = ft_calloc(1, sizeof(t_player));
+	if (!*plyr)
+		error_and_exit(E_MALLOC, ms);
+	(*plyr)->angle = 0;
+	(*plyr)->delta_x = 0;
+	(*plyr)->delta_y = 0;
+	(*plyr)->pos_x = 0;
+	(*plyr)->pos_y = 0;
+	(*plyr)->ms = ms;
+	return;
+}
+
+void	init_background(t_background **bg, t_main *ms)
+{
+	*bg = ft_calloc(1, sizeof(t_background));
+	if (!*bg)
+		error_and_exit(E_MALLOC, ms);
+	(*bg)->ceiling = NULL;
+	(*bg)->floor = NULL;
+	(*bg)->ms = ms;
+	return ;
 }
 
 void	init_color(t_color **color, t_main *ms)
