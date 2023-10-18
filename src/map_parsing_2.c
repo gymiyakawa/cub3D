@@ -19,6 +19,7 @@ char	**clean_maze(char **maze, int lines, t_main *ms)
 	i = 0;
 	while (i <= last_line)
 	{
+						
 		maze[i] = trim_end_spaces(maze[i]);
 		if (!maze[i])
 			free_partial_maze(maze, ms, i);
@@ -40,6 +41,7 @@ char	*trim_end_spaces(char *str)
 	while (end >= 0 && (str[end] == ' ' || str[end] == '\n'))
 		end--;
 	trimmed_str = ft_substr(str, 0, end + 1);
+	str = x_free(str);
 	return (trimmed_str);
 }
 

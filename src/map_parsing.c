@@ -52,6 +52,7 @@ char	**copy_maze(char *str, t_main *ms)
 
 	i = 0;
 	j = 0;
+
 	maze = ft_calloc(ms->line_count + 1, sizeof(char *)); //the line count is actually for the whole .cub file; should I substract and realloc after we find out the size of the maze itself? or no need because we x_free(maze) in the end anyway?
 	if (!maze)
 		error_and_exit(E_MALLOC, ms);

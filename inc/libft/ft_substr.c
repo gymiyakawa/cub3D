@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:19:26 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/07/19 16:13:05 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:02:37 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	else
 		s_len -= start;
 	i = 0;
-	str = x_calloc ((s_len + 1) * (sizeof(char)));
+	str = ft_calloc ((s_len + 1), (sizeof(char)));
 	if (str == NULL)
 		return (NULL);
 	while (len > 0 && s[start] && s_len != 0)

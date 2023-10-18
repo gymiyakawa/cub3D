@@ -14,6 +14,8 @@ void	clean_exit(t_main *ms)
 		ms->map = free_map(ms->map);
 	if (ms->ray)
 		ms->ray = x_free(ms->ray);
+	if (ms->bg)
+		ms->bg = x_free(ms->bg);
 	if (ms->plyr)
 		ms->plyr = x_free(ms->plyr);
 	if (ms)

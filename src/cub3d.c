@@ -28,7 +28,6 @@ char	**copy_file(char *str, t_main *ms)
 	int		i;
 
 	i = 0;
-	ms->line_count = line_count(str, ms);
 	file_copy = ft_calloc(ms->line_count + 1, sizeof(char *));
 	if(!file_copy)
 		error_and_exit(E_MALLOC, ms);
@@ -71,7 +70,7 @@ int	main(int ac, char **av)
 		init_ms(&ms, av);
 		if (parsing(av[1], ms))
 		{
-			// mlx_set_setting(MLX_STRETCH_IMAGE, true);
+			mlx_set_setting(MLX_STRETCH_IMAGE, true);
 			ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", TRUE);
 			if (!ms->mlx)
 				error_and_exit(E_MLX_INI, ms);
