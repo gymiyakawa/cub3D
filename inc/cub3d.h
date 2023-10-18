@@ -33,6 +33,7 @@
 #define E_PLAY "Wrong or insufficient player number\n"
 #define E_MAZ_OP "Maze or player is not within closed walls\n"
 #define E_DUP "Unable to duplicate maze\n"
+#define E_PAD "Unable to pad maze\n"
 #define TEST "TESTY TEST!\n" //delete this later
 
 // FUNCTION PROTOTYPES
@@ -47,9 +48,14 @@ void	free_partial_maze(char **maze, t_main *ms, int i);
 char	**clean_maze(char **maze, int lines, t_main *ms);
 bool    only_spaces_or_new_lines(char *str);
 char	*trim_end_spaces(char *str);
-void 	trim_end_spaces_in_place(char *str);
-bool	check_if_closed(t_main *ms, char **m);
 void	check_for_limits(t_map *map, t_main *ms);
+
+//flood_fill.c
+char	**duplicate_maze(char **maze, t_main *ms);
+bool    flood_fill(t_main *ms, char **dup, int y, int x);
+bool	check_if_closed(t_main *ms, char **m);
+void	pad_maze(t_main *ms, char **maze);
+char    *add_padding(char *str, int len);
 
 
 //error.c

@@ -13,6 +13,7 @@ int	parse_map(t_main *ms)
 	ms->map->maze = copy_maze(temp, ms);
 	if (find_player_start(ms->map->maze, ms)) //rethink the error handling in the find_player_start function?
 		check_for_limits(ms->map, ms); //maybe this should be called sooner
+	pad_maze(ms, ms->map->maze);
 	if (!check_if_closed(ms, ms->map->maze))
 		error_and_exit(E_MAZ_OP, ms);
 	return (0);
@@ -55,7 +56,7 @@ char **copy_maze(char *str, t_main *ms)
 		error_and_exit(E_MALLOC, ms);
 	while (ft_strncmp(str, ms->file_copy[j], ft_strlen(str)) != 0 && ms->file_copy[j] != NULL)
 		j++;
-	while (ms->file_copy && ms->file_copy[j] && ms->file_copy[j][0] != '\0') 
+	while (ms->file_copy[j] && ms->file_copy[j][0] != '\0')
 	{
 		if (!validate_maze_line(ms->file_copy[j]))
 			handle_maze_line_error(maze, ms, j);
@@ -148,17 +149,8 @@ char	*trim_end_spaces(char *str)
 	return(trimmed_str);
 }
 
-void 	trim_end_spaces_in_place(char *str)
-{
-	int		end;
-
-	end = ft_strlen(str) - 1;
-	while (end >= 0 && str[end] == ' ')
-		str[end--] = '\0';
-}
-
 bool only_spaces_or_new_lines(char *str)
-{//check this function
+{
     int i = 0;
 
     if (!str || str[0] == '\0' || (str[0] == '\n' && str[1] == '\0'))

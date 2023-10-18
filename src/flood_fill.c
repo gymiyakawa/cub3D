@@ -20,63 +20,114 @@ char	**duplicate_maze(char **maze, t_main *ms)
 	return (dup_maze);
 }
 
-//flood fill - checks if the 0s and the player do not touch a space
-int	look_for_spaces(t_main *ms, char **dup, int y, int x)
+bool flood_fill(t_main *ms, char **dup, int y, int x)
 {
-    if (y < 0 || x < 0 || y >= ms->map->y_max || x >= ms->map->x_max
-        || dup[y][x] == 'A')
+    if (y < 0 || y >= ms->map->y_max || x < 0 || x >= ms->map->x_max)
     {
-        return (0);
+        return(FALSE);
     }
-	if (ft_strchr(" ", dup[y][x]))
-        error_and_exit(E_MAZ_OP, ms);
+    if (dup[y][x] == '1' || dup[y][x] == 'A')
+    {
+        return TRUE;
+    }
+    if (ft_strchr("NSEW", dup[y][x]) || dup[y][x] == '0')
+    {
+        if (y == 0 || y == ms->map->y_max - 1 || x == 0
+            || x == ms->map->x_max - 1)
+        {
+            return(FALSE);
+        }
+        if (dup[y-1][x-1] == ' ' || dup[y-1][x+1] == ' '
+            || dup[y+1][x-1] == ' ' || dup[y+1][x+1] == ' ')
+        {
+            return(FALSE);
+        }
+    }
     dup[y][x] = 'A';
-	look_for_spaces(ms, dup, y, x + 1); 
-    look_for_spaces(ms, dup, y, x - 1);
-	look_for_spaces(ms, dup, y + 1, x);
-	look_for_spaces(ms, dup, y - 1, x);
-	look_for_spaces(ms, dup, y + 1, x + 1);
-	look_for_spaces(ms, dup, y - 1, x - 1);
-	look_for_spaces(ms, dup, y + 1, x - 1);
-	look_for_spaces(ms, dup, y - 1, x + 1);
-	return (0);
+    if (!flood_fill(ms, dup, y - 1, x) || !flood_fill(ms, dup, y + 1, x)
+        || !flood_fill(ms, dup, y, x - 1) || !flood_fill(ms, dup, y, x + 1))
+    {
+        return FALSE;
+    }
+    return TRUE;
 }
 
-bool	check_if_closed(t_main *ms, char **m)
-{//when I get here, my trim end of strings doesn't work anymore
-    int 	y;
-    int 	x;
-	char	**dup_maze;
+bool check_if_closed(t_main *ms, char **m)
+{
+    int     y;
+    int     x;
+    char    **dup_maze;
 
-	y = 0;
+    y = 0;
     x = 0;
-	dup_maze = duplicate_maze(m, ms);
-	if(!dup_maze)
-		error_and_exit(E_DUP, ms);
-	// int i = 0;
-    // int j = 0;
-    // while(dup_maze[i] && dup_maze[i][j] != '\n' && dup_maze[i][j] != '\0')
-    // {
-    //     printf("DUP MAZE %s and length %zu\n", dup_maze[i], ft_strlen(dup_maze[i]));
-    //     i++;
-    // }
+    dup_maze = duplicate_maze(m, ms);
+    if (!dup_maze) 
+        error_and_exit(E_DUP, ms);
     while (m[y] != NULL)
     {
         x = 0;
-        while (m[y][x] && (m[y][x] != '\n' || m[y][x] != '\0'))
+        while (m[y][x])
         {
             if (m[y][x] == '0' || (y == ms->map->p_y && x == ms->map->p_x))
-			{
-                if (y == 0 || (y + 1) == ms->map->y_max || (x + 1) == ms->map->x_max
-                    || x == 0)
-                    return(FALSE);
-                else
-                    look_for_spaces(ms, dup_maze, y, x);
+            {
+                if (y == 0 || (y + 1) == ms->map->y_max
+                    || (x + 1) == ms->map->x_max || x == 0)
+                {
+                    dup_maze = ft_free_array(dup_maze);
+                    return (FALSE);
+                }
+                else if (!flood_fill(ms, dup_maze, y, x))
+                {
+                    dup_maze = ft_free_array(dup_maze);
+                    return (FALSE);
+                }
             }
             x++;
         }
         y++;
     }
-	dup_maze = ft_free_array(dup_maze);
-	return (TRUE);
+    dup_maze = ft_free_array(dup_maze);
+    return (TRUE);
+}
+
+void	pad_maze(t_main *ms, char **maze)
+{
+	int	i;
+	char *padded;
+
+	i = 0;
+	padded = NULL;
+	while(maze[i])
+	{
+		padded = add_padding(maze[i], ms->map->x_max);
+		if (!padded)
+			error_and_exit(E_PAD, ms);
+		free(maze[i]);
+		maze[i] = padded;
+		i++;
+	}
+}
+
+char *add_padding(char *str, int len)
+{
+    int		i;
+	char	*new;
+    int		original_len;
+    int		padding_start;
+
+	i = 0;
+	original_len = ft_strlen(str);
+    if (original_len >= len)
+        return (ft_strdup(str));
+    new = ft_calloc(len + 1, sizeof(char));
+    if (!new)
+        return (NULL);
+    padding_start = (len - original_len) / 2;
+    while(i < padding_start)
+        new[i++] = ' ';
+    ft_strlcpy(new + padding_start, str, original_len + 1);
+	i = padding_start + original_len;
+	while(i < len)
+        new[i++] = ' ';
+    return (new);
 }
