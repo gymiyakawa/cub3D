@@ -111,7 +111,6 @@ void	elements_check(t_main *ms);
 bool	detect_loose_char(t_main *ms);
 char	**find_valid_lines(t_main *ms);
 bool	is_valid_line(char *line);
-bool	is_map_last(t_main *ms);  // even needed at this point?
 bool	are_there_repeats(t_main *ms);
 
 //mlx_control.c
