@@ -1,85 +1,115 @@
 #include "../inc/cub3d.h"
 
-// char	**duplicate_map(t_map *map)
-// {
-// 	char	**dup_map;
-// 	int		i;
+char	**duplicate_maze(char **maze, t_main *ms)
+{
+	int		i;
+	char	**dup_maze;
 
-// 	i = 0;
-// 	dup_map = ft_calloc(sizeof(char *), (map->y_max + 1));
-// 	if (!dup_map)
-// 		return (NULL);
-// 	while (i < map->y_max)
-// 	{
-// 		dup_map[i] = ft_strdup(map->map[i]);
-// 		i++;
-// 	}
-// 	return (dup_map);
-// }
+	i = 0;
+	dup_maze = ft_calloc((ms->map->y_max + 1), sizeof(char *));
+	if (!dup_maze)
+		return (NULL);
+	while (i < ms->map->y_max)
+	{
+		dup_maze[i] = ft_strdup(maze[i]);
+		if (!dup_maze[i])
+			error_and_exit(E_MALLOC, ms);
+		i++;
+	}
+	dup_maze[i] = NULL;
+	return (dup_maze);
+}
 
-// int	exit_check(t_map *map, char **dup_map, int y, int x)
-// {
-// 	if (dup_map[y][x + 1] == 'E')
-// 		map->exit_check++;
-// 	if (dup_map[y][x - 1] == 'E')
-// 		map->exit_check++;
-// 	if (dup_map[y + 1][x] == 'E')
-// 		map->exit_check++;
-// 	if (dup_map[y - 1][x] == 'E')
-// 		map->exit_check++;
-// 	return (0);
-// }
+bool	flood_fill(t_main *ms, char **map, int y, int x)
+{
+	bool	up;
+	bool	down;
+	bool	left;
+	bool	right;
 
-// int	replace_assets(t_map *map, char **dup_map, int y, int x)
-// {
-// 	exit_check(map, dup_map, y, x);
-// 	if (ft_strchr("0C", dup_map[y][x + 1]))
-// 	{
-// 		dup_map[y][x + 1] = 'A';
-// 		replace_assets(map, dup_map, y, x + 1);
-// 	}
-// 	if (ft_strchr("0C", dup_map[y][x - 1]))
-// 	{
-// 		dup_map[y][x - 1] = 'A';
-// 		replace_assets(map, dup_map, y, x - 1);
-// 	}
-// 	if (ft_strchr("0C", dup_map[y + 1][x]))
-// 	{
-// 		dup_map[y + 1][x] = 'A';
-// 		replace_assets(map, dup_map, y + 1, x);
-// 	}
-// 	if (ft_strchr("0C", dup_map[y - 1][x]))
-// 	{
-// 		dup_map[y - 1][x] = 'A';
-// 		replace_assets(map, dup_map, y - 1, x);
-// 	}
-// 	return (0);
-// }
+	up = y > 0;
+	down = y < ms->map->y_max - 1;
+	left = x > 0;
+	right = x < ms->map->x_max - 1;
+	if (y < 0 || y > ms->map->y_max - 1 || x < 0 || x > ms->map->x_max)
+		return (FALSE);
+	if (map[y][x] == 'A')
+		return (TRUE);
+	if (map[y][x] == '0' || ft_strchr("NSEW", map[y][x]))
+	{
+		if ((up && left && map[y - 1][x - 1] == ' ') || (up && right && map[y
+				- 1][x + 1] == ' ') || (down && left && map[y + 1][x
+				- 1] == ' ') || (down && right && map[y + 1][x + 1] == ' '))
+			return (FALSE);
+		map[y][x] = 'A';
+		if (!flood_fill(ms, map, y - 1, x) || !flood_fill(ms, map, y + 1, x)
+			|| !flood_fill(ms, map, y, x - 1) || !flood_fill(ms, map, y, x + 1))
+			return (FALSE);
+	}
+	return (TRUE);
+}
 
-// int	check_valid_path(t_map *map)
-// {
-// 	char	**dup_map;
-// 	int		y;
-// 	int		x;
+bool	check_if_closed(t_main *ms, char **m, int y, int x)
+{
+	char	**dup_maze;
 
-// 	y = 1;
-// 	x = 1;
-// 	dup_map = duplicate_map(map);
-// 	replace_assets(map, dup_map, map->p_y, map->p_x);
-// 	while (y < map->y_max)
-// 	{
-// 		x = 1;
-// 		while (x < map->x_max)
-// 		{
-// 			if (dup_map[y][x] == 'C' || map->exit_check == 0)
-// 			{
-// 				free_table(dup_map);
-// 				error_and_message(6, map);
-// 			}
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// 	free_table(dup_map);
-// 	return (0);
-// }
+	dup_maze = duplicate_maze(m, ms);
+	if (!dup_maze)
+		error_and_exit(E_DUP, ms);
+	while (m[y] != NULL)
+	{
+		x = 0;
+		while (m[y][x])
+		{
+			if (m[y][x] == '0' || (y == ms->map->p_y && x == ms->map->p_x))
+			{
+				if (!flood_fill(ms, dup_maze, y, x))
+				{
+					dup_maze = ft_free_array(dup_maze);
+					return (FALSE);
+				}
+			}
+			x++;
+		}
+		y++;
+	}
+	dup_maze = ft_free_array(dup_maze);
+	return (TRUE);
+}
+
+void	pad_maze(t_main *ms, char **maze)
+{
+	int		i;
+	char	*padded;
+
+	i = 0;
+	padded = NULL;
+	while (maze[i])
+	{
+		padded = add_padding(maze[i], ms->map->x_max);
+		if (!padded)
+			error_and_exit(E_PAD, ms);
+		free(maze[i]);
+		maze[i] = padded;
+		i++;
+	}
+	if (!check_if_closed(ms, maze, 0, 0))
+		error_and_exit(E_MAZ_OP, ms);
+}
+
+char	*add_padding(char *str, int len)
+{
+	int		i;
+	char	*new;
+
+	i = ft_strlen(str);
+	if (i == len)
+		return (ft_strdup(str));
+	new = ft_calloc(len + 1, sizeof(char));
+	if (!new)
+		return (NULL);
+	ft_strlcpy(new, str, len + 1);
+	while (i < len)
+		new[i++] = ' ';
+	return (new);
+}

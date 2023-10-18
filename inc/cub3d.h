@@ -32,6 +32,7 @@
 
 #define E_MAP "Input file inexistent or not conforming to .cub extension\n"
 #define E_MAP_NFD "Map not found\n"
+#define E_INV_MAP "Invalid map\n"
 #define E_AC "Only two arguments for cub3d (the first is the program's name)\n"
 #define E_MALLOC "Error on malloc\n"
 #define E_OPEN "Error opening fd\n"
@@ -40,25 +41,41 @@
 #define E_PRS_TXT "Invalid texture parameter\n"
 #define E_PARS "Parsing error\n"
 #define E_INV_CHAR "Invalid character in maze line\n"
-#define E_PLAY "Wrong or insufficient number for the player\n"
-#define E_MSS_ELEM "Missing required element: NO, SO, EA, WE, F, C or Map\n"
-#define E_WRG_ORD "Wrong order of elements. Map must be last\n"
+#define E_PLAY "Wrong or insufficient player number\n"
+#define E_MSS_ELEM "Missing required element: NO, SO, EA, WE, F, C or map\n"
+#define E_WRG_ORD "Wrong order of elements - map must be last\n"
 #define	E_RPT_ELEM "No element can be repeated\n"
 #define E_INV_LINE "All non-identified lines must be empty\n"
 #define E_MLX_INI "MLX42 failed to initialize\n"
+#define E_MAZ_OP "Maze or player is not within closed walls\n"
+#define E_DUP "Unable to duplicate maze\n"
+#define E_PAD "Unable to pad maze\n"
+// #define TEST "TESTY TEST!\n" //delete this later
+
 // FUNCTION PROTOTYPES
 
 //map_parsing.c
 int	    parse_map(t_main *ms);
-// int	    open_and_allocate_map(char *str, t_main *ms);
-int     check_input_extension(char *str, t_main *ms);
+void	check_for_limits(t_map *map, t_main *ms);
 char    **copy_maze(char *str, t_main *ms);
-bool	validate_maze_line(char *line);
 void	handle_maze_line_error(char **maze, t_main *ms, int i);
 bool	find_player_start(char **maze, t_main *ms);
+
+//map_parsing_2.c
+char	**clean_maze(char **maze, int lines, t_main *ms);
+char	*trim_end_spaces(char *str);
+bool    only_spaces_or_new_lines(char *str);
 void	free_partial_maze(char **maze, t_main *ms, int i);
 // char	*set_maze(t_main *ms);
 int		get_first_line_i(t_map *map);
+bool	validate_maze_line(char *line);
+
+//flood_fill.c
+char	**duplicate_maze(char **maze, t_main *ms);
+bool    flood_fill(t_main *ms, char **dup, int y, int x);
+bool    check_if_closed(t_main *ms, char **m, int y, int x);
+void	pad_maze(t_main *ms, char **maze);
+char    *add_padding(char *str, int len);
 
 //error.c
 void    error_and_exit(char *str, t_main *ms);
@@ -117,6 +134,16 @@ bool	are_there_repeats(t_main *ms);
 //mlx_control.c
 void	key_bindings(mlx_key_data_t input, void *ms);
 void	make_background(mlx_t *mlx, t_color *c, t_background *bg);
+int		parse_indiv_textures(t_main *ms, char *direction);
+t_img	*which_texture(t_main *ms, char *direction);
+int	    texture_pathfinder(char *arg, t_main *ms, t_img *img);
+
+//parsing utils.c
+bool	valid_up_to_identifier(char *initial, char *identifier);
+int		create_trgb(int t, int r, int g, int b);
+char	*find_identifier(t_main *ms, char *identifier);
+void	check_valid_path(char *path, t_main *ms, t_img *img);
+int     check_input_extension(char *str, t_main *ms);
 
 //printing functions
 void		print_color_struct(t_color *c);

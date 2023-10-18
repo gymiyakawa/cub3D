@@ -20,7 +20,7 @@ LIBFT_DIR = ./inc/libft/
 ####    FILES    ####
 RAW_SRC = cub3d.c color_parsing.c init.c error.c map_parsing.c \
 		print.c parsing_utils.c texture_parsing.c checks.c exit.c \
-		mlx_control.c raycasting.c
+		mlx_control.c raycasting.c flood_fill.c map_parsing_2.c \
 
 RAW_INC = cub3d.h structs.h
 
@@ -44,6 +44,9 @@ $(NAME): $(OBJECTS) | $(OBJ_DIR)
 
 #	Linux compilation
 #	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_DIR)/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
+
+#	WSL (Linux) compilation
+#	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_DIR)/build/libmlx42.a -Iinclude -ldl -lXext -lX11 -lm -pthread
 
 	@echo "$(GREEN) cub3d compiled successfully!$(RESET)"
 

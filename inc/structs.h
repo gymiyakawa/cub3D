@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:06:55 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/18 14:43:42 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:15:23 by raruiz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_texture
 	mlx_texture_t	**mlx_textures;
 	t_main			*ms;
 }	t_texture;
-
 typedef struct s_map
 {
 	// mlx_t*	mlx;
@@ -77,7 +76,7 @@ typedef struct s_map
 	// int		coin;
 	// int		exit;
 	// int		moves;
-	int		pixel;
+	// int		pixel;
 	// int		pixel_max;
 	// bool	is_dead;
 	int		i_first_line;
