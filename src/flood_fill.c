@@ -21,7 +21,7 @@ char	**duplicate_maze(char **maze, t_main *ms)
 }
 
 bool	flood_fill(t_main *ms, char **dup, int y, int x)
-{
+{//need to fix it for when 0 or player is at the end of the shortest string
 	bool	up;
 	bool	down;
 	bool	left;
