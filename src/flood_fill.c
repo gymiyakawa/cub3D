@@ -35,7 +35,7 @@ bool	flood_fill(t_main *ms, char **dup, int y, int x)
 		return (FALSE);
 	if (dup[y][x] == 'A')
 		return (TRUE);
-	if (dup[y][x] == '0')
+	if (dup[y][x] == '0' || ft_strchr("NSEW", dup[y][x]))
 	{
 		if ((up && left && dup[y - 1][x - 1] == ' ') || (up && right && dup[y
 				- 1][x + 1] == ' ') || (down && left && dup[y + 1][x
