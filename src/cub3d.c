@@ -50,23 +50,15 @@ char	**copy_file(char *str, t_main *ms)
 bool	parsing(char *str, t_main *ms)
 {
 	check_input_extension(str, ms);
-	
-	
 	if (parse_map(ms) != 0)
 		error_and_exit(E_PARS, ms);
-	
 	elements_check(ms);
-	
-	// ms->file_copy = copy_file(str, ms);  <-moved to init_ms()
 	if (parse_colors(ms) != 0)
 		error_and_exit(E_PARS, ms);
-									// print_color_struct(ms->colors);
 	if (parse_texture(ms) != 0)
 		error_and_exit(E_PARS, ms);
-									// print_textures(ms->texture);
 	return (TRUE);
 }
-
 
 //void mlx_key_hook(mlx_t* mlx, mlx_keyfunc func, void* param)
 int	main(int ac, char **av)
@@ -112,8 +104,13 @@ int	main(int ac, char **av)
 			mlx_loop(ms->mlx);
 		}
 	}
+	else
+		perror(E_AC);
 	clean_exit(ms);
 	return 0;
+	// add headers
+	//norminette
+	//test with valgrind and leaks
 }
 
 
