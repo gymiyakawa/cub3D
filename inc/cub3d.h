@@ -33,7 +33,6 @@
 #define E_MAP "Input file inexistent or not conforming to .cub extension\n"
 #define E_MAP_NFD "Map not found\n"
 #define E_INV_MAP "Invalid map\n"
-#define E_AC "Only two arguments for cub3d (the first is the program's name)\n"
 #define E_MALLOC "Error on malloc\n"
 #define E_OPEN "Error opening fd\n"
 #define E_BIG "Map too big for this screen\n"
@@ -50,6 +49,7 @@
 #define E_MAZ_OP "Maze or player is not within closed walls\n"
 #define E_DUP "Unable to duplicate maze\n"
 #define E_PAD "Unable to pad maze\n"
+#define E_AC "Wrong number of arguments\n"
 // #define TEST "TESTY TEST!\n" //delete this later
 
 // FUNCTION PROTOTYPES
@@ -122,34 +122,24 @@ char		*find_identifier(t_main *ms, char *identifier);
 bool		valid_up_to_identifier(char *initial, char *identifier);
 u_int32_t	create_rgba(int r, int g, int b, int a);
 int			find_identifier_pos(t_main *ms, char *identifier);
+int         check_input_extension(char *str, t_main *ms);
 
 //checks.c
 void	elements_check(t_main *ms);
 bool	detect_loose_char(t_main *ms);
 char	**find_valid_lines(t_main *ms);
 bool	is_valid_line(char *line);
-bool	is_map_last(t_main *ms);  // even needed at this point?
 bool	are_there_repeats(t_main *ms);
 
 //mlx_control.c
 void	key_bindings(mlx_key_data_t input, void *ms);
 void	make_background(mlx_t *mlx, t_color *c, t_background *bg);
-int		parse_indiv_textures(t_main *ms, char *direction);
-t_img	*which_texture(t_main *ms, char *direction);
-int	    texture_pathfinder(char *arg, t_main *ms, t_img *img);
-
-//parsing utils.c
-bool	valid_up_to_identifier(char *initial, char *identifier);
-int		create_trgb(int t, int r, int g, int b);
-char	*find_identifier(t_main *ms, char *identifier);
-void	check_valid_path(char *path, t_main *ms, t_img *img);
-int     check_input_extension(char *str, t_main *ms);
 
 //printing functions
 void		print_color_struct(t_color *c);
 void		print_textures(t_texture *t);
 mlx_image_t	*make_test_map_img(t_main *ms, t_map *map);
-void	print_square(mlx_image_t *img, int x, int y, u_int32_t color);
+void	    print_square(mlx_image_t *img, int x, int y, u_int32_t color);
 
 // ray casting tests
 int	raycasting(t_ray *ray, t_player *plyr);

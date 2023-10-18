@@ -50,8 +50,6 @@ char	**copy_file(char *str, t_main *ms)
 bool	parsing(char *str, t_main *ms)
 {
 	check_input_extension(str, ms);
-	
-	
 	if (parse_map(ms) != 0)
 		error_and_exit(E_PARS, ms);
 	elements_check(ms);
@@ -107,7 +105,7 @@ int	main(int ac, char **av)
 		}
 	}
 	else
-		perror(AC_E);
+		perror(E_AC);
 	clean_exit(ms);
 	return 0;
 	// add headers

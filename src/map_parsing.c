@@ -86,31 +86,6 @@ int	get_first_line_i(t_map *map)
 	return (-1);
 }
 
-void	free_partial_maze(char **maze, t_main *ms, int i)
-{
-	while (i >= 0)
-	{
-		maze[i] = x_free(maze[i]);
-		i--;
-	}
-	maze = x_free(maze);
-	error_and_exit(E_MALLOC, ms);
-}
-
-bool	validate_maze_line(char *line)
-{
-	int i;
-
-	i = 0;
-	while (line && line[i])
-	{
-		if (!ft_strchr("NSEW10 \n", line[i]))
-			return (FALSE);
-		i++;
-	}
-	return (TRUE);
-}
-
 void	handle_maze_line_error(char **maze, t_main *ms, int j)
 {
 	int	i;
