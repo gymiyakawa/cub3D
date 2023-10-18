@@ -20,7 +20,7 @@ char	**duplicate_maze(char **maze, t_main *ms)
 	return (dup_maze);
 }
 
-bool	flood_fill(t_main *ms, char **dup, int y, int x)
+bool	flood_fill(t_main *ms, char **map, int y, int x)
 {//need to fix it for when 0 or player is at the end of the shortest string
 	bool	up;
 	bool	down;
@@ -33,17 +33,17 @@ bool	flood_fill(t_main *ms, char **dup, int y, int x)
 	right = x < ms->map->x_max - 1;
 	if (y < 0 || y > ms->map->y_max - 1 || x < 0 || x > ms->map->x_max)
 		return (FALSE);
-	if (dup[y][x] == 'A')
+	if (map[y][x] == 'A')
 		return (TRUE);
-	if (dup[y][x] == '0' || ft_strchr("NSEW", dup[y][x]))
+	if (map[y][x] == '0' || ft_strchr("NSEW", map[y][x]))
 	{
-		if ((up && left && dup[y - 1][x - 1] == ' ') || (up && right && dup[y
-				- 1][x + 1] == ' ') || (down && left && dup[y + 1][x
-				- 1] == ' ') || (down && right && dup[y + 1][x + 1] == ' '))
+		if ((up && left && map[y - 1][x - 1] == ' ') || (up && right && map[y
+				- 1][x + 1] == ' ') || (down && left && map[y + 1][x
+				- 1] == ' ') || (down && right && map[y + 1][x + 1] == ' '))
 			return (FALSE);
-		dup[y][x] = 'A';
-		if (!flood_fill(ms, dup, y - 1, x) || !flood_fill(ms, dup, y + 1, x)
-			|| !flood_fill(ms, dup, y, x - 1) || !flood_fill(ms, dup, y, x + 1))
+		map[y][x] = 'A';
+		if (!flood_fill(ms, map, y - 1, x) || !flood_fill(ms, map, y + 1, x)
+			|| !flood_fill(ms, map, y, x - 1) || !flood_fill(ms, map, y, x + 1))
 			return (FALSE);
 	}
 	return (TRUE);
