@@ -21,7 +21,7 @@ char	**duplicate_maze(char **maze, t_main *ms)
 }
 
 bool	flood_fill(t_main *ms, char **map, int y, int x)
-{//need to fix it for when 0 or player is at the end of the shortest string
+{
 	bool	up;
 	bool	down;
 	bool	left;
@@ -93,6 +93,8 @@ void	pad_maze(t_main *ms, char **maze)
 		maze[i] = padded;
 		i++;
 	}
+	if (!check_if_closed(ms, maze, 0, 0))
+		error_and_exit(E_MAZ_OP, ms);
 }
 
 char	*add_padding(char *str, int len)
