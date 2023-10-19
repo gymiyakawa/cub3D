@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:06:55 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/19 16:03:59 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:31:53 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_map
 	int		*test_map;
 	int		x_max;
 	int		y_max;
+	int		last_line;
 	// void	*img_p;
 	// void	*img_e;
 	// void	*img_e2;

@@ -13,8 +13,14 @@ void	init_ms(t_main **ms, char **av)
 	*ms = ft_calloc(1, sizeof(t_main));
 	if (!*ms)
 		error_and_exit(E_MALLOC, *ms);
-	(*ms)->fd = open_fd(av[1], *ms);
+	// (*ms)->fd = open_fd(av[1], *ms);
 	(*ms)->line_count = line_count(av[1], *ms);
+	// int i = 0;
+	// while (i < ((*ms)->line_count))
+	// {
+	// 	(*ms)->file_copy[i] = x_free((*ms)->file_copy[i]);
+	// 	i++;
+	// }
 	(*ms)->file_copy = copy_file(av[1], *ms);
 	(*ms)->valid_lines = NULL;
 	(*ms)->game_over = false;
@@ -120,9 +126,7 @@ void	init_map(t_map **map, t_main *ms)
 	*map = ft_calloc(1, sizeof(t_map));
 	if (!map)
 		error_and_exit(E_MALLOC, ms);
-	(*map)->maze = ft_calloc(1, sizeof(char **));
-	if (!(*map)->maze)
-		error_and_exit(E_MALLOC, ms); 
+	(*map)->maze = NULL; 
 	(*map)->y_max = 0;
 	(*map)->x_max = 0;
 	(*map)->p_view = 0;
@@ -131,5 +135,6 @@ void	init_map(t_map **map, t_main *ms)
 	//add more stuff as needed
 	(*map)->ms = ms;
 	(*map)->i_first_line = 0;
+	(*map)->last_line = 0;
 	return ;
 }

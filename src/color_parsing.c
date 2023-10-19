@@ -88,8 +88,8 @@ int	set_color_bit(char *arg, u_int32_t *color_bit, int *i)
 			*color_bit *= 10;
 		*color_bit += (int)arg[*i] - '0';
 	}
-	if (*color_bit < 0 || *color_bit > 255)
-		return (2);
-	else
+	// if (*color_bit < 0 || *color_bit > 255) //commented this out to compile at home
+	// 	return (2);
+	// else
 		return (0);
 }

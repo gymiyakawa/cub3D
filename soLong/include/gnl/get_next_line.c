@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raruiz-r <raruiz-r@42quebec.com>           +#+  +:+       +#+        */
+/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 12:20:26 by raruiz-r          #+#    #+#             */
-/*   Updated: 2022/07/08 11:01:25 by raruiz-r         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:04:12 by raruiz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*isolate_line(char *keep)
 	if (!keep[i])
 		return (NULL);
 	while (keep[i] && keep[i] != '\n')
-		i++;
+		i++;		
 	line = ft_calloc(sizeof(char), (i + 2));
 	if (!line)
 		return (NULL);

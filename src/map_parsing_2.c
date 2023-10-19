@@ -3,7 +3,7 @@
 
 //deletes the extra strings at the end of the maze
 //and calls function that trims end of strings
-char	**clean_maze(char **maze, int lines, t_main *ms)
+char	**clean_maze(char **maze, t_main *ms, int lines)
 {
 	int	i;
 	int	last_line;
@@ -12,7 +12,7 @@ char	**clean_maze(char **maze, int lines, t_main *ms)
 	last_line = 0;
 	while (i < lines)
 	{
-		if (!only_spaces_or_new_lines(maze[i]))
+		if (!only_new_lines(maze[i]))
 			last_line = i;
 		i++;
 	}
@@ -45,7 +45,7 @@ char	*trim_end_spaces(char *str)
 	return (trimmed_str);
 }
 
-bool	only_spaces_or_new_lines(char *str)
+bool	only_new_lines(char *str)
 {
 	int	i;
 
@@ -54,7 +54,7 @@ bool	only_spaces_or_new_lines(char *str)
 		return (TRUE);
 	while (str[i] != '\0')
 	{
-		if (str[i] != ' ' && str[i] != '\n')
+		if (str[i] != '\n')
 			return (FALSE);
 		i++;
 	}

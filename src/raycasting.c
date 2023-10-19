@@ -1,5 +1,6 @@
 
 #include "../inc/cub3d.h"
+//commented this out to compile at home
 
 /*
 		NEED TO BE SETUP PRIOR
