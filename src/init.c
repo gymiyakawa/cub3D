@@ -19,7 +19,7 @@ void	init_ms(t_main **ms, char **av)
 	// while (i < ((*ms)->line_count))
 	// {
 	// 	(*ms)->file_copy[i] = x_free((*ms)->file_copy[i]);
-	// 	i++;
+	// 	i++; 
 	// }
 	(*ms)->file_copy = copy_file(av[1], *ms);
 	(*ms)->valid_lines = NULL;

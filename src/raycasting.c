@@ -20,6 +20,19 @@
 void	raycasting(t_ray *ray, t_texture *text)
 {
 	int	i;
+	
+			// temporary inits, for testing only
+		ray->px = 2.0;
+		ray->py = 3;  //x and y start position
+		ray->dir_x = -1.0;
+		ray->dir_y = 0.0; //initial direction vector
+		ray->plane_x = 0.0;
+		ray->plane_y = 0.66; //the 2d raycaster version of camera plane
+		ray->ms->game = mlx_new_image(ray->ms->mlx, WIDTH, HEIGHT);
+
+
+
+
 
 	i = 0;
 	while (i++ < WIDTH)
@@ -86,6 +99,8 @@ void	texture_calculations(t_ray *ray, t_texture *text)
 		wall_x = ray->px + ray->perpwalldist * ray->dir_x;
 	wall_x -= floor((wall_x)); // reference had floor((wall_x)) for some reason
 	text_i = get_text_index(ray);
+	
+									// printf("texture width %d\n", text->mlx_textures[0]->width);
 	
 	text->text_x = (int)(wall_x * text->mlx_textures[text_i]->width);
 	
@@ -165,6 +180,9 @@ void	run_dda(t_ray *ray)
 				
 				
 		}
+									print_str_array(ray->ms->map->maze);
+									printf("maze x: |%d|\n", (int)ray->map_x);
+									printf("maze y: |%d|\n", (int)ray->map_y);
 		if (ray->ms->map->maze[(int)ray->map_x][(int)ray->map_y] == '1')   /// might be a problem
 			ray->hit = 1;
 	}

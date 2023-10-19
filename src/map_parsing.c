@@ -83,8 +83,8 @@ int check_maze_size(char *str, t_main *ms)
         start++;
     line_count = count_maze_lines(ms->file_copy, start + 2);
     ms->map->last_line = start + line_count;
-									printf("MAZE LINES: %d\n", line_count);
-									printf("LAST LINE: %d\n", ms->map->last_line);
+									// printf("MAZE LINES: %d\n", line_count);
+									// printf("LAST LINE: %d\n", ms->map->last_line);
     return (line_count);
 }
 
@@ -153,6 +153,7 @@ char	**copy_maze(char *str, t_main *ms)
 	maze = clean_maze(maze, ms, i);
 	return (maze);
 }
+
 // char	**copy_maze(char *str, t_main *ms, int line_count)
 // {
 // 	char	**maze;
