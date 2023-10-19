@@ -10,9 +10,18 @@ void	key_bindings(mlx_key_data_t input, void *main_struct)
 	{
 		mlx_close_window(ms->mlx);
 	}
+	if (input.key == MLX_KEY_W)
+	{
+		// go up; 
+	}
+	
+	
 	
 	return ;
 }
+
+
+
 
 // will probably need to keep track of the return variable from mlx_new_image. 
 void	make_background(mlx_t *mlx, t_color *c, t_background *bg)

@@ -19,11 +19,11 @@ void	init_ms(t_main **ms, char **av)
 	(*ms)->valid_lines = NULL;
 	(*ms)->game_over = false;
 	(*ms)->filename = ft_strdup(av[1]);
+	(*ms)->game = NULL;
 	init_color(&(*ms)->colors, *ms);
 	init_texture(&(*ms)->texture, *ms);
 	init_map(&(*ms)->map, *ms);
 	init_background(&(*ms)->bg, *ms);
-	init_player(&(*ms)->plyr, *ms);
 	init_ray(&(*ms)->ray, *ms);
 	(*ms)->mlx = NULL;
 	return ;
@@ -34,39 +34,36 @@ void	init_ray(t_ray **ray, t_main *ms)
 	*ray = ft_calloc(1, sizeof(t_ray));
 	if (!*ray)
 		error_and_exit(E_MALLOC, ms);
-	(*ray)->dof = 0;
-	(*ray)->mx = 0;
-	(*ray)->my = 0;
-	(*ray)->mp = 0;
-	(*ray)->h_dist = 0;
-	(*ray)->hx = 0;
-	(*ray)->hy = 0;
-	(*ray)->angle = 0;
-	(*ray)->rx = 0;
-	(*ray)->ry = 0;
-	(*ray)->v_dist = 0;
-	(*ray)->vx	= 0;
-	(*ray)->vy = 0;
-	(*ray)->xo = 0;
-	(*ray)->yo = 0;
+	(*ray)->px = 0;
+	(*ray)->py = 0;
+	(*ray)->dir_x = 0;
+	(*ray)->dir_y = 0;
+	(*ray)->plane_x = 0;
+	(*ray)->plane_y = 0;
+	(*ray)->camera_x = 0;
+	(*ray)->raydir_x = 0;
+	(*ray)->raydir_y = 0;
+	(*ray)->map_x = 0;
+	(*ray)->map_y = 0;
+	(*ray)->sidedist_x = 0;
+	(*ray)->sidedist_y = 0;
+	(*ray)->deltadist_x = 0;
+	(*ray)->deltadist_y = 0;
+	(*ray)->perpwalldist = 0;
+	(*ray)->step_x = 0;
+	(*ray)->step_y = 0;
+	(*ray)->hit = 0;
+	(*ray)->side = 0;
+	(*ray)->line_height = 0;
+	(*ray)->draw_start = 0;
+	(*ray)->draw_end = 0;
+	(*ray)->pitch = 100;
+	(*ray)->rot_speed = 0;
+	(*ray)->mov_speed = 0;
 	(*ray)->ms = ms;
 	return ;
 }
 
-
-void	init_player(t_player **plyr, t_main	*ms)
-{
-	*plyr = ft_calloc(1, sizeof(t_player));
-	if (!*plyr)
-		error_and_exit(E_MALLOC, ms);
-	(*plyr)->angle = 0;
-	(*plyr)->delta_x = 0;
-	(*plyr)->delta_y = 0;
-	(*plyr)->pos_x = 0;
-	(*plyr)->pos_y = 0;
-	(*plyr)->ms = ms;
-	return;
-}
 
 void	init_background(t_background **bg, t_main *ms)
 {
@@ -111,6 +108,9 @@ void	init_texture(t_texture **texture, t_main *ms)
 	(*texture)->mlx_textures = ft_calloc(4, sizeof(mlx_texture_t *));
 	if ((*texture)->mlx_textures == NULL)
 		error_and_exit(E_MALLOC, ms);
+	(*texture)->text_x = 0;
+	(*texture)->text_y = 0;
+	(*texture)->text_num = 0;
 	(*texture)->ms = ms;
 	return ;
 }

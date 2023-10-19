@@ -77,26 +77,7 @@ int	main(int ac, char **av)
 			make_background(ms->mlx, ms->colors, ms->bg);
 			
 			
-			
-			// for testing purposes only, feel free to delete/relocate
-			// int test_map[] = {
-			// 1, 1, 1, 1, 1, 1, 1, 1,
-			// 1, 0, 0, 0, 0, 0, 0, 1,
-			// 1, 0, 0, 0, 0, 0, 0, 1,
-			// 1, 0, 0, 0, 0, 0, 0, 1,
-			// 1, 0, 0, 0, 0, 0, 0, 1,
-			// 1, 0, 0, 0, 0, 0, 0, 1,
-			// 1, 0, 0, 0, 0, 0, 0, 1,
-			// 1, 0, 0, 0, 0, 0, 0, 1,
-			// 1, 1, 1, 1, 1, 1, 1, 1,
-			// };
-			//  ms->map->test_map = test_map;
-			// raycasting(ms->ray, ms->plyr);
-	
-			// ms->map->m_img = make_test_map_img(ms, ms->map);
-			// int32_t testmap = mlx_image_to_window(ms->mlx, ms->map->m_img, 0, 0);
-			// 						printf("did it get to here?\n");
-			// (void)testmap;
+			raycasting(ms->ray, ms->texture);
 		
 		
 			mlx_key_hook(ms->mlx, &key_bindings, ms);
