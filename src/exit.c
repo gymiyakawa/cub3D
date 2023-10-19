@@ -26,9 +26,9 @@ void	clean_exit(t_main *ms)
 
 void    *free_map(t_map *map)
 {
-    int	i;
+    // int	i;
 
-	i = 0;
+	// i = 0;
 	if (map->maze)
 		map->maze = ft_free_array(map->maze);
     //need to do anything about void *win? check mlx functions

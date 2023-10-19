@@ -6,24 +6,18 @@
 char	**clean_maze(char **maze, t_main *ms)
 {
 	int	i;
-	// int	last_line;
 
-	// i = 0;
-	// last_line = 0;
-	// while (i < lines)
-	// {
-	// 	if (!only_spaces_or_new_lines(maze[i]))
-	// 		last_line = i;
-	// 	i++;
-	// }
 	i = 0;
-	while (i <= ms->map->last_line)
+	while (i < ms->map->last_line)
 	{
-						
-		maze[i] = trim_end_spaces(maze[i]);
-		if (!maze[i])
-			free_partial_maze(maze, ms, i);
-		i++;
+		if (only_new_lines(maze[i]))
+		{					
+								printf("GETTING HERE?\n");
+			maze[i] = trim_end_spaces(maze[i]);
+			if (!maze[i])
+				free_partial_maze(maze, ms, i);
+		}
+			i++;
 	}
 	maze[ms->map->last_line + 1] = NULL;
 	return (maze);
@@ -45,7 +39,7 @@ char	*trim_end_spaces(char *str)
 	return (trimmed_str);
 }
 
-bool	only_spaces_or_new_lines(char *str)
+bool	only_new_lines(char *str)
 {
 	int	i;
 
@@ -54,7 +48,7 @@ bool	only_spaces_or_new_lines(char *str)
 		return (TRUE);
 	while (str[i] != '\0')
 	{
-		if (str[i] != ' ' && str[i] != '\n')
+		if (str[i] != '\n')
 			return (FALSE);
 		i++;
 	}

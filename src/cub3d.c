@@ -51,11 +51,11 @@ bool	parsing(char *str, t_main *ms)
 	check_input_extension(str, ms);
 	if (parse_map(ms) != 0)
 		error_and_exit(E_PARS, ms);
-	elements_check(ms);
-	if (parse_colors(ms) != 0)
-		error_and_exit(E_PARS, ms);
-	if (parse_texture(ms) != 0)
-		error_and_exit(E_PARS, ms);
+	// elements_check(ms); //commented this out to compile at home
+	// if (parse_colors(ms) != 0)
+	// 	error_and_exit(E_PARS, ms);
+	// if (parse_texture(ms) != 0)
+	// 	error_and_exit(E_PARS, ms);
 	return (TRUE);
 }
 

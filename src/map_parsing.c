@@ -11,7 +11,6 @@ int	parse_map(t_main *ms)
 	temp = find_identifier(ms, "1");
 	if (!temp)
 		error_and_exit(E_INV_MAP, ms);
-				printf("TEMP: %s\n", temp);
 	i = check_maze_size(temp, ms);
 	ms->map->maze = copy_maze(temp, ms, i);
 	ms->map->i_first_line = get_first_line_i(ms->map);
@@ -23,33 +22,35 @@ int	parse_map(t_main *ms)
 	return (0);
 }
 
-int	check_maze_size(char *str, t_main *ms)
+int check_maze_size(char *str, t_main *ms)
 {
-	int		i;
-	int		j;
-	int	last_line;
-
-	i = 0;
-	j = 0;
-	while (ms->file_copy[i] && ms->file_copy[i][0] != '\0')
-		i++;
-	while (ft_strncmp(str, ms->file_copy[j], ft_strlen(str)) != 0
-		&& ms->file_copy[j] != NULL)
-		j++;
-	i = i - j;
-	j = 0;
-	last_line = 0;
-	while (j < i)
-	{
-		if (!only_spaces_or_new_lines(ms->file_copy[j]))
-			last_line = j;
-		j++;
-	}
-									printf("MAZE LINES: %d\n", last_line);
-	ms->map->last_line = j;
-									printf("LAST LINE: %d\n", i + j + 1);
-	return (last_line);
+    int start;
+	int line_count;
+	
+	start = 0;
+    while (ft_strncmp(str, ms->file_copy[start], ft_strlen(str)) != 0
+		&& (ms->file_copy[start] != NULL || *ms->file_copy[start] != '\n'))
+        start++;
+    line_count = count_maze_lines(ms->file_copy, start + 2);
+    ms->map->last_line = start + line_count;
+									printf("MAZE LINES: %d\n", line_count);
+									printf("LAST LINE: %d\n", ms->map->last_line);
+    return (line_count);
 }
+
+int count_maze_lines(char **file_copy, int start)
+{
+    int count;
+	
+	count = 0;
+    while (file_copy[start] && file_copy[start][0] != '\0') 
+	{
+        count++;
+        start++;
+    }
+    return (count);
+}
+
 
 //this function checks screen limits; it goes through the maze,
 //finds the longest string and sets y_max for width;
@@ -105,13 +106,13 @@ void	check_for_limits(t_map *map, t_main *ms)
 // }
 char	**copy_maze(char *str, t_main *ms, int line_count)
 {
-	char	**maze;
 	int		i;
 	int		j;
+	char	**maze;
 
 	i = 0;
 	j = 0;
-	maze = ft_calloc(line_count + 1, sizeof(char *)); //the line count is actually for the whole .cub file; should I substract and realloc after we find out the size of the maze itself? or no need because we x_free(maze) in the end anyway?
+	maze = ft_calloc(line_count + 1, sizeof(char *));
 	if (!maze)
 		error_and_exit(E_MALLOC, ms);
 	while (ft_strncmp(str, ms->file_copy[j], ft_strlen(str)) != 0
@@ -128,7 +129,13 @@ char	**copy_maze(char *str, t_main *ms, int line_count)
 		j++;
 	}
 	maze[i] = NULL;
+							i = 0;
+							while(maze[i] != NULL)
+								printf("MAZE BEFORE CLEAN: %s\n", maze[i++]);
 	maze = clean_maze(maze, ms);
+							i = 0;
+							while(maze[i] != NULL)
+								printf("MAZE AFTER CLEAN: %s\n", maze[i++]);
 	return (maze);
 }
 
