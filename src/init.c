@@ -120,9 +120,7 @@ void	init_map(t_map **map, t_main *ms)
 	*map = ft_calloc(1, sizeof(t_map));
 	if (!map)
 		error_and_exit(E_MALLOC, ms);
-	(*map)->maze = ft_calloc(1, sizeof(char **));
-	if (!(*map)->maze)
-		error_and_exit(E_MALLOC, ms); 
+	(*map)->maze = NULL; 
 	(*map)->y_max = 0;
 	(*map)->x_max = 0;
 	(*map)->p_view = 0;
@@ -131,5 +129,6 @@ void	init_map(t_map **map, t_main *ms)
 	//add more stuff as needed
 	(*map)->ms = ms;
 	(*map)->i_first_line = 0;
+	(*map)->last_line = 0;
 	return ;
 }

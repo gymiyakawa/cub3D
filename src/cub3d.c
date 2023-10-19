@@ -70,11 +70,11 @@ int	main(int ac, char **av)
 		init_ms(&ms, av);
 		if (parsing(av[1], ms))
 		{
-			mlx_set_setting(MLX_STRETCH_IMAGE, true);
-			ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", TRUE);
-			if (!ms->mlx)
-				error_and_exit(E_MLX_INI, ms);
-			make_background(ms->mlx, ms->colors, ms->bg);
+			// mlx_set_setting(MLX_STRETCH_IMAGE, true);
+			// ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", TRUE);
+			// if (!ms->mlx)
+			// 	error_and_exit(E_MLX_INI, ms);
+			// make_background(ms->mlx, ms->colors, ms->bg);
 			
 			
 			
@@ -99,8 +99,8 @@ int	main(int ac, char **av)
 			// (void)testmap;
 		
 		
-			mlx_key_hook(ms->mlx, &key_bindings, ms);
-			mlx_loop(ms->mlx);
+		// 	mlx_key_hook(ms->mlx, &key_bindings, ms);
+		// 	mlx_loop(ms->mlx);
 		}
 	}
 	else

@@ -26,12 +26,11 @@ void	clean_exit(t_main *ms)
 
 void    *free_map(t_map *map)
 {
-    if (map->maze)
-    {
-        //liberar cada linha depois da leitura
-        // map->maze = x_free((*map).maze);
+    int	i;
+
+	i = 0;
+	if (map->maze)
 		map->maze = ft_free_array(map->maze);
-    }
     //need to do anything about void *win? check mlx functions
     map = x_free(map);
     return(map);
@@ -42,7 +41,6 @@ void    *free_ms(t_main *ms)
 {
     if (ms->filename)
         ms->filename = x_free(ms->filename);
-		
     if (ms->file_copy)
 		ms->file_copy = ft_free_array(ms->file_copy);
     if (ms)

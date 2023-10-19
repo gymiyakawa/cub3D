@@ -6,7 +6,7 @@
 /*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:06:55 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/18 16:15:23 by raruiz-r         ###   ########.fr       */
+/*   Updated: 2023/10/18 20:18:30 by raruiz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_map
 	int		*test_map;
 	int		x_max;
 	int		y_max;
+	int		last_line;
 	// void	*img_p;
 	// void	*img_e;
 	// void	*img_e2;
