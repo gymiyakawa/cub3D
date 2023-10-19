@@ -36,7 +36,7 @@ int	parse_map(t_main *ms)
 
 	if (find_player_start(ms->map->maze, ms))
 		check_for_limits(ms->map, ms);
-									print_str_array(ms->map->maze);
+									// print_str_array(ms->map->maze);
 	if (!check_if_closed(ms, ms->map->maze, 0, 0))
 		error_and_exit(E_MAZ_OP, ms);
 	pad_maze(ms, ms->map->maze);

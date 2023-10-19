@@ -8,16 +8,20 @@ int	line_count(char *str, t_main *ms)
 	int		i;
 
 	i = 0;
-	ms->fd = open_fd(str, ms);
-	temp = get_next_line(ms->fd);
+	if (ms->fd < 2)
+		ms->fd = open_fd(str, ms);
+	// temp = get_next_line(ms->fd);
+	temp = "str";
 	while (temp)
 	{
 		i++;
 		temp = get_next_line(ms->fd);
+				printf("BOOOOYA %d\n", i);
 		free(temp);
 	}
 	close(ms->fd);
-	free(temp);
+	// temp = x_free(temp);
+									printf("return from linecount %d\n", i);
 	return (i);
 }
 
@@ -28,14 +32,16 @@ char	**copy_file(char *str, t_main *ms)
 	int		i;
 
 	i = 0;
+											printf("linecount: %d\n", ms->line_count);
 	file_copy = ft_calloc(ms->line_count + 1, sizeof(char *));
 	if(!file_copy)
 		error_and_exit(E_MALLOC, ms);
 	ms->fd = open_fd(str, ms);
 	temp = get_next_line(ms->fd);
-	while (temp)
+	while (temp != NULL)
 	{
 		file_copy[i] = ft_strdup(temp);
+											// printf("filecopy[%d]: %s\n", i, file_copy[i]);
 		i++;
 		temp = x_free(temp);
 		temp = get_next_line(ms->fd);
@@ -43,6 +49,9 @@ char	**copy_file(char *str, t_main *ms)
 	close(ms->fd);
 	temp = x_free(temp);
 	file_copy[i] = NULL;
+											// printf("null terminating filecopy[%d]: %s\n", i, file_copy[i]);
+
+											print_str_array(file_copy);
 	return (file_copy);
 }
 
@@ -106,7 +115,7 @@ int	main(int ac, char **av)
 	else
 		perror(E_AC);
 	clean_exit(ms);
-	return 0;
+	return (0);
 	// add headers
 	//norminette
 	//test with valgrind and leaks
