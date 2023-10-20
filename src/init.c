@@ -63,13 +63,11 @@ void	init_ray(t_ray **ray, t_main *ms)
 	(*ray)->line_height = 0;
 	(*ray)->draw_start = 0;
 	(*ray)->draw_end = 0;
-	(*ray)->pitch = 100;
-	(*ray)->rot_speed = 0;
-	(*ray)->mov_speed = 0;
+	(*ray)->rot_speed = ROT_SPEED;
+	(*ray)->mov_speed = MOV_SPEED;
 	(*ray)->ms = ms;
 	return ;
 }
-
 
 void	init_background(t_background **bg, t_main *ms)
 {

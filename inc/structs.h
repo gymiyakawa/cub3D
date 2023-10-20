@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:06:55 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/19 16:31:53 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/20 12:07:14 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ typedef struct s_ray
 	double	camera_x;
 	double	raydir_x;
 	double	raydir_y;
+	int		direction;
 	int		map_x;
 	int		map_y;
 	double	sidedist_x;

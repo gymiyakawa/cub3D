@@ -72,7 +72,7 @@ bool	parsing(char *str, t_main *ms)
 int	main(int ac, char **av)
 {
 	t_main *ms;
-	
+
 	ms = NULL;
 	if (ac == 2)
 	{
@@ -80,15 +80,18 @@ int	main(int ac, char **av)
 		if (parsing(av[1], ms))
 		{
 			mlx_set_setting(MLX_STRETCH_IMAGE, true);
+			
 			ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", TRUE);
 			if (!ms->mlx)
 				error_and_exit(E_MLX_INI, ms);
-			make_background(ms->mlx, ms->colors, ms->bg);
+			ms->game = mlx_new_image(ms->mlx, WIDTH, HEIGHT);
+			// make_background(ms->mlx, ms->colors, ms->bg);
+			set_raycasting_vars(ms->ray);
 			
-			
-			raycasting(ms->ray, ms->texture);
-		
-		
+	
+				raycasting(ms);
+
+
 			mlx_key_hook(ms->mlx, &key_bindings, ms);
 			mlx_loop(ms->mlx);
 		}

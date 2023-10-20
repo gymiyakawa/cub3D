@@ -16,7 +16,7 @@ void	key_bindings(mlx_key_data_t input, void *main_struct)
 	}
 	
 	
-	
+	// raycasting((t_main *)main_struct);
 	return ;
 }
 
@@ -29,7 +29,7 @@ void	make_background(mlx_t *mlx, t_color *c, t_background *bg) //commented this 
 	uint32_t	x;
 	uint32_t	y;
 
-	bg->ceiling = mlx_new_image(mlx, MAX_WIDTH, mlx->height / 2);
+	bg->ceiling = mlx_new_image(mlx, WIDTH, mlx->height / 2);
 	x = -1;
 	while (++x < bg->ceiling->width)
 	{
@@ -39,7 +39,7 @@ void	make_background(mlx_t *mlx, t_color *c, t_background *bg) //commented this 
 	}
 	int32_t ceiling_inst;
 	ceiling_inst = mlx_image_to_window(mlx, bg->ceiling, 0, 0);
-	bg->floor = mlx_new_image(mlx, MAX_WIDTH, MAX_HEIGHT);
+	bg->floor = mlx_new_image(mlx, WIDTH, MAX_HEIGHT);
 	x = -1;
 	while (++x < bg->floor->width)
 	{
