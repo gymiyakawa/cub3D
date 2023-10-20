@@ -10,23 +10,27 @@
 #include <stdbool.h> 
 #include <fcntl.h>
 
+// game config
 #define MAX_WIDTH 1920
 #define MAX_HEIGHT 1080
 #define WIDTH 1200
 #define HEIGHT 1200
+#define ROT_SPEED 0.15
+#define MOV_SPEED 0.1
+
+// general macros
 #define TRUE 1
 #define FALSE 0
 #define MAX_FILES 256
-#define PI 3.1415826535
+#define PI 3.1415826535 // not used right now
 #define P2 PI / 2
 #define P3 3 * PI / 2
 
-
-//	index values for texture parsing
-#define NO_INDEX 0
-#define SO_INDEX 1
-#define EA_INDEX 2
-#define WE_INDEX 3
+//	directions
+#define NORTH 0
+#define SOUTH 1
+#define EAST 2
+#define WEST 3
 
 // ERROR MESSAGES
 
@@ -104,7 +108,6 @@ void	init_texture(t_texture **texture, t_main *ms);
 void	init_map(t_map **map, t_main *ms);
 void	init_background(t_background **bg, t_main *ms);
 void	init_ray(t_ray **ray, t_main *ms);
-void	init_player(t_player **plyr, t_main	*ms);
 
 //color_parsing.c
 int		parse_colors(t_main *ms);
@@ -144,8 +147,15 @@ void		print_textures(t_texture *t);
 mlx_image_t	*make_test_map_img(t_main *ms, t_map *map);
 void	    print_square(mlx_image_t *img, int x, int y, u_int32_t color);
 
-// ray casting tests
-int	raycasting(t_ray *ray, t_player *plyr);
-void	check_horizontal(t_ray *ray, t_player *plyr);
-// float	calc_dist(float ax, float ay, float bx, float by, float ang); // original, but not using ang for some reason
-float	calc_dist(float ax, float ay, float bx, float by);
+// raycasting
+void	raycasting(t_main *ms);
+void	render_texture(t_ray *ray, t_texture *text, int i);
+void	texture_calculations(t_ray *ray, t_texture *text);
+int		get_text_index(t_ray *ray);
+void	calculate_columns(t_ray *ray);
+void	run_dda(t_ray *ray);
+void	set_step(t_ray *ray);
+double	get_delta_dist(double dir);
+int		get_direction(int	p_view);
+void	set_orientation(t_ray *ray);
+void	set_raycasting_vars(t_ray *ray);

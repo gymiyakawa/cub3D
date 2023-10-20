@@ -62,44 +62,28 @@ bool	parsing(char *str, t_main *ms)
 int	main(int ac, char **av)
 {
 	t_main *ms;
-	
+
 	ms = NULL;
 	if (ac == 2)
 	{
 		init_ms(&ms, av);
 		if (parsing(av[1], ms))
 		{
-			// mlx_set_setting(MLX_STRETCH_IMAGE, true);
-			// ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", TRUE);
-			// if (!ms->mlx)
-			// 	error_and_exit(E_MLX_INI, ms);
+			mlx_set_setting(MLX_STRETCH_IMAGE, true);
+			
+			ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", TRUE);
+			if (!ms->mlx)
+				error_and_exit(E_MLX_INI, ms);
+			ms->game = mlx_new_image(ms->mlx, WIDTH, HEIGHT);
 			// make_background(ms->mlx, ms->colors, ms->bg);
+			set_raycasting_vars(ms->ray);
 			
-			
-			
-			// // for testing purposes only, feel free to delete/relocate
-			// int test_map[] = {
-			// 1, 1, 1, 1, 1, 1, 1, 1,
-			// 1, 0, 0, 0, 0, 0, 0, 1,
-			// 1, 0, 0, 0, 0, 0, 0, 1,
-			// 1, 0, 0, 0, 0, 0, 0, 1,
-			// 1, 0, 0, 0, 0, 0, 0, 1,
-			// 1, 0, 0, 0, 0, 0, 0, 1,
-			// 1, 0, 0, 0, 0, 0, 0, 1,
-			// 1, 0, 0, 0, 0, 0, 0, 1,
-			// 1, 1, 1, 1, 1, 1, 1, 1,
-			// };
-			// ms->map->test_map = test_map;
-			// raycasting(ms->ray, ms->plyr);
 	
-			// ms->map->m_img = make_test_map_img(ms, ms->map);
-			// int32_t testmap = mlx_image_to_window(ms->mlx, ms->map->m_img, 0, 0);
-			// 						printf("did it get to here?\n");
-			// (void)testmap;
-		
-		
-			// mlx_key_hook(ms->mlx, &key_bindings, ms);
-			// mlx_loop(ms->mlx);
+				raycasting(ms);
+
+
+			mlx_key_hook(ms->mlx, &key_bindings, ms);
+			mlx_loop(ms->mlx);
 		}
 	}
 	else

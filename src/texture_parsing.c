@@ -81,13 +81,13 @@ int	texture_pathfinder(char *arg, t_main *ms, int path_i, char *dir)
 int	which_path(char *direction)
 {
 	if (ft_strcmp(direction, "NO") == 0)
-		return (NO_INDEX);
+		return (NORTH);
 	if (ft_strcmp(direction, "SO") == 0)
-		return (SO_INDEX);
+		return (SOUTH);
 	if (ft_strcmp(direction, "EA") == 0)
-		return (EA_INDEX);
+		return (EAST);
 	if (ft_strcmp(direction, "WE") == 0)
-		return (WE_INDEX);
+		return (WEST);
 	else
 		return (-1);
 }

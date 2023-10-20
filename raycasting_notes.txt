@@ -1,189 +1,516 @@
+/*
+Copyright (c) 2004-2019, Lode Vandevenne
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+#include <cmath>
+#include <string>
+#include <vector>
+#include <iostream>
+
+#include "quickcg.h"
+using namespace QuickCG;
+
+/*
+g++ *.cpp -lSDL -O3 -W -Wall -ansi -pedantic
+g++ *.cpp -lSDL
+*/
 
 
+#define screenWidth 640
+#define screenHeight 480
+#define texWidth 64
+#define texHeight 64
+#define mapWidth 24
+#define mapHeight 24
+
+int worldMap[mapWidth][mapHeight]=
+{
+  {4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,7,7,7,7,7,7,7,7},
+  {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,7},
+  {4,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7},
+  {4,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7},
+  {4,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,7},
+  {4,0,4,0,0,0,0,5,5,5,5,5,5,5,5,5,7,7,0,7,7,7,7,7},
+  {4,0,5,0,0,0,0,5,0,5,0,5,0,5,0,5,7,0,0,0,7,7,7,1},
+  {4,0,6,0,0,0,0,5,0,0,0,0,0,0,0,5,7,0,0,0,0,0,0,8},
+  {4,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,7,7,1},
+  {4,0,8,0,0,0,0,5,0,0,0,0,0,0,0,5,7,0,0,0,0,0,0,8},
+  {4,0,0,0,0,0,0,5,0,0,0,0,0,0,0,5,7,0,0,0,7,7,7,1},
+  {4,0,0,0,0,0,0,5,5,5,5,0,5,5,5,5,7,7,7,7,7,7,7,1},
+  {6,6,6,6,6,6,6,6,6,6,6,0,6,6,6,6,6,6,6,6,6,6,6,6},
+  {8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
+  {6,6,6,6,6,6,0,6,6,6,6,0,6,6,6,6,6,6,6,6,6,6,6,6},
+  {4,4,4,4,4,4,0,4,4,4,6,0,6,2,2,2,2,2,2,2,3,3,3,3},
+  {4,0,0,0,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,0,0,0,2},
+  {4,0,0,0,0,0,0,0,0,0,0,0,6,2,0,0,5,0,0,2,0,0,0,2},
+  {4,0,0,0,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,2,0,2,2},
+  {4,0,6,0,6,0,0,0,0,4,6,0,0,0,0,0,5,0,0,0,0,0,0,2},
+  {4,0,0,5,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,2,0,2,2},
+  {4,0,6,0,6,0,0,0,0,4,6,0,6,2,0,0,5,0,0,2,0,0,0,2},
+  {4,0,0,0,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,0,0,0,2},
+  {4,4,4,4,4,4,4,4,4,4,1,1,1,2,2,2,2,2,2,3,3,3,3,3}
+};
+
+Uint32 buffer[screenHeight][screenWidth];
+
+int main(int /*argc*/, char */*argv*/[])
+{
+  double posX = 22.0, posY = 11.5;  //x and y start position
+  double dirX = -1.0, dirY = 0.0; //initial direction vector
+  double planeX = 0.0, planeY = 0.66; //the 2d raycaster version of camera plane
+
+  double time = 0; //time of current frame
+  double oldTime = 0; //time of previous frame
+
+  std::vector<Uint32> texture[8];
+  for(int i = 0; i < 8; i++) texture[i].resize(texWidth * texHeight);
+
+  screen(screenWidth,screenHeight, 0, "Raycaster");
+
+  //generate some textures
+#if 0
+  for(int x = 0; x < texWidth; x++)
+  for(int y = 0; y < texHeight; y++)
+  {
+    int xorcolor = (x * 256 / texWidth) ^ (y * 256 / texHeight);
+    //int xcolor = x * 256 / texWidth;
+    int ycolor = y * 256 / texHeight;
+    int xycolor = y * 128 / texHeight + x * 128 / texWidth;
+    texture[0][texWidth * y + x] = 65536 * 254 * (x != y && x != texWidth - y); //flat red texture with black cross
+    texture[1][texWidth * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
+    texture[2][texWidth * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
+    texture[3][texWidth * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
+    texture[4][texWidth * y + x] = 256 * xorcolor; //xor green
+    texture[5][texWidth * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
+    texture[6][texWidth * y + x] = 65536 * ycolor; //red gradient
+    texture[7][texWidth * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
+  }
+#else
+ //generate some textures
+  unsigned long tw, th;
+  loadImage(texture[0], tw, th, "pics/eagle.png");
+  loadImage(texture[1], tw, th, "pics/redbrick.png");
+  loadImage(texture[2], tw, th, "pics/purplestone.png");
+  loadImage(texture[3], tw, th, "pics/greystone.png");
+  loadImage(texture[4], tw, th, "pics/bluestone.png");
+  loadImage(texture[5], tw, th, "pics/mossy.png");
+  loadImage(texture[6], tw, th, "pics/wood.png");
+  loadImage(texture[7], tw, th, "pics/colorstone.png");
+#endif
+
+  //start the main loop
+  while(!done())
+  {
+    for(int x = 0; x < w; x++)
+    {
+      //calculate ray position and direction
+      double cameraX = 2 * x / (double)w - 1; //x-coordinate in camera space
+      double rayDirX = dirX + planeX*cameraX;
+      double rayDirY = dirY + planeY*cameraX;
+
+      //which box of the map we're in
+      int mapX = int(posX);
+      int mapY = int(posY);
+
+      //length of ray from current position to next x or y-side
+      double sideDistX;
+      double sideDistY;
+
+      //length of ray from one x or y-side to next x or y-side
+      double deltaDistX = (rayDirX == 0) ? 1e30 : std::abs(1 / rayDirX);
+      double deltaDistY = (rayDirY == 0) ? 1e30 : std::abs(1 / rayDirY);
+      double perpWallDist;
+
+      //what direction to step in x or y-direction (either +1 or -1)
+      int stepX;
+      int stepY;
+
+      int hit = 0; //was there a wall hit?
+      int side; //was a NS or a EW wall hit?
+
+      //calculate step and initial sideDist
+      if(rayDirX < 0)
+      {
+        stepX = -1;
+        sideDistX = (posX - mapX) * deltaDistX;
+      }
+      else
+      {
+        stepX = 1;
+        sideDistX = (mapX + 1.0 - posX) * deltaDistX;
+      }
+      if(rayDirY < 0)
+      {
+        stepY = -1;
+        sideDistY = (posY - mapY) * deltaDistY;
+      }
+      else
+      {
+        stepY = 1;
+        sideDistY = (mapY + 1.0 - posY) * deltaDistY;
+      }
+      //perform DDA
+      while (hit == 0)
+      {
+        //jump to next map square, either in x-direction, or in y-direction
+        if(sideDistX < sideDistY)
+        {
+          sideDistX += deltaDistX;
+          mapX += stepX;
+          side = 0;
+        }
+        else
+        {
+          sideDistY += deltaDistY;
+          mapY += stepY;
+          side = 1;
+        }
+        //Check if ray has hit a wall
+        if(worldMap[mapX][mapY] > 0) hit = 1;
+      }
+
+      //Calculate distance of perpendicular ray (Euclidean distance would give fisheye effect!)
+      if(side == 0) perpWallDist = (sideDistX - deltaDistX);
+      else          perpWallDist = (sideDistY - deltaDistY);
+
+      //Calculate height of line to draw on screen
+      int lineHeight = (int)(h / perpWallDist);
 
 
-Needed Variables
-player struct {
-	pos x
-	pos y
-	
-for player rotation:
-	delta x
-	delta y
-	angle
-	
+      int pitch = 100;
+
+      //calculate lowest and highest pixel to fill in current stripe
+      int drawStart = -lineHeight / 2 + h / 2 + pitch;
+      if(drawStart < 0) drawStart = 0;
+      int drawEnd = lineHeight / 2 + h / 2 + pitch;
+      if(drawEnd >= h) drawEnd = h - 1;
+
+      //texturing calculations
+      int texNum = worldMap[mapX][mapY] - 1; //1 subtracted from it so that texture 0 can be used!
+
+      //calculate value of wallX
+      double wallX; //where exactly the wall was hit
+      if(side == 0) wallX = posY + perpWallDist * rayDirY;
+      else          wallX = posX + perpWallDist * rayDirX;
+      wallX -= floor((wallX));
+
+      //x coordinate on the texture
+      int texX = int(wallX * double(texWidth));
+      if(side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
+      if(side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
+
+      // TODO: an integer-only bresenham or DDA like algorithm could make the texture coordinate stepping faster
+      // How much to increase the texture coordinate per screen pixel
+      double step = 1.0 * texHeight / lineHeight;
+      // Starting texture coordinate
+      double texPos = (drawStart - pitch - h / 2 + lineHeight / 2) * step;
+      for(int y = drawStart; y < drawEnd; y++)
+      {
+        // Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
+        int texY = (int)texPos & (texHeight - 1);
+        texPos += step;
+        Uint32 color = texture[texNum][texHeight * texY + texX];
+        //make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+        if(side == 1) color = (color >> 1) & 8355711;
+        buffer[y][x] = color;
+      }
+    }
+
+    drawBuffer(buffer[0]);
+    for(int y = 0; y < h; y++) for(int x = 0; x < w; x++) buffer[y][x] = 0; //clear the buffer instead of cls()
+    //timing for input and FPS counter
+    oldTime = time;
+    time = getTicks();
+    double frameTime = (time - oldTime) / 1000.0; //frametime is the time this frame has taken, in seconds
+    print(1.0 / frameTime); //FPS counter
+    redraw();
+
+    //speed modifiers
+    double moveSpeed = frameTime * 5.0; //the constant value is in squares/second
+    double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
+
+    readKeys();
+    //move forward if no wall in front of you
+    if(keyDown(SDLK_UP))
+    {
+      if(worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) posX += dirX * moveSpeed;
+      if(worldMap[int(posX)][int(posY + dirY * moveSpeed)] == false) posY += dirY * moveSpeed;
+    }
+    //move backwards if no wall behind you
+    if(keyDown(SDLK_DOWN))
+    {
+      if(worldMap[int(posX - dirX * moveSpeed)][int(posY)] == false) posX -= dirX * moveSpeed;
+      if(worldMap[int(posX)][int(posY - dirY * moveSpeed)] == false) posY -= dirY * moveSpeed;
+    }
+    //rotate to the right
+    if(keyDown(SDLK_RIGHT))
+    {
+      //both camera direction and camera plane must be rotated
+      double oldDirX = dirX;
+      dirX = dirX * cos(-rotSpeed) - dirY * sin(-rotSpeed);
+      dirY = oldDirX * sin(-rotSpeed) + dirY * cos(-rotSpeed);
+      double oldPlaneX = planeX;
+      planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
+      planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
+    }
+    //rotate to the left
+    if(keyDown(SDLK_LEFT))
+    {
+      //both camera direction and camera plane must be rotated
+      double oldDirX = dirX;
+      dirX = dirX * cos(rotSpeed) - dirY * sin(rotSpeed);
+      dirY = oldDirX * sin(rotSpeed) + dirY * cos(rotSpeed);
+      double oldPlaneX = planeX;
+      planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
+      planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);
+    }
+    if(keyDown(SDLK_ESCAPE))
+    {
+      break;
+    }
+  }
 }
 
-	MAP 
-	in this example the map is a 8 / 8 square
-	meaning it has 64 squares
 
- 
-RAYS
-struct {
-	int r, mx, my
-	mp, dof
-	dof = depth of field. Or whats the max number of squares we could
-		check before being outside the map. (loose personal definition)
-	
-	float
-	rx, ry, ra, xo, yo
-	ra = rays angle. set it to player's angle
-	xo, yo = offset. to check the next point of contact;
-	
-	
-#define PI 3.1415826535
-#define P2 PI / 2
-#define P3 3*PI / 2
-	
-	
----------------- checking HORIZONTAL line ---
-	dof = 0 
-	float distHorizontal = 1000000;
-	float hx = px;
-	float hy = py;
-	
-	
-	
-	float aTan = 1 / Tan(ra); angle tangent is the inverse of the tangent of the ray angle
-	rx ry = the coordinates where the ray first horizontal line
-	
-	
-	PI = number Pi. // we use PI to check angles in C
-		
-	// means the player is looking up
-	if (ra > PI) 
+void	draw_texture_ns(t_game *g, xpm_t *tex, int **tab, int i)
+{
+	double	step;
+	double	tex_pos;
+	int		line;
 
-					formula is the player is looking up
-					round the ray position to the neares 64 value;
-					formula below:
-		ry = (((int)Player_y >> 6) << 6) - 0.0001;
-		rx = (Player_y - ry) * aTan+px
-		yo = -64;
-		xo = yo * aTan;
-		
-					formula is the player is looking down
-	
-		if (ra < PI) // means player is looking down
-		ry = (((int)Player_y >> 6) << 6) + 64;
-		rx = (Player_y - ry) * aTan+px
-		yo = 64;
-		xo = yo * aTan;
-		
-					formula for looking straight left of right
-		if (ra == 0 || ra == PI)  // means its looking in a straight horizontal line
-		rx = px;
-		ry = py;
-		dof = 8;
-		while (dof < 8)
+	step = 1.0 * tex->texture.height / g->rc->line_height;
+	tex_pos = ((double) g->rc->draw_start - (double) HEIGHT / 2
+			+ (double) g->rc->line_height / 2) * step;
+	line = g->rc->draw_start - 1;
+	while (++line < g->rc->draw_end)
+	{
+		g->tex->texture_y = (int)tex_pos;
+		if (tex_pos > tex->texture.height - 1)
+			tex_pos = tex->texture.height - 1;
+		tex_pos += step;
+		mlx_put_pixel(g->game, i, line, \
+			((tab[g->tex->texture_y][g->tex->texture_x] >> 1) & 8355711));
+	}
+}
+
+
+
+
+1111
+1111
+1111
+
+*PX 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+
+
+
+
+
+/* This function's goal is to calculate ray position and direction
+If ray_dir_x of ray_dir_y are 0, the division through zero is avoided by
+setting it to a very high value (1e30: an arbitrarily chosen high enough number)
+interpreted as infinity */
+static void	set_ray_posdir(t_game *g, double i)
+{
+	g->rc->camera_x = 2 * i / (double) WIDTH - 1;
+	g->rc->ray_dir_x = g->rc->dir_x + g->rc->plane_x * g->rc->camera_x;
+	g->rc->ray_dir_y = g->rc->dir_y + g->rc->plane_y * g->rc->camera_x;
+	g->rc->map_x = (int)g->rc->pos_x;
+	g->rc->map_y = (int)g->rc->pos_y;
+	if (g->rc->ray_dir_x == 0)
+		g->rc->delta_dis_x = 1e30;
+	else
+		g->rc->delta_dis_x = fabs(1 / g->rc->ray_dir_x);
+	if (g->rc->ray_dir_y == 0)
+		g->rc->delta_dis_y = 1e30;
+	else
+		g->rc->delta_dis_y = fabs(1 / g->rc->ray_dir_y);
+}
+
+/* "The DDA algorithm will always jump exactly one square each loop,
+either a square in the x-direction, or a square in the y-direction.
+If it has to go in the negative or positive x-direction, 
+and the negative or positive y-direction will depend on the ray's direction, 
+and this fact will be stored in stepX and stepY.
+Those variables are always either -1 or +1." 
+(Ref.: Lodev.org)*/
+static void	set_step(t_ray *rc)
+{
+	if (rc->ray_dir_x < 0)
+	{
+		rc->step_x = -1;
+		rc->side_dis_x = (rc->pos_x - rc->map_x) * rc->delta_dis_x;
+	}
+	else
+	{
+		rc->step_x = 1;
+		rc->side_dis_x = (rc->map_x + 1.0 - rc->pos_x) * rc->delta_dis_x;
+	}
+	if (rc->ray_dir_y < 0)
+	{
+		rc->step_y = -1;
+		rc->side_dis_y = (rc->pos_y - rc->map_y) * rc->delta_dis_y;
+	}
+	else
+	{
+		rc->step_y = 1;
+		rc->side_dis_y = (rc->map_y + 1.0 - rc->pos_y) * rc->delta_dis_y;
+	}
+}
+
+static void	dda_time(t_ray *rc)
+{
+	while (rc->hit == 0)
+	{
+		if (rc->side_dis_x < rc->side_dis_y)
 		{
-			mx = (int) (rx) >> 6;
-			my = (int) (ry) >> 6;
-			mp = my *mapX + mx;
-			if (mp > 0 && mp < mapX * mapY && map[mp] == 1) // ray hits a wall
-			{
-					// this section calculates the distance to the player from where it hit the wall
-				hx = rx;
-				hy = ry;
-				distHorizontal = calc_dist(px, py, hx, hy, ra);
-				
-				
-				dof = 8;
-			}
-			else	// advances to the next line, adding the offset and incrementing dof
-			{
-				rx = xo;
-				ry = yo;
-				dof += 1;
-			}
-			
+			rc->side_dis_x += rc->delta_dis_x;
+			rc->map_x += rc->step_x;
+			if (rc->ray_dir_x > 0)
+				rc->side = EAST;
+			else
+				rc->side = WEST;
 		}
-
-
-
-
-
-------- checking VERTICAL line ---
-	dof = 0 
-	
-	float distVertical = 1000000;
-	float vx = px;
-	float vy = py;
-	
-	
-	
-	float nTan = -tan(ra); uses the negative tangent
-	
-	PI = number Pi. // we use PI to check angles in C
-		
-		// means the player is looking left
-		if (ra > P2 && ra > P3) 
-
-					formula is the player is looking left
-					round the ray position to the neares 64 value;
-					formula below:
-		rx = (((int)Player_x >> 6) << 6) - 0.0001;
-		ry = (Player_x - rx) * nTan + py
-		xo = -64;
-		yo = xo * nTan;
-		
-					formula is the player is looking right
-	
-		if (ra < P2 || ra > P3) // means player is looking right NOTE THE OR SYMBOL
-		rx = (((int)Player_x >> 6) << 6) + 64;
-		ry = (Player_x - rx) * nTan+py
-		xo = 64;
-		yo = xo * nTan;
-		
-					formula for looking straight up or down
-		if (ra == 0 || ra == PI)  // means its looking in a straight horizontal line
-		rx = px;
-		ry = py;
-		dof = 8;
-		while (dof < 8)
+		else
 		{
-			mx = (int) (rx) >> 6;
-			my = (int) (ry) >> 6;
-			mp = my *mapX + mx;
-			if (mp > 0 && mp < mapX * mapY && map[mp] == 1) // ray hits a wall
-			{
-					// this section calculates the distance to the player from where it hit the wall
-				vx = rx;
-				vy = ry;
-				distVertical = calc_dist(px, py, vx, vy, ra);
-				
-				
-				
-				dof = 8;
-			}
-			else	// advances to the next line, adding the offset and incrementing dof
-			{
-				rx = xo;
-				ry = yo;
-				dof += 1;
-			}
-			
+			rc->side_dis_y += rc->delta_dis_y;
+			rc->map_y += rc->step_y;
+			if (rc->ray_dir_y > 0)
+				rc->side = SOUTH;
+			else
+				rc->side = NORTH;
 		}
-
-if (distVertical < distHorizontal)
-{
-	rx = vx;
-	ry = xy;
-}
-if (distHorizontal < distVertical)
-{
-	rx = hx;
-	ry = hy;
+		if (rc->map[rc->map_y][rc->map_x] == '1')
+			rc->hit = 1;
+	}
 }
 
-
-PRINT RAY(or print ray's consequence)
-
-
-
---------- function to check distance ----
-// maybe too many variables, send a struct instead
-float	calc_dist(float ax, float ay, float bx, float by, float ang)
+static void	set_line_len(t_game *g)
 {
-	return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
+	if (g->rc->side == 0 || g->rc->side == 1)
+		g->rc->intersect_dist = g->rc->side_dis_x - g->rc->delta_dis_x;
+	else
+		g->rc->intersect_dist = g->rc->side_dis_y - g->rc->delta_dis_y;
+	g->rc->line_height = (int)(HEIGHT / g->rc->intersect_dist);
+	g->rc->draw_start = -g->rc->line_height / 2 + HEIGHT / 2;
+	if (g->rc->draw_start < 0)
+		g->rc->draw_start = 0;
+	g->rc->draw_end = g->rc->line_height / 2 + HEIGHT / 2;
+	if (g->rc->draw_end >= HEIGHT)
+		g->rc->draw_end = HEIGHT;
 }
+
+/* This function starts by projecting ceiling and floor all over
+Then, while loop goes thrugh every 'i' is a slice in the screen
+We calculateray position and direction and determines which
+axis is first hit and we calculate the distance to a wall (collision)
+We calculate size of line to be drawn and draw it on scree. */
+void	raycaster(t_game *g)
+{
+	int	i;
+
+	i = -1;
+	g->player_x = g->rc->pos_x;
+	g->player_y = g->rc->pos_y;
+	floor_n_ceiling(g);
+	while (++i < WIDTH)
+	{
+		g->rc->hit = 0;
+		set_ray_posdir(g, i);
+		set_step(g->rc);
+		dda_time(g->rc);
+		set_line_len(g);
+		texture_calculation(g);
+		if (g->rc->side == EAST)
+			draw_texture_ew(g, g->tex->ea, g->tex->e, i);
+		else if (g->rc->side == WEST)
+			draw_texture_ew(g, g->tex->we, g->tex->w, i);
+		else if (g->rc->side == SOUTH)
+			draw_texture_ns(g, g->tex->so, g->tex->s, i);
+		else
+			draw_texture_ns(g, g->tex->no, g->tex->n, i);
+	}
+	mlx_image_to_window(g->mlx, g->game, 0, 0);
+}
+
+
+static void	set_direction(char direction, t_ray *rc)
+{
+	if (direction == 'N')
+	{
+		rc->dir_x = 0;
+		rc->dir_y = -1;
+	}
+	if (direction == 'S')
+	{
+		rc->dir_x = 0;
+		rc->dir_y = 1;
+	}
+	if (direction == 'E')
+	{
+		rc->dir_x = -1;
+		rc->dir_y = 0;
+	}
+	if (direction == 'W')
+	{
+		rc->dir_x = 1;
+		rc->dir_y = 0;
+	}
+}
+
+static void	set_plane(char direction, t_ray *rc)
+{
+	if (direction == 'N')
+	{
+		rc->plane_x = 0.66;
+		rc->plane_y = 0;
+	}
+	if (direction == 'S')
+	{
+		rc->plane_x = -0.66;
+		rc->plane_y = 0;
+	}
+	if (direction == 'E')
+	{
+		rc->plane_x = 0;
+		rc->plane_y = -0.66;
+	}
+	if (direction == 'W')
+	{
+		rc->plane_x = 0;
+		rc->plane_y = 0.66;
+	}
+}
+
+int	init_mlx_variables(t_game *g)
+{
+	g->mlx = mlx_init(WIDTH, HEIGHT, "Cub3d", true);
+	if (!g->mlx)
+		return (-1);
+	g->game = mlx_new_image(g->mlx, WIDTH, HEIGHT);
+	if (!g->game)
+		return (-1);
+	return (0);
+}
+
+
+	
