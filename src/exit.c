@@ -62,13 +62,13 @@ void    *free_texture(t_texture *t)
 	t->paths = ft_free_array(t->paths);
 	if (t->mlx_textures)
 	{
-		if (t->mlx_textures[0])
+		if (&t->mlx_textures[0])
 			mlx_delete_texture(t->mlx_textures[0]);
-		if (t->mlx_textures[1])
+		if (&t->mlx_textures[1])
 			mlx_delete_texture(t->mlx_textures[1]);
-		if (t->mlx_textures[2])
+		if (&t->mlx_textures[2])
 			mlx_delete_texture(t->mlx_textures[2]);
-		if (t->mlx_textures[3])
+		if (&t->mlx_textures[3])
 			mlx_delete_texture(t->mlx_textures[3]);
 	}
 	t->mlx_textures = x_free(t->mlx_textures);

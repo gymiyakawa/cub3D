@@ -1,13 +1,27 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "C/C++ Runner: Debug Session",
-      "type": "lldb",
-      "request": "launch",
-      "args": [],
-      "cwd": "/Users/gmiyakaw/Documents/Common_Core_Projects/cub3d/src",
-      "program": "/Users/gmiyakaw/Documents/Common_Core_Projects/cub3d/src/build/Debug/outDebug"
-    }
-  ]
-}
+	"version": "0.2.0",
+	"configurations": [
+	  {
+		"name": "(lldb) Launch",
+		"type": "cppdbg",
+		"request": "launch",
+		"program": "${workspaceFolder}/cub3d",
+		"args": [
+		  "./maps/small.cub"
+		],
+		"stopAtEntry": true,
+		"cwd": "${workspaceFolder}",
+		"environment": [],
+		"externalConsole": false,
+		"MIMode": "lldb"
+	  },
+	  {
+		"name": "C/C++ Runner: Debug Session",
+		"type": "lldb",
+		"request": "launch",
+		"args": [],
+		"cwd": "/Users/gmiyakaw/Documents/Common_Core_Projects/cub3d/src",
+		"program": "/Users/gmiyakaw/Documents/Common_Core_Projects/cub3d/src/build/Debug/outDebug"
+	  }
+	]
+  }

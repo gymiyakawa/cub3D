@@ -230,10 +230,10 @@ bool	find_player_start(char **maze, t_main *ms)
 		x = 0;
 		while (maze[y][x])
 		{
-									// printf("x:%d, y:%d\n", x, y);
 			if (ft_strchr("NSEW", maze[y][x]))
 			{
 									// print_str_array(maze);
+									// printf("x:%d, y:%d\n", x, y);
 									// printf("maze[x,y]: %c\n", maze[y][x]); 
 				ms->map->p_view = maze[y][x];
 				ms->map->p_x = x;

@@ -43,6 +43,7 @@ void	print_textures(t_texture *t)
 	printf("height: %d\n", t->mlx_textures[3]->height);
 	printf("bbp: %d\n", t->mlx_textures[3]->bytes_per_pixel);
 	printf("pixels: %s\n", t->mlx_textures[3]->pixels);
+	printf("\n----finished printing textures----\n");
 	return;
 }
 

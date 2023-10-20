@@ -14,13 +14,9 @@ void	key_bindings(mlx_key_data_t input, void *main_struct)
 	{
 		// go up; 
 	}
-	
-	
-	// raycasting((t_main *)main_struct);
+	raycasting(ms);
 	return ;
 }
-
-
 
 
 // will probably need to keep track of the return variable from mlx_new_image. 
