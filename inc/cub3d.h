@@ -54,6 +54,8 @@
 #define E_DUP "Unable to duplicate maze\n"
 #define E_PAD "Unable to pad maze\n"
 #define E_AC "Wrong number of arguments\n"
+#define E_WIN "Error with rendering game image\n"
+#define E_RAY "Error setting ray direction\n"
 // #define TEST "TESTY TEST!\n" //delete this later
 
 // FUNCTION PROTOTYPES

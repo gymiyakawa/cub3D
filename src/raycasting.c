@@ -22,7 +22,7 @@ void	set_raycasting_vars(t_ray *ray)
 	ray->py = ray->map_y + 0.5;
 	ray->direction = get_direction(ray->ms->map->p_view);
 	if (ray->direction < 0)
-		error_and_exit("parsing error\n", ray->ms);
+		error_and_exit(E_RAY, ray->ms);
 	set_orientation(ray);
 }
 
