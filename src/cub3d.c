@@ -85,10 +85,10 @@ int	main(int ac, char **av)
 			if (!ms->mlx)
 				error_and_exit(E_MLX_INI, ms);
 			ms->game = mlx_new_image(ms->mlx, WIDTH, HEIGHT);
-			make_background(ms->mlx, ms->colors, ms->bg);
 
 			set_raycasting_vars(ms->ray);
 
+			make_background(ms->mlx, ms->colors, ms->bg);
 			raycasting(ms);
 			mlx_key_hook(ms->mlx, &key_bindings, ms);
 			mlx_loop(ms->mlx);

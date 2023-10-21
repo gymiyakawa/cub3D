@@ -40,10 +40,10 @@ $(NAME): $(OBJECTS) | $(OBJ_DIR)
 	@make -C $(LIBFT_DIR)
 
 #	MacOs compilaion
-	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_CC)
+# @$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_CC)
 
 #	Linux compilation
-#	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_DIR)/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
+	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_DIR)/build/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
 
 #	WSL (Linux) compilation
 #	@$(CC) $(CFLAGS) -I $(INC_DIR) -o $@ $(OBJECTS) $(LIBFT_DIR)libft.a $(MLX_DIR)/build/libmlx42.a -Iinclude -ldl -lXext -lX11 -lm -pthread
