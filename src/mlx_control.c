@@ -12,6 +12,10 @@ void	key_bindings(mlx_key_data_t input, void *main_struct)
 	// {
 	// 	// go up; 
 	// }
+	// if (input.key == MLX_KEY_W)
+	// {
+	// 	// go up; 
+	// }
 	// if (input.key == MLX_KEY_UP)
 	// 	ms->ray->px = 
 
