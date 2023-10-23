@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:06:55 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/20 16:51:58 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:41:53 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ typedef struct s_main
 	t_ray		*ray;
 	mlx_t		*mlx;
 	mlx_image_t	*game;
+	int32_t		game_inst;
 	int			fd;
 	bool		game_over;
 	char		**file_copy;

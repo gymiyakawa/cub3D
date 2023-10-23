@@ -21,7 +21,6 @@ u_int32_t	create_rgba(int r, int g, int b, int a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-
 //	finds the line which contains the identifier, checks if it is
 // has only space before it and returns a pointer to that line.
 char *find_identifier(t_main *ms, char *identifier)

@@ -13,7 +13,7 @@
 // game config
 #define MAX_WIDTH 1920
 #define MAX_HEIGHT 1080
-#define WIDTH 1200
+#define WIDTH 1500
 #define HEIGHT 1200
 #define ROT_SPEED 0.15
 #define MOV_SPEED 0.1
@@ -166,3 +166,4 @@ void	set_orientation(t_ray *ray);
 void	set_raycasting_vars(t_ray *ray);
 void	set_ray_directions(t_ray *ray, int i);
 void	no_texture(t_ray *ray, int i);
+uint32_t	make_px_color(t_texture *text_strt, mlx_texture_t *t);

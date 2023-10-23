@@ -205,12 +205,7 @@ int main(int /*argc*/, char */*argv*/[])
       if(drawEnd >= h) drawEnd = h - 1;
 
 
-						TESTURE CALCS
-
-
-
-
-
+						TEXTURE CALCS
 
       //texturing calculations
       int texNum = worldMap[mapX][mapY] - 1; //1 subtracted from it so that texture 0 can be used!
@@ -314,3 +309,7 @@ int main(int /*argc*/, char */*argv*/[])
     }
   }
 }
+
+
+
+

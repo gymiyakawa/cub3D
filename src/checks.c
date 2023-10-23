@@ -24,9 +24,7 @@ void	elements_check(t_main *ms)
 		error_and_exit(E_RPT_ELEM, ms);
 	if (detect_loose_char(ms) == true)
 		error_and_exit(E_INV_LINE, ms);
-	
-	
-		
+
 	// if (is_map_last(ms) == false)
 	// 	error_and_exit(E_WRG_ORD, ms);
 	

@@ -5,7 +5,22 @@ void	key_bindings(mlx_key_data_t input, void *main_struct)
 {
 	t_main	*ms;
 
+					// refresh image
+
 	ms = main_struct;
+
+						//provisorio
+			mlx_delete_image(ms->mlx, ms->game);
+			ms->game = mlx_new_image(ms->mlx, WIDTH, HEIGHT);
+			if (!ms->game) // or (!ms->game || mlx_image_to_window(ms->mlx, ms->game, 0, 0) < 0)?
+			{
+				mlx_close_window(ms->mlx);
+				error_and_exit(E_WIN, ms);
+			}
+			
+			
+			
+			
 	if (input.key == MLX_KEY_ESCAPE) //input.key or mlx_is_key_down??
 		mlx_close_window(ms->mlx);
 	// if (input.key == MLX_KEY_W)
@@ -20,10 +35,10 @@ void	key_bindings(mlx_key_data_t input, void *main_struct)
 	// 	ms->ray->px = 
 
 	
-	// if (input.key == MLX_KEY_D)
-	// {
-	// 	look_left(ms->ray); // funcao da Ana
-	// }
+	if (input.key == MLX_KEY_D)
+	{
+		look_left(ms->ray); // funcao da Ana
+	}
 
 
 	raycasting(ms);
