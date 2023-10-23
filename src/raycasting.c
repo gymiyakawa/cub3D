@@ -111,8 +111,13 @@ void	raycasting(t_main *ms)
 		set_step(ray);
 		run_dda(ray);
 		calculate_columns(ray);
-		// texture_calculations(ray, text);
-											// printf("rendered x position: %d\n", i);
+		
+					// NO TEXTURES
+		// (void)text;
+		// no_texture(ray, i);
+		
+					// WITH TEXTURES
+		texture_calculations(ray, text);
 		render_texture(ray, text, i);
 		
 									// linha laranja horizonte
@@ -286,9 +291,12 @@ void	texture_calculations(t_ray *ray, t_texture *text)
 	
 	text->text_num = ray->ms->map->maze[ray->map_y][ray->map_x] - 1; // original was not casted, but he used a int map
 
-		//maybe calculate texture.width?
 
-	if (ray->side == EAST || ray->side == WEST)
+		
+		
+
+	// if (ray->side == EAST || ray->side == WEST)	// og
+	if (ray->side == NORTH || ray->side == SOUTH)		// not sure if better
 		wall_x = ray->py + ray->perpwalldist * ray->raydir_y;
 	else
 		wall_x = ray->px + ray->perpwalldist * ray->raydir_x;
@@ -296,16 +304,16 @@ void	texture_calculations(t_ray *ray, t_texture *text)
 	
 	text_i = get_text_index(ray);
 	
-						
-	
 									// printf("texture width %d\n", text->mlx_textures[0]->width);
 									// print_textures(text);
 
-	text->text_x = (int)(wall_x * text->mlx_textures[text_i]->width);
+	text->text_x = (int)(wall_x * (double)text->mlx_textures[text_i]->width);
 	
+				// int texX = int(wallX * double(texWidth));
+
 	if ((ray->side == EAST || ray->side == WEST) && ray->raydir_x > 0)
 		text->text_x = text->mlx_textures[text_i]->width - text->text_x - 1;
-	
+
 	if ((ray->side == NORTH || ray->side == SOUTH) && ray->raydir_y < 0)
 		text->text_x = text->mlx_textures[text_i]->width - text->text_x - 1;
 	return ;
@@ -331,50 +339,63 @@ int	get_text_index(t_ray *ray)
 
 void	render_texture(t_ray *ray, t_texture *text, int i)
 {
-	// int		text_i;
-	// double	step;
-	// double	tex_pos;
+	int		text_i;
+	double	step;
+	double	tex_pos;
 	int		line;
-	// int		px_i;
-	// mlx_texture_t	*texture;
+	int		px_i;
+	mlx_texture_t	*texture;
 
-	// text_i = get_text_index(ray);
-	// texture = text->mlx_textures[text_i];
-	// draw_texture(text->mlx_textures[text_i], ray);
+	text_i = get_text_index(ray);
+	texture = text->mlx_textures[text_i];
+									// draw_texture(text->mlx_textures[text_i], ray);
 	
-	// step = 1.0 * texture->height / ray->line_height;
-	// tex_pos = ((double) ray->draw_start - (double) HEIGHT / 2
-	// 		+ (double) ray->line_height / 2) * step;
+	step = 1.0 * texture->height / ray->line_height;
+	tex_pos = ((double) ray->draw_start - (double) HEIGHT / 2
+			+ (double) ray->line_height / 2) * step;		// og
+			
+	// tex_pos = (ray->draw_start - HEIGHT / 2
+	// 		+ ray->line_height / 2) * step;
+			
+	// double texPos = (drawStart - pitch - h / 2 + lineHeight / 2) * step;
+
 	line = ray->draw_start - 1;
-										//should print a line through the middle;
-								// mlx_put_pixel(ray->ms->game, i, line, 0XFF0000FF);
-								
+
 	while (++line < ray->draw_end)
 	{
-		// text->text_y = (int) tex_pos;
-		// if (tex_pos > texture->height - 1)
-		// 	tex_pos = texture->height -1;
-		// tex_pos += step;
+		text->text_y = (int) tex_pos;
+		if (tex_pos > texture->height - 1)
+			tex_pos = texture->height -1;
+		tex_pos += step;
+			
+		px_i = line * texture->width * texture->bytes_per_pixel;
+		// (void)px_i;
+		mlx_put_pixel(ray->ms->game, i, line, texture->pixels[px_i]);
+								// printf("texture equivalent %d\n", texture->pixels[px_i]);
 
-								// lets try without textures
-								(void)text;
-							// px_i = line * texture->width * texture->bytes_per_pixel;
-							// (void)px_i;
-							// mlx_put_pixel(ray->ms->game, i, line, texture->pixels[px_i]);
-							// printf("texture equivalent %d\n", texture->pixels[px_i]);
-
-							// printf("i: %d, line: %d\n", i, line);
-			if (ray->side == NORTH)
-				mlx_put_pixel(ray->ms->game, i, line, 0XFF0000FF);	// RED
-			if (ray->side == SOUTH)
-				mlx_put_pixel(ray->ms->game, i, line, 0X0000FFFF);	// BLUE
-			if (ray->side == EAST)
-				mlx_put_pixel(ray->ms->game, i, line, 0XFFFF00FF);	// YELLOW
-			if (ray->side == WEST)
-				mlx_put_pixel(ray->ms->game, i, line, 0X00FF00FF);	// GREEN
+								// printf("i: %d, line: %d\n", i, line);
 	}
-								// printf("\nEXITED LOOP\n");
-
-	
 }
 
+
+
+
+
+
+void	no_texture(t_ray *ray, int i)
+{
+	int	line;
+
+	line = ray->draw_start - 1;
+	while (++line < ray->draw_end)
+	{
+	if (ray->side == NORTH)
+		mlx_put_pixel(ray->ms->game, i, line, 0XFF0000FF);	// RED
+	if (ray->side == SOUTH)
+		mlx_put_pixel(ray->ms->game, i, line, 0X0000FFFF);	// BLUE
+	if (ray->side == EAST)
+		mlx_put_pixel(ray->ms->game, i, line, 0XFFFF00FF);	// YELLOW
+	if (ray->side == WEST)
+		mlx_put_pixel(ray->ms->game, i, line, 0X00FF00FF);	// GREEN
+	}
+}

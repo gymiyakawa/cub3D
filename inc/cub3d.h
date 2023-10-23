@@ -165,3 +165,4 @@ int		get_direction(int	p_view);
 void	set_orientation(t_ray *ray);
 void	set_raycasting_vars(t_ray *ray);
 void	set_ray_directions(t_ray *ray, int i);
+void	no_texture(t_ray *ray, int i);
