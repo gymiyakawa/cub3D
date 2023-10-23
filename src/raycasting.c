@@ -48,7 +48,7 @@ int	get_direction(int	p_view)
 		return (WEST);
 	else
 	{
-		perror("p_view not set\n");
+		perror(E_PVIEW);
 		return (-1);
 	}
 }
@@ -106,7 +106,7 @@ void	raycasting(t_main *ms)
 	i = -1;
 	while (++i < WIDTH)
 	{
-		ray->hit = 0;
+		ray->hit = FALSE;
 		set_ray_directions(ray, i);
 		set_step(ray);
 		run_dda(ray);
@@ -188,7 +188,7 @@ void	set_step(t_ray *ray)
 
 void	run_dda(t_ray *ray)
 {
-	while (ray->hit == false)
+	while (ray->hit == FALSE)
 	{
 									// print_str_array(ray->ms->map->maze);
 									// printf("direction: %d\n", ray->direction);
@@ -210,7 +210,6 @@ void	run_dda(t_ray *ray)
 				ray->side = WEST;
 			else
 				ray->side = EAST;
-
 		}
 		else
 		{
@@ -231,7 +230,7 @@ void	run_dda(t_ray *ray)
 		// if (ray->ms->map->maze[ray->map_x][ray->map_y] == '1')
 
 		if (ray->ms->map->maze[ray->map_y][ray->map_x] == '1') // OG
-			ray->hit = true;
+			ray->hit = TRUE;
 	}
 									// exit(1);
 	return ;
@@ -266,7 +265,6 @@ void	calculate_columns(t_ray *ray)
 
 
 	ray->line_height = (int)(HEIGHT / ray->perpwalldist);
-	
 	ray->draw_start = -ray->line_height / 2 + HEIGHT / 2;
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;

@@ -56,6 +56,7 @@
 #define E_AC "Wrong number of arguments\n"
 #define E_WIN "Error with rendering game image\n"
 #define E_RAY "Error setting ray direction\n"
+#define E_PVIEW "p_view not set\n"
 // #define TEST "TESTY TEST!\n" //delete this later
 
 // FUNCTION PROTOTYPES
