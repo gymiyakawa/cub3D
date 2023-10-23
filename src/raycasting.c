@@ -113,12 +113,12 @@ void	raycasting(t_main *ms)
 		calculate_columns(ray);
 		
 					// NO TEXTURES
-		// (void)text;
-		// no_texture(ray, i);
+		(void)text;
+		no_texture(ray, i);
 		
 					// WITH TEXTURES
-		texture_calculations(ray, text);
-		render_texture(ray, text, i);
+		// texture_calculations(ray, text);
+		// render_texture(ray, text, i);
 		
 									// linha laranja horizonte
 									// mlx_put_pixel(ray->ms->game, i, HEIGHT / 2, ray->ms->colors->c_color);
