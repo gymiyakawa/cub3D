@@ -141,6 +141,7 @@ bool	are_there_repeats(t_main *ms);
 
 //mlx_control.c
 void	key_bindings(mlx_key_data_t input, void *ms);
+void	refresh_game(t_main *ms);
 void	make_background(mlx_t *mlx, t_color *c, t_background *bg);
 void	rotate_right(t_ray *ray);
 void	rotate_left(t_ray *ray);

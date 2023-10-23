@@ -13,6 +13,7 @@ void	key_bindings(mlx_key_data_t input, void *main_struct)
 	t_main	*ms;
 
 	ms = main_struct;
+	refresh_game(ms);
 	if (input.key == MLX_KEY_ESCAPE && input.action == MLX_PRESS)
 		mlx_close_window(ms->mlx);
 	if (input.key == MLX_KEY_W && (input.action == MLX_PRESS
@@ -35,6 +36,17 @@ void	key_bindings(mlx_key_data_t input, void *main_struct)
 		rotate_left(ms->ray);
 	raycasting(ms);
 	return ;
+}
+
+void	refresh_game(t_main *ms)
+{
+	mlx_delete_image(ms->mlx, ms->game);
+	ms->game = mlx_new_image(ms->mlx, WIDTH, HEIGHT);
+	if (!ms->game) // or (!ms->game || mlx_image_to_window(ms->mlx, ms->game, 0, 0) < 0)?
+	{
+		mlx_close_window(ms->mlx);
+		error_and_exit(E_WIN, ms);
+	}
 }
 
 void	move_ahead(t_ray *ray)
