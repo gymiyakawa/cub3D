@@ -8,13 +8,12 @@ void	key_bindings(mlx_key_data_t input, void *main_struct)
 	ms = main_struct;
 	if (input.key == MLX_KEY_ESCAPE) //input.key or mlx_is_key_down??
 		mlx_close_window(ms->mlx);
-	}
 	if (input.key == MLX_KEY_W)
 	{
 		// go up; 
 	}
-	if (input.key == MLX_KEY_UP)
-		ms->ray->px = 
+	// if (input.key == MLX_KEY_UP)
+	// 	ms->ray->px = 
 
 	
 	raycasting(ms);
