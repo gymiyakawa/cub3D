@@ -75,7 +75,6 @@ int	main(int ac, char **av)
 			if (!ms->mlx)
 				error_and_exit(E_MLX_INI, ms);
 			ms->game = mlx_new_image(ms->mlx, WIDTH, HEIGHT);
-			make_background(ms->mlx, ms->colors, ms->bg);
 			if (!ms->game) // or (!ms->game || mlx_image_to_window(ms->mlx, ms->game, 0, 0) < 0)?
 			{
 				mlx_close_window(ms->mlx);
@@ -84,17 +83,14 @@ int	main(int ac, char **av)
 			// make_background(ms->mlx, ms->colors, ms->bg);
 			// 	from tuto: Even after the image is being displayed, we can still modify the buffer.
 			// mlx_put_pixel(img, 0, 0, 0xFF0000FF); // but I think this is handled in make_background, right?
-			set_raycasting_vars(ms->ray);
+		
 			
-	
-				raycasting(ms);
-
 			set_raycasting_vars(ms->ray);
 
+			make_background(ms->mlx, ms->colors, ms->bg);
 			raycasting(ms);
 			mlx_key_hook(ms->mlx, &key_bindings, ms);
 			mlx_loop(ms->mlx);
-			mlx_terminate(ms->mlx);
 		}
 	}
 	else
