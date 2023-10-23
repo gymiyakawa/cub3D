@@ -70,7 +70,6 @@ int	main(int ac, char **av)
 		if (parsing(av[1], ms))
 		{
 			mlx_set_setting(MLX_STRETCH_IMAGE, true);
-			
 			ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", TRUE);
 			if (!ms->mlx)
 				error_and_exit(E_MLX_INI, ms);
@@ -83,10 +82,7 @@ int	main(int ac, char **av)
 			// make_background(ms->mlx, ms->colors, ms->bg);
 			// 	from tuto: Even after the image is being displayed, we can still modify the buffer.
 			// mlx_put_pixel(img, 0, 0, 0xFF0000FF); // but I think this is handled in make_background, right?
-		
-			
 			set_raycasting_vars(ms->ray);
-
 			make_background(ms->mlx, ms->colors, ms->bg);
 			raycasting(ms);
 			mlx_key_hook(ms->mlx, &key_bindings, ms);
@@ -97,8 +93,7 @@ int	main(int ac, char **av)
 		perror(E_AC);
 	clean_exit(ms);
 	return (0);
-	//search error_and_exit("") and change to macros
-	//main_struct to ms in key bindings function
+
 	// add headers
 	//norminette
 	//test with valgrind and leaks

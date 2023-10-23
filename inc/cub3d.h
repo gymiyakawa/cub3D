@@ -142,9 +142,12 @@ bool	are_there_repeats(t_main *ms);
 //mlx_control.c
 void	key_bindings(mlx_key_data_t input, void *ms);
 void	make_background(mlx_t *mlx, t_color *c, t_background *bg);
-
-void	look_left(t_ray *ray);
-
+void	rotate_right(t_ray *ray);
+void	rotate_left(t_ray *ray);
+void	move_north(t_ray *ray);
+void	move_south(t_ray *ray);
+void	move_east(t_ray *ray);
+void	move_west(t_ray *ray);
 
 //printing functions
 void		print_color_struct(t_color *c);
