@@ -15,63 +15,69 @@ void	key_bindings(mlx_key_data_t input, void *main_struct)
 	ms = main_struct;
 	if (input.key == MLX_KEY_ESCAPE && input.action == MLX_PRESS)
 		mlx_close_window(ms->mlx);
-	if (input.key == MLX_KEY_W)
-		move_north(ms->ray);
-	if (input.key == MLX_KEY_S && input.action == MLX_PRESS)
-		move_south(ms->ray);
-	if (input.key == MLX_KEY_D && input.action == MLX_PRESS)
-		move_east(ms->ray);
-	if (input.key == MLX_KEY_A && input.action == MLX_PRESS)
-		move_west(ms->ray);
-	if (input.key == MLX_KEY_RIGHT && input.action == MLX_PRESS)
+	if (input.key == MLX_KEY_W && (input.action == MLX_PRESS
+		|| input.action == MLX_REPEAT))
+		move_ahead(ms->ray);
+	if (input.key == MLX_KEY_S && (input.action == MLX_PRESS
+		|| input.action == MLX_REPEAT))
+		move_back(ms->ray);
+	if (input.key == MLX_KEY_D && (input.action == MLX_PRESS
+		|| input.action == MLX_REPEAT))
+		move_right(ms->ray);
+	if (input.key == MLX_KEY_A && (input.action == MLX_PRESS
+		|| input.action == MLX_REPEAT))
+		move_left(ms->ray);
+	if (input.key == MLX_KEY_RIGHT && (input.action == MLX_PRESS
+		|| input.action == MLX_REPEAT))
 		rotate_right(ms->ray);
-	 if (input.key == MLX_KEY_LEFT && input.action == MLX_PRESS)
+	 if (input.key == MLX_KEY_LEFT && (input.action == MLX_PRESS
+	 	|| input.action == MLX_REPEAT))
 		rotate_left(ms->ray);
 	raycasting(ms);
 	return ;
 }
 
-void	move_north(t_ray *ray)
+void	move_ahead(t_ray *ray)
 {
 	char **maze;
 	
 	maze = ray->ms->map->maze;
-	if(maze[(int)ray->py][(int)(ray->px + ray->dir_x * ray->mov_speed)] == '0')
+	if(maze[(int)ray->py][(int)(ray->px + ray->dir_x * ray->mov_speed)] != '1')
 		ray->px += ray->dir_x * ray->mov_speed;
-	if(maze[(int)(ray->py + ray->dir_y * ray->mov_speed)][(int)ray->px] == '0')
+	if(maze[(int)(ray->py + ray->dir_y * ray->mov_speed)][(int)ray->px] != '1')
 		ray->py += ray->dir_y * ray->mov_speed;
 }
 
-void	move_south(t_ray *ray)
+void	move_back(t_ray *ray)
 {
 	char **maze;
 	
 	maze = ray->ms->map->maze;
-	if(maze[(int)ray->py][(int)(ray->px - ray->dir_x * ray->mov_speed)] == '0')
+	if(maze[(int)ray->py][(int)(ray->px - ray->dir_x * ray->mov_speed)] != '1')
 		ray->px -= ray->dir_x * ray->mov_speed;
-	if(maze[(int)(ray->py - ray->dir_y * ray->mov_speed)][(int)ray->px] == '0')
+	if(maze[(int)(ray->py - ray->dir_y * ray->mov_speed)][(int)ray->px] != '1')
 		ray->py -= ray->dir_y * ray->mov_speed;
 }
 
-void	move_east(t_ray *ray)
+void	move_right(t_ray *ray)
 {
 	char **maze;
 	
 	maze = ray->ms->map->maze;
-	if(maze[(int)ray->py][(int)(ray->px + ray->plane_x * ray->mov_speed)] == '0')
+	if(maze[(int)ray->py][(int)(ray->px + ray->plane_x * ray->mov_speed)] != '1')
 		ray->px += ray->plane_x * ray->mov_speed;
-	if(maze[(int)(ray->py + ray->plane_y * ray->mov_speed)][(int)ray->px] == '0')
+	if(maze[(int)(ray->py + ray->plane_y * ray->mov_speed)][(int)ray->px] != '1')
 		ray->py += ray->plane_y * ray->mov_speed;
 }
 
-void	move_west(t_ray *ray)
+void	move_left(t_ray *ray)
 {
 	char **maze;
 	
 	maze = ray->ms->map->maze;
-	if(maze[(int)ray->py][(int)(ray->px - ray->plane_x * ray->mov_speed)] == '0')
+	if(maze[(int)ray->py][(int)(ray->px - ray->plane_x * ray->mov_speed)] != '1')
 		ray->px -= ray->plane_x * ray->mov_speed;
-	if(maze[(int)(ray->py - ray->plane_y * ray->mov_speed)][(int)ray->px] == '0')
+	if(maze[(int)(ray->py - ray->plane_y * ray->mov_speed)][(int)ray->px] != '1')
 		ray->py -= ray->plane_y * ray->mov_speed;
 }
 

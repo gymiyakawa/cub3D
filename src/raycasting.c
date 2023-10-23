@@ -120,9 +120,7 @@ void	raycasting(t_main *ms)
 
 
 	}
-	int32_t game_img;
-	game_img = mlx_image_to_window(ray->ms->mlx, ray->ms->game, 0, 0);
-	(void)game_img;
+	ms->game_inst= mlx_image_to_window(ray->ms->mlx, ray->ms->game, 0, 0);
 	return ;
 }
 
