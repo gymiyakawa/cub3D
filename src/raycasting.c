@@ -32,7 +32,7 @@ void	set_raycasting_vars(t_ray *ray)
 										// printf("%d\n", ray->ms->map->p_view);
 	ray->direction = get_direction(ray->ms->map->p_view);
 	if (ray->direction < 0)
-		error_and_exit("parsing error\n", ray->ms);
+		error_and_exit(E_PARS, ray->ms);
 	set_orientation(ray);
 }
 
@@ -50,7 +50,7 @@ int	get_direction(int	p_view)
 
 	else
 	{
-		perror("p_view not set\n");
+		perror(E_PVIEW);
 		return (-1);
 	}
 }
@@ -107,7 +107,7 @@ void	raycasting(t_main *ms)
 	i = -1;
 	while (++i < WIDTH)
 	{
-		ray->hit = 0;
+		ray->hit = FALSE;
 		set_ray_directions(ray, i);
 		set_step(ray);
 		run_dda(ray);
@@ -193,7 +193,7 @@ void	set_step(t_ray *ray)
 
 void	run_dda(t_ray *ray)
 {
-	while (ray->hit == false)
+	while (ray->hit == FALSE)
 	{
 									// print_str_array(ray->ms->map->maze);
 									// printf("direction: %d\n", ray->direction);
@@ -215,7 +215,6 @@ void	run_dda(t_ray *ray)
 				ray->side = WEST;
 			else
 				ray->side = EAST;
-
 		}
 		else
 		{
@@ -236,7 +235,7 @@ void	run_dda(t_ray *ray)
 		// if (ray->ms->map->maze[ray->map_x][ray->map_y] == '1')
 
 		if (ray->ms->map->maze[ray->map_y][ray->map_x] == '1') // OG
-			ray->hit = true;
+			ray->hit = TRUE;
 	}
 									// exit(1);
 	return ;

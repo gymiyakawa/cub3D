@@ -56,6 +56,7 @@
 #define E_AC "Wrong number of arguments\n"
 #define E_WIN "Error with rendering game image\n"
 #define E_RAY "Error setting ray direction\n"
+#define E_PVIEW "p_view not set\n"
 // #define TEST "TESTY TEST!\n" //delete this later
 
 // FUNCTION PROTOTYPES
@@ -141,10 +142,14 @@ bool	are_there_repeats(t_main *ms);
 
 //mlx_control.c
 void	key_bindings(mlx_key_data_t input, void *ms);
+void	refresh_game(t_main *ms);
 void	make_background(mlx_t *mlx, t_color *c, t_background *bg);
-
-void	look_left(t_ray *ray);
-
+void	rotate_right(t_ray *ray);
+void	rotate_left(t_ray *ray);
+void	move_ahead(t_ray *ray);
+void	move_back(t_ray *ray);
+void	move_right(t_ray *ray);
+void	move_left(t_ray *ray);
 
 //printing functions
 void		print_color_struct(t_color *c);
