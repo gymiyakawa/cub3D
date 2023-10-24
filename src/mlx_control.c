@@ -12,7 +12,6 @@ void	key_bindings(mlx_key_data_t input, void *main_struct)
 {
 	t_main	*ms;
 
-					// refresh image
 	ms = main_struct;
 	refresh_game(ms);
 	if (input.key == MLX_KEY_ESCAPE && input.action == MLX_PRESS)
@@ -39,7 +38,6 @@ void	key_bindings(mlx_key_data_t input, void *main_struct)
 	return ;
 }
 
-
 void	refresh_game(t_main *ms)
 {
 	mlx_delete_image(ms->mlx, ms->game);
@@ -55,14 +53,10 @@ void	move_ahead(t_ray *ray)
 {
 	char **maze;
 	maze = ray->ms->map->maze;
-	
-	if(maze[(int)ray->py][(int)(ray->px + ray->dir_x * ray->mov_speed)] != '1' && \
-		ray->perpwalldist > 0.2)	//og
+
+	if(maze[(int)ray->py][(int)(ray->px + ray->dir_x * (ray->mov_speed + 0.1))] != '1')
 		ray->px += ray->dir_x * ray->mov_speed;
-		
-		
-	if(maze[(int)(ray->py + ray->dir_y * ray->mov_speed)][(int)ray->px] != '1'&& \
-		ray->perpwalldist > 0.2)	//og
+	if(maze[(int)(ray->py + ray->dir_y * (ray->mov_speed + 0.1))][(int)ray->px] != '1')
 		ray->py += ray->dir_y * ray->mov_speed;
 }
 

@@ -18,7 +18,6 @@ bool	detect_loose_char(t_main *ms)
 
 void	elements_check(t_main *ms)
 {
-	
 	ms->valid_lines = find_valid_lines(ms);	
 	if (are_there_repeats(ms) == true)
 		error_and_exit(E_RPT_ELEM, ms);

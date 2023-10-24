@@ -124,7 +124,7 @@ int		set_color_bit(char *arg, u_int32_t *color_bit, int *i);
 //texture parsing
 int		parse_texture(t_main *ms);
 int		parse_indiv_textures(t_texture *t, char *direction);
-int		texture_pathfinder(char *arg, t_main *ms, int path_i, char *dir);
+int		texture_pathsetter(char *arg, t_main *ms, int path_i, char *dir);
 void	check_valid_path(char *path, t_main *ms);
 int		which_path(char *direction);
 

@@ -9,5 +9,3 @@ void    error_and_exit(char *str, t_main *ms)
 	clean_exit(ms);
     exit(1);
 }
-
-
