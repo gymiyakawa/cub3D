@@ -143,9 +143,7 @@ void	make_background(mlx_t *mlx, t_color *c, t_background *bg) //commented this 
 		while (++y < bg->ceiling->height)
 			mlx_put_pixel(bg->ceiling, x, y, c->c_color);
 	}
-	int32_t ceiling_inst;
-	ceiling_inst = mlx_image_to_window(mlx, bg->ceiling, 0, 0);
-	(void)ceiling_inst;
+	mlx_image_to_window(mlx, bg->ceiling, 0, 0);
 	bg->floor = mlx_new_image(mlx, WIDTH, MAX_HEIGHT);
 	x = -1;
 	while (++x < bg->floor->width)
@@ -154,7 +152,5 @@ void	make_background(mlx_t *mlx, t_color *c, t_background *bg) //commented this 
 		while (++y < bg->floor->height)
 			mlx_put_pixel(bg->floor, x, y, c->f_color);
 	}
-	int32_t floor_inst;
-	floor_inst = mlx_image_to_window(mlx, bg->floor, 0, mlx->height / 2);
-	(void)floor_inst;
+	mlx_image_to_window(mlx, bg->floor, 0, mlx->height / 2);
 }

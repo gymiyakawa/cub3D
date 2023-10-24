@@ -32,8 +32,6 @@ int	parse_map(t_main *ms)
 	//should I add an identify first line of maze function here? sending temp and doing a ft_strncmp (so I can allocate properly in the function below)
 	ms->map->maze = copy_maze(temp, ms);
 	ms->map->i_first_line = get_first_line_i(ms->map);
-
-
 	if (find_player_start(ms->map->maze, ms))
 		check_for_limits(ms->map, ms);
 									// print_str_array(ms->map->maze);
@@ -190,7 +188,7 @@ int	get_first_line_i(t_map *map)
 	i = -1;
 	while (map->ms->file_copy[++i])
 	{
-		if (!ft_strncmp(map->ms->file_copy[i], map->maze[0], ft_strlen(map->ms->file_copy[i]))) //changed to strncmp because it is supposedly safer
+		if (!ft_strncmp(map->ms->file_copy[i], map->maze[0], ft_strlen(map->maze[0])))
 			return (i);
 	}
 	return (-1);

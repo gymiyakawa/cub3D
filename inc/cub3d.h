@@ -158,8 +158,6 @@ void	move_left(t_ray *ray);
 //printing functions
 void		print_color_struct(t_color *c);
 void		print_textures(t_texture *t);
-mlx_image_t	*make_test_map_img(t_main *ms, t_map *map);
-void	    print_square(mlx_image_t *img, int x, int y, u_int32_t color);
 
 //raycasting_init.c
 void	set_raycasting_vars(t_ray *ray);

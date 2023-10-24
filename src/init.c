@@ -112,6 +112,10 @@ void	init_texture(t_texture **texture, t_main *ms)
 	(*texture)->mlx_textures = ft_calloc(4, sizeof(mlx_texture_t *));
 	if ((*texture)->mlx_textures == NULL)
 		error_and_exit(E_MALLOC, ms);
+	(*texture)->mlx_textures[0] = NULL;
+	(*texture)->mlx_textures[1] = NULL;
+	(*texture)->mlx_textures[2] = NULL;
+	(*texture)->mlx_textures[3] = NULL;
 	(*texture)->text_x = 0;
 	(*texture)->text_y = 0;
 	(*texture)->text_num = 0;
