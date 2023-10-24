@@ -88,8 +88,6 @@ line_height = height of the line relative to ray length
 
 draw_start/draw_end = initial and final point of start and end of wall section
 
-pitch = goes unchanged at 100 for this version
-
 wall_x = exact point on the x axis on the wall where the ray hit. used to
 map which section of the texture to render
 
