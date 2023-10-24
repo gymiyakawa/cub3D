@@ -89,9 +89,6 @@
    fun:_ZL24realizeClassWithoutSwiftP10objc_classS0_
    ...
 }
-
-
-
 {
    <insert_a_suppression_name_here>
    Memcheck:Leak

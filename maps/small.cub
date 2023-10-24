@@ -1,20 +1,17 @@
-   NO textures/north.png
-SO textures/south.png
-WE textures/west.png
-EA textures/east.png
+   NO textures/photo_butterfly.png
+SO textures/photo_lake.png
+WE textures/photo_clouds.png
+EA textures/photo_cabin.png
 
-F 95, 75,     75
+C 100, 170, 255
 
-C 22 5,13   0,   0
+F 70, 45,  45
 
 
-
-1111111111111111
-1000000000000001
-1000000000000001
-1000000000000001
-1000000E00000001
-1000000000111111
-1000000000000001
-1000000000000001
-1111111111111111
+1111111
+1000101
+10001011
+100S0001
+10001011
+10001011
+1111111

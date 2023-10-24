@@ -69,21 +69,21 @@ int	main(int ac, char **av)
 		init_ms(&ms, av);
 		if (parsing(av[1], ms))
 		{
-			mlx_set_setting(MLX_STRETCH_IMAGE, true);
-			ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", false);
-			if (!ms->mlx)
-				error_and_exit(E_MLX_INI, ms);
-			ms->game = mlx_new_image(ms->mlx, WIDTH, HEIGHT);
-			if (!ms->game) // or (!ms->game || mlx_image_to_window(ms->mlx, ms->game, 0, 0) < 0)?
-			{
-				mlx_close_window(ms->mlx);
-				error_and_exit(E_WIN, ms);
-			}
-			set_raycasting_vars(ms->ray);
-			make_background(ms->mlx, ms->colors, ms->bg);
-			raycasting(ms);
-			mlx_key_hook(ms->mlx, &key_bindings, ms);
-			mlx_loop(ms->mlx);
+			// mlx_set_setting(MLX_STRETCH_IMAGE, true);
+			// ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", false);
+			// if (!ms->mlx)
+			// 	error_and_exit(E_MLX_INI, ms);
+			// ms->game = mlx_new_image(ms->mlx, WIDTH, HEIGHT);
+			// if (!ms->game) // or (!ms->game || mlx_image_to_window(ms->mlx, ms->game, 0, 0) < 0)?
+			// {
+			// 	mlx_close_window(ms->mlx);
+			// 	error_and_exit(E_WIN, ms);
+			// }
+			// set_raycasting_vars(ms->ray);
+			// make_background(ms->mlx, ms->colors, ms->bg);
+			// raycasting(ms);
+			// mlx_key_hook(ms->mlx, &key_bindings, ms);
+			// mlx_loop(ms->mlx);
 		}
 	}
 	else

@@ -175,4 +175,3 @@ int			get_text_index(t_ray *ray);
 void		render_texture(t_ray *ray, t_texture *text, int i);
 uint32_t	make_px_color(t_texture *text_strt, mlx_texture_t *t);
 void		no_texture(t_ray *ray, int i);
-
