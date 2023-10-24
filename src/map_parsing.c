@@ -106,7 +106,7 @@ void	check_for_limits(t_map *map, t_main *ms)
 {
 	int	i;
 	int	j;
-
+					(void)ms; //change function arguments and delete this
 	i = 0;
 	j = 0;
 	while (map->maze[i] != NULL)
@@ -117,8 +117,8 @@ void	check_for_limits(t_map *map, t_main *ms)
 		i++;
 	}
 	map->y_max = i;
-	if (map->y_max >= MAX_WIDTH || map->y_max >= MAX_HEIGHT)
-		error_and_exit(E_BIG, ms);
+	// if (map->y_max >= MAX_WIDTH || map->y_max >= MAX_HEIGHT)
+	// 	error_and_exit(E_BIG, ms);
 }
 
 //extracts the maze from the file_copy, calling the function that checks
