@@ -1,10 +1,12 @@
-NO ./img/north.xpm42
-SO ./img/south.xpm42
-WE ./img/west.xpm42
-EA ./img/east.xpm42
+   NO textures/photo_butterfly.png
+SO textures/photo_lake.png
+WE textures/photo_clouds.png
+EA textures/photo_cabin.png
 
-F 220, 100,1
-C 0,30,1
+C 100, 170, 255
+
+F 70, 45,  45
+
 
         1111111111111111111111111
         1000000000110000000000001

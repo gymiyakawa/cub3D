@@ -1,7 +1,7 @@
-NO ./img/north.xpm42
-SO ./img/south.xpm42
-WE ./img/west.xpm42
-EA ./img/east.xpm42
+   NO textures/photo_butterfly.png
+SO textures/photo_lake.png
+WE textures/photo_clouds.png
+EA textures/photo_cabin.png
 
 F 220,100,0
 C 225,-0,0
