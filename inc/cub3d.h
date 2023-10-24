@@ -13,8 +13,8 @@
 // game config
 #define MAX_WIDTH 1920
 #define MAX_HEIGHT 1080
-#define WIDTH 1500
-#define HEIGHT 1200
+#define WIDTH 1920
+#define HEIGHT 1080
 #define ROT_SPEED 0.15
 #define MOV_SPEED 0.1
 
@@ -22,15 +22,18 @@
 #define TRUE 1
 #define FALSE 0
 #define MAX_FILES 256
-#define PI 3.1415826535 // not used right now
-#define P2 PI / 2
-#define P3 3 * PI / 2
 
 //	directions
 #define NORTH 0
 #define SOUTH 1
 #define EAST 2
 #define WEST 3
+
+// colors
+#define RED 0XFF0000FF
+#define BLUE 0X0000FFFF
+#define YELLOW 0XFFFF00FF
+#define GREEN 0X00FF00FF
 
 // ERROR MESSAGES
 
@@ -66,6 +69,7 @@ int	    parse_map(t_main *ms);
 int     check_maze_size(char *str, t_main *ms);
 int     count_maze_lines(char **file_copy, int start);
 void	check_for_limits(t_map *map, t_main *ms);
+
 // char    **copy_maze(char *str, t_main *ms);
 char	**copy_maze(char *str, t_main *ms);
 void	handle_maze_line_error(char **maze, t_main *ms, int i);
@@ -157,18 +161,22 @@ void		print_textures(t_texture *t);
 mlx_image_t	*make_test_map_img(t_main *ms, t_map *map);
 void	    print_square(mlx_image_t *img, int x, int y, u_int32_t color);
 
+//raycasting_init.c
+void	set_raycasting_vars(t_ray *ray);
+void	set_ray_directions(t_ray *ray, int i);
+int		get_direction(int	p_view);
+void	set_orientation(t_ray *ray);
+
 // raycasting
 void	raycasting(t_main *ms);
-void	render_texture(t_ray *ray, t_texture *text, int i);
-void	texture_calculations(t_ray *ray, t_texture *text);
-int		get_text_index(t_ray *ray);
 void	calculate_columns(t_ray *ray);
 void	run_dda(t_ray *ray);
 void	set_step(t_ray *ray);
-double	get_delta_dist(double dir);
-int		get_direction(int	p_view);
-void	set_orientation(t_ray *ray);
-void	set_raycasting_vars(t_ray *ray);
-void	set_ray_directions(t_ray *ray, int i);
-void	no_texture(t_ray *ray, int i);
+
+// texture rendering 
+void		texture_calculations(t_ray *ray, t_texture *text);
+int			get_text_index(t_ray *ray);
+void		render_texture(t_ray *ray, t_texture *text, int i);
 uint32_t	make_px_color(t_texture *text_strt, mlx_texture_t *t);
+void		no_texture(t_ray *ray, int i);
+

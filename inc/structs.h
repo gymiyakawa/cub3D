@@ -26,7 +26,7 @@ typedef struct s_background
 	t_main		*ms;
 } t_background;
 
-//	direction order: NO, SO, EA, WE;
+//	textures and paths follow the direction order: NO, SO, EA, WE
 typedef struct s_texture
 {
 	char			**paths;
@@ -39,8 +39,6 @@ typedef struct s_texture
 
 typedef struct s_map
 {
-	// mlx_t*	mlx;
-	// void	*mlx;
 	void	*win;
 	char	**maze;
 	int		flag;
@@ -50,32 +48,15 @@ typedef struct s_map
 	int		p_y;
 	int		p_x;
 	int		m_size;
-	// int		e_x;
-	// int		e_y;
-	// int		exit_check;
 	mlx_image_t	*m_img;
 	int		*test_map;
 	int		x_max;
 	int		y_max;
 	int		last_line;
-	// void	*img_p;
-	// void	*img_e;
-	// void	*img_e2;
-	// void	*img_w;
-	// void	*img_c;
-	// void	*img_z;
-	// int		img_width;
-	// int		img_height;
-	// int		player;
-	// int		coin;
-	// int		exit;
-	// int		moves;
-	// int		pixel;
-	// int		pixel_max;
-	// bool	is_dead;
 	int		i_first_line;
 	t_main	*ms;
 }	t_map;
+
 /*
 px / py = player position.
 
@@ -162,36 +143,3 @@ typedef struct s_main
 	int			line_count;
 	char		**valid_lines;
 }	t_main;
-
-			// from so_long
-// typedef struct s_map
-// {
-// 	void	*mlx;
-// 	void	*win;
-// 	char	**map;
-// 	int		flag;
-// 	int		x;
-// 	int		y;
-// 	int		p_y;
-// 	int		p_x;
-// 	int		e_x;
-// 	int		e_y;
-// 	int		exit_check;
-// 	int		x_max;
-// 	int		y_max;
-// 	void	*img_p;
-// 	void	*img_e;
-// 	void	*img_e2;
-// 	void	*img_w;
-// 	void	*img_c;
-// 	void	*img_z;
-// 	int		img_width;
-// 	int		img_height;
-// 	int		player;
-// 	int		coin;
-// 	int		exit;
-// 	int		moves;
-// 	int		pixel;
-// 	int		pixel_max;
-// 	bool	is_dead;
-// }			t_map;

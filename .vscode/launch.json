@@ -20,8 +20,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/gmiyakaw/Documents/Common_Core_Projects/cub3d/src",
-      "program": "/Users/gmiyakaw/Documents/Common_Core_Projects/cub3d/src/build/Debug/outDebug"
+      "cwd": "/Users/gmiyakaw/Documents/Common_Core_Projects/cub3d/inc/MLX42/src",
+      "program": "/Users/gmiyakaw/Documents/Common_Core_Projects/cub3d/inc/MLX42/src/build/Debug/outDebug"
     }
   ]
 }
