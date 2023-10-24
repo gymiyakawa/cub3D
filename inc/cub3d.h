@@ -11,8 +11,8 @@
 #include <fcntl.h>
 
 // game config
-#define WIDTH 1200
-#define HEIGHT 1200
+#define WIDTH 1920
+#define HEIGHT 1080
 #define ROT_SPEED 0.15
 #define MOV_SPEED 0.1
 
