@@ -1,7 +1,6 @@
 
 #include "../inc/cub3d.h"
 
-
 void	texture_calculations(t_ray *ray, t_texture *text)
 {
 	double	wall_x;
@@ -40,12 +39,12 @@ int	get_text_index(t_ray *ray)
 
 void	render_texture(t_ray *ray, t_texture *text, int i)
 {
-	int		text_i;
-	double	step;
-	double	tex_pos;
-	int		line;
+	int				text_i;
+	double			step;
+	double			tex_pos;
+	int				line;
 	uint32_t		px_color;
-	mlx_texture_t	*t;
+	mlx_texture_t	*t; //limit of 5 variables declared per function
 
 	text_i = get_text_index(ray);
 	t = text->mlx_textures[text_i];
@@ -91,13 +90,13 @@ void	no_texture(t_ray *ray, int i)
 	line = ray->draw_start - 1;
 	while (++line < ray->draw_end)
 	{
-	if (ray->side == NORTH)
-		mlx_put_pixel(ray->ms->game, i, line, RED);
-	if (ray->side == SOUTH)
-		mlx_put_pixel(ray->ms->game, i, line, BLUE);
-	if (ray->side == EAST)
-		mlx_put_pixel(ray->ms->game, i, line, YELLOW);
-	if (ray->side == WEST)
-		mlx_put_pixel(ray->ms->game, i, line, GREEN);
+		if (ray->side == NORTH)
+			mlx_put_pixel(ray->ms->game, i, line, RED);
+		if (ray->side == SOUTH)
+			mlx_put_pixel(ray->ms->game, i, line, BLUE);
+		if (ray->side == EAST)
+			mlx_put_pixel(ray->ms->game, i, line, YELLOW);
+		if (ray->side == WEST)
+			mlx_put_pixel(ray->ms->game, i, line, GREEN);
 	}
 }

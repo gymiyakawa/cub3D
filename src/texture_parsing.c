@@ -31,11 +31,8 @@ int	parse_texture(t_main *ms)
 		error_and_exit(E_PRS_TXT, ms);
 	if (parse_indiv_textures(ms->texture, "EA") != 0)
 		error_and_exit(E_PRS_TXT, ms);
-		
-										// print_textures(ms->texture);
 	return (0);
 }
-
 
 int	parse_indiv_textures(t_texture *t, char *direction)
 {

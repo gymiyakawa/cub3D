@@ -64,11 +64,7 @@
 
 //map_parsing.c
 int	    parse_map(t_main *ms);
-int     check_maze_size(char *str, t_main *ms);
-int     count_maze_lines(char **file_copy, int start);
-void	check_for_limits(t_map *map, t_main *ms);
-
-// char    **copy_maze(char *str, t_main *ms);
+void	check_for_limits(t_map *map);
 char	**copy_maze(char *str, t_main *ms);
 void	handle_maze_line_error(char **maze, t_main *ms, int i);
 bool	find_player_start(char **maze, t_main *ms);

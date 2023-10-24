@@ -18,8 +18,7 @@ char	**clean_maze(char **maze, t_main *ms, int lines)
 	}
 	i = 0;
 	while (i <= last_line)
-	{
-						
+	{			
 		maze[i] = trim_end_spaces(maze[i]);
 		if (!maze[i])
 			free_partial_maze(maze, ms, i);
@@ -75,7 +74,7 @@ void	free_partial_maze(char **maze, t_main *ms, int i)
 //checks if each line has only the accepted characters
 bool	validate_maze_line(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line && line[i])

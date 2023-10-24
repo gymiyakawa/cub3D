@@ -14,16 +14,16 @@ bool	valid_up_to_identifier(char *initial, char *identifier)
 	return (TRUE);
 }
 
-//	creates a color integer, using bit shifting as per MLX42
-//	standards
+// creates a color integer, using bit shifting
+// as per MLX42	standards
 u_int32_t	create_rgba(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-//	finds the line which contains the identifier, checks if it is
+// finds the line which contains the identifier, checks if it is
 // has only space before it and returns a pointer to that line.
-char *find_identifier(t_main *ms, char *identifier)
+char	*find_identifier(t_main *ms, char *identifier)
 {
 	char	*line;
 	int		i;
@@ -39,7 +39,7 @@ char *find_identifier(t_main *ms, char *identifier)
 			if (ft_strncmp(&line[i], identifier, ft_strlen(identifier)) == 0)
 			{
 				if (valid_up_to_identifier(&line[0], &line[i]) == false)
-					break;
+					break ;
 				return (line);
 			}
 			i++;
@@ -48,7 +48,7 @@ char *find_identifier(t_main *ms, char *identifier)
 	return (NULL);
 }
 
-	// same as find_identifier() but returns the pos of identifier on the line
+// same as find_identifier() but returns the pos of identifier on the line
 int	find_identifier_pos(t_main *ms, char *identifier)
 {
 	char	*line;
@@ -65,7 +65,7 @@ int	find_identifier_pos(t_main *ms, char *identifier)
 			if (ft_strncmp(&line[i], identifier, ft_strlen(identifier)) == 0)
 			{
 				if (valid_up_to_identifier(&line[0], &line[i]) == false)
-					break;
+					break ;
 				return (i);
 			}
 			i++;
@@ -74,7 +74,8 @@ int	find_identifier_pos(t_main *ms, char *identifier)
 	return (-1);
 }
 
-// checks if the path to an img is valid and assigns fd at the correct img structure
+// checks if the path to an img is valid 
+// and assigns fd at the correct img structure
 void	check_valid_path(char *path, t_main *ms)
 {
 	int	fd;
@@ -99,11 +100,11 @@ int	check_input_extension(char *str, t_main *ms)
 	i = ft_strlen(str) - 1;
 	j = 3;
 	if (!str)
-        error_and_exit(E_MAP, ms);
+		error_and_exit(E_MAP, ms);
 	while (comp && str && j >= 0)
 	{
 		if (comp[j] != str[i])
-		    error_and_exit(E_MAP, ms);
+			error_and_exit(E_MAP, ms);
 		i--;
 		j--;
 	}

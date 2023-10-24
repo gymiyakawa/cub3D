@@ -39,17 +39,14 @@ typedef struct s_texture
 
 typedef struct s_map
 {
-	void	*win;
+	// void	*win;
 	char	**maze;
-	int		flag;
-	int		x;
-	int		y;
 	int		p_view;
 	int		p_y;
 	int		p_x;
-	int		m_size;
-	mlx_image_t	*m_img;
-	int		*test_map;
+	// int		m_size;
+	// mlx_image_t	*m_img;
+	// int		*test_map;
 	int		x_max;
 	int		y_max;
 	int		last_line;

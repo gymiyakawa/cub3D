@@ -3,12 +3,14 @@
 
 void	raycasting(t_main *ms)
 {
-	t_ray *ray = ms->ray;
-	t_texture *text = ms->texture;
-	int	i;
+	int			i;
+	t_ray		*ray;
+	t_texture	*text;
 
 	i = -1;
-	while (++i < WIDTH) // og
+	ray = ms->ray;
+	text = ms->texture;
+	while (++i < WIDTH)
 	{
 		ray->hit = FALSE;
 		set_ray_directions(ray, i);
@@ -24,20 +26,20 @@ void	raycasting(t_main *ms)
 
 void	set_ray_directions(t_ray *ray, int i)
 {
-		ray->camera_x = 2 * i / (double)WIDTH - 1;	// og
-		ray->raydir_x = ray->dir_x + ray->plane_x * ray->camera_x;
-		ray->raydir_y = ray->dir_y + ray->plane_y * ray->camera_x;
-		ray->map_x = (int)ray->px;
-		ray->map_y = (int)ray->py;
-		if (ray->raydir_x == 0)
-			ray->deltadist_x = 1e30;
-		else
-			ray->deltadist_x = fabs(1 / ray->raydir_x);
-		if (ray->raydir_y == 0)
-			ray->deltadist_y = 1e30;
-		else
-			ray->deltadist_y = fabs(1 / ray->raydir_y);
-		return ;
+	ray->camera_x = 2 * i / (double)WIDTH - 1;
+	ray->raydir_x = ray->dir_x + ray->plane_x * ray->camera_x;
+	ray->raydir_y = ray->dir_y + ray->plane_y * ray->camera_x;
+	ray->map_x = (int)ray->px;
+	ray->map_y = (int)ray->py;
+	if (ray->raydir_x == 0)
+		ray->deltadist_x = 1e30;
+	else
+		ray->deltadist_x = fabs(1 / ray->raydir_x);
+	if (ray->raydir_y == 0)
+		ray->deltadist_y = 1e30;
+	else
+		ray->deltadist_y = fabs(1 / ray->raydir_y);
+	return ;
 }
 
 void	set_step(t_ray *ray)
@@ -98,7 +100,6 @@ void	calculate_columns(t_ray *ray)
 		ray->perpwalldist = ray->sidedist_y - ray->deltadist_y;
 	else
 		ray->perpwalldist = ray->sidedist_x - ray->deltadist_x;
-
 	ray->line_height = (int)(HEIGHT / ray->perpwalldist);
 	ray->draw_start = -ray->line_height / 2 + HEIGHT / 2;
 	if (ray->draw_start < 0)

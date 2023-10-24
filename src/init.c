@@ -5,7 +5,7 @@ int	open_fd(char *str, t_main *ms)
 	ms->fd = open(str, O_RDONLY);
 	if (ms->fd < 0)
 		error_and_exit(E_OPEN, ms);
-	return(ms->fd);
+	return (ms->fd);
 }
 
 void	init_ms(t_main **ms, char **av)
@@ -13,14 +13,7 @@ void	init_ms(t_main **ms, char **av)
 	*ms = ft_calloc(1, sizeof(t_main));
 	if (!*ms)
 		error_and_exit(E_MALLOC, *ms);
-	// (*ms)->fd = open_fd(av[1], *ms);
 	(*ms)->line_count = line_count(av[1], *ms);
-	// int i = 0;
-	// while (i < ((*ms)->line_count))
-	// {
-	// 	(*ms)->file_copy[i] = x_free((*ms)->file_copy[i]);
-	// 	i++; 
-	// }
 	(*ms)->file_copy = copy_file(av[1], *ms);
 	(*ms)->valid_lines = NULL;
 	(*ms)->game_over = false;
@@ -134,7 +127,6 @@ void	init_map(t_map **map, t_main *ms)
 	(*map)->p_view = 0;
 	(*map)->p_y = 0;
 	(*map)->p_x = 0;
-	//add more stuff as needed
 	(*map)->ms = ms;
 	(*map)->i_first_line = 0;
 	(*map)->last_line = 0;

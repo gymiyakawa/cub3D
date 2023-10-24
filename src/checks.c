@@ -18,7 +18,7 @@ bool	detect_loose_char(t_main *ms)
 
 void	elements_check(t_main *ms)
 {
-	ms->valid_lines = find_valid_lines(ms);	
+	ms->valid_lines = find_valid_lines(ms);
 	if (are_there_repeats(ms) == true)
 		error_and_exit(E_RPT_ELEM, ms);
 	if (detect_loose_char(ms) == true)
@@ -28,7 +28,7 @@ void	elements_check(t_main *ms)
 
 char	**find_valid_lines(t_main *ms)
 {
-	char **valid_lines;
+	char	**valid_lines;
 
 	valid_lines = ft_calloc(7, sizeof(char *));
 	if (!valid_lines)
@@ -55,9 +55,9 @@ char	**find_valid_lines(t_main *ms)
 	return (valid_lines);
 }
 
-char	**make_charset()
+char	**make_charset(void)
 {
-	char **charset;
+	char	**charset;
 
 	charset = ft_calloc(7, sizeof(char *));
 	charset[0] = "NO";
@@ -72,9 +72,9 @@ char	**make_charset()
 
 bool	is_valid_line(char *line)
 {
-	char **charset;
-	int	i;
-	int	j;
+	char	**charset;
+	int		i;
+	int		j;
 
 	charset = make_charset();
 	i = 0;
@@ -87,8 +87,8 @@ bool	is_valid_line(char *line)
 				continue ;
 			if (ft_strncmp(charset[i], &line[j], ft_strlen(charset[i])) == 0)
 			{
-					charset = x_free(charset);
-					return (true);
+				charset = x_free(charset);
+				return (true);
 			}
 		}
 		i++;
@@ -128,10 +128,7 @@ bool	are_there_repeats(t_main *ms)
 // 		j = 0;
 // 		while (j < 6)
 // 		{
-			
 // 		}
 // 		i++;
 // 	}
-	
-	
 // }

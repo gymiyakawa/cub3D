@@ -23,13 +23,13 @@ int	line_count(char *str, t_main *ms)
 
 char	**copy_file(char *str, t_main *ms)
 {
-	char 	**file_copy;
+	char	**file_copy;
 	char	*temp;
 	int		i;
 
 	i = 0;
 	file_copy = ft_calloc(ms->line_count + 1, sizeof(char *));
-	if(!file_copy)
+	if (!file_copy)
 		error_and_exit(E_MALLOC, ms);
 	ms->fd = open_fd(str, ms);
 	temp = get_next_line(ms->fd);
@@ -61,7 +61,7 @@ bool	parsing(char *str, t_main *ms)
 
 int	main(int ac, char **av)
 {
-	t_main *ms;
+	t_main	*ms;
 
 	ms = NULL;
 	if (ac == 2)
@@ -74,7 +74,7 @@ int	main(int ac, char **av)
 			if (!ms->mlx)
 				error_and_exit(E_MLX_INI, ms);
 			ms->game = mlx_new_image(ms->mlx, WIDTH, HEIGHT);
-			if (!ms->game) // or (!ms->game || mlx_image_to_window(ms->mlx, ms->game, 0, 0) < 0)?
+			if (!ms->game)
 			{
 				mlx_close_window(ms->mlx);
 				error_and_exit(E_WIN, ms);
@@ -90,10 +90,6 @@ int	main(int ac, char **av)
 		perror(E_AC);
 	clean_exit(ms);
 	return (0);
-
-
-	//resizing
-
 	// add headers
 	//norminette
 	//test with valgrind and leaks
@@ -101,10 +97,10 @@ int	main(int ac, char **av)
 
 void	close_fds(void)
 {
-	int i;
+	int	i;
 
 	i = 3;
 	while (i++ < MAX_FILES)
 		close(i);
-	return;
+	return ;
 }
