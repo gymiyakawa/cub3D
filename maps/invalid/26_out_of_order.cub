@@ -1,3 +1,10 @@
+
+111111
+100101
+101001
+1100N1
+111111
+
    NO textures/photo_butterfly.png
 SO textures/photo_lake.png
 WE textures/photo_clouds.png
@@ -6,9 +13,3 @@ EA textures/photo_cabin.png
 C 100, 170, 255
 
 F 70, 45,  45
-
-111111
-100101
-101001
-1100N1
-111111

@@ -44,7 +44,7 @@
 #define E_PRS_COL "Invalid color parameter\n"
 #define E_PRS_TXT "Invalid texture parameter\n"
 #define E_PARS "Parsing error\n"
-#define E_INV_CHAR "Invalid character in maze line\n"
+#define E_INV_CHAR "Invalid character in maze line or .cub file out of order\n"
 #define E_PLAY "Wrong or insufficient player number\n"
 #define E_MSS_ELEM "Missing required element: NO, SO, EA, WE, F, C or map\n"
 #define E_WRG_ORD "Wrong order of elements - map must be last\n"
