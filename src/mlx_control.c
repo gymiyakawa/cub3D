@@ -144,7 +144,8 @@ void	make_background(mlx_t *mlx, t_color *c, t_background *bg) //commented this 
 	int32_t ceiling_inst;
 	ceiling_inst = mlx_image_to_window(mlx, bg->ceiling, 0, 0);
 	(void)ceiling_inst;
-	bg->floor = mlx_new_image(mlx, WIDTH, MAX_HEIGHT);
+	// bg->floor = mlx_new_image(mlx, WIDTH, MAX_HEIGHT);
+	bg->floor = mlx_new_image(mlx, WIDTH, HEIGHT);
 	x = -1;
 	while (++x < bg->floor->width)
 	{

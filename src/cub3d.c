@@ -94,6 +94,10 @@ int	main(int ac, char **av)
 	clean_exit(ms);
 	return (0);
 
+
+	//resizing
+	//rotation not straight
+
 	// add headers
 	//norminette
 	//test with valgrind and leaks

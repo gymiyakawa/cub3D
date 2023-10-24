@@ -246,9 +246,9 @@ void	calculate_columns(t_ray *ray)
 	// 	ray->perpwalldist = ray->sidedist_y - ray->deltadist_y;
 
 	if (ray->side == 0 || ray->side == 1)				// THIS ONE!!!!!! FUCK YEAH HOLY SMOKES HALLELUJAH AMEN GEEEBUS ALLMIGHTY LAWD!!!
-		ray->perpwalldist = ray->sidedist_y - ray->deltadist_y;
+		ray->perpwalldist = ray->sidedist_y - ray->deltadist_y + 0.1;
 	else
-		ray->perpwalldist = ray->sidedist_x - ray->deltadist_x;
+		ray->perpwalldist = ray->sidedist_x - ray->deltadist_x + 0.1;
 
 
 
