@@ -93,7 +93,6 @@ int	main(int ac, char **av)
 
 
 	//resizing
-	//rotation not straight
 
 	// add headers
 	//norminette
