@@ -22,3 +22,13 @@ void	handle_maze_line_error(char **maze, t_main *ms, int j)
 	maze = x_free(maze);
 	error_and_exit(E_INV_CHAR, ms);
 }
+
+void	close_fds(void)
+{
+	int	i;
+
+	i = 3;
+	while (i++ < MAX_FILES)
+		close(i);
+	return ;
+}

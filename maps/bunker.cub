@@ -3,7 +3,7 @@ SO textures/metalWall_02.png
 WE textures/metalWall_03.png
 EA textures/metalWall_04.png
 
-C 10, 10, 10
+C 50, 50, 50
 
 F 100, 100, 100
 

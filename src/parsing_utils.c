@@ -89,24 +89,3 @@ void	check_valid_path(char *path, t_main *ms)
 	close (fd);
 	return ;
 }
-
-int	check_input_extension(char *str, t_main *ms)
-{
-	char	*comp;
-	int		i;
-	int		j;
-
-	comp = ".cub";
-	i = ft_strlen(str) - 1;
-	j = 3;
-	if (!str)
-		error_and_exit(E_MAP, ms);
-	while (comp && str && j >= 0)
-	{
-		if (comp[j] != str[i])
-			error_and_exit(E_MAP, ms);
-		i--;
-		j--;
-	}
-	return (0);
-}

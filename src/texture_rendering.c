@@ -32,22 +32,21 @@ int	get_text_index(t_ray *ray)
 		return (WEST);
 	else
 	{
-		printf(E_TEX_IND); //do we need this?
+		perror(E_TEX_IND);
 		return (0);
 	}
 }
 
 void	render_texture(t_ray *ray, t_texture *text, int i)
 {
-	int				text_i;
 	double			step;
 	double			tex_pos;
 	int				line;
 	uint32_t		px_color;
-	mlx_texture_t	*t; //limit of 5 variables declared per function
+	mlx_texture_t	*t;
 
-	text_i = get_text_index(ray);
-	t = text->mlx_textures[text_i];
+	text->text_i = get_text_index(ray);
+	t = text->mlx_textures[text->text_i];
 	step = 1.0 * (double)t->height / (double)ray->line_height;
 	tex_pos = ((double) ray->draw_start - (double) HEIGHT / 2
 			+ (double) ray->line_height / 2) * step;
@@ -70,6 +69,8 @@ uint32_t	make_px_color(t_texture *text_strt, mlx_texture_t *t)
 	int			a;
 
 	text_strt->text_y++;
+	if (text_strt->text_x == 0)
+		text_strt->text_x = 1;
 	r = t->pixels[(t->width * text_strt->text_y * t->bytes_per_pixel) - \
 		(text_strt->text_x * t->bytes_per_pixel)];
 	g = t->pixels[(t->width * text_strt->text_y * t->bytes_per_pixel) - \

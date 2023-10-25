@@ -70,33 +70,6 @@ char	**make_charset(void)
 	return (charset);
 }
 
-bool	is_valid_line(char *line)
-{
-	char	**charset;
-	int		i;
-	int		j;
-
-	charset = make_charset();
-	i = 0;
-	while (charset[i] != NULL)
-	{
-		j = -1;
-		while (line[++j])
-		{
-			if (valid_up_to_identifier(&line[0], &line[j]) == false)
-				continue ;
-			if (ft_strncmp(charset[i], &line[j], ft_strlen(charset[i])) == 0)
-			{
-				charset = x_free(charset);
-				return (true);
-			}
-		}
-		i++;
-	}
-	charset = x_free(charset);
-	return (false);
-}
-
 bool	are_there_repeats(t_main *ms)
 {
 	int	i;
@@ -115,20 +88,3 @@ bool	are_there_repeats(t_main *ms)
 	return (false);
 }
 
-// bool	is_map_last(t_main *ms)
-// {
-// 	int		i;
-// 	int		j;
-// 	char	*map_line;
-
-// 	map_line = find_identifier(ms, "1");
-// 	i = 0;
-// 	while (ms->file_copy[i])
-// 	{
-// 		j = 0;
-// 		while (j < 6)
-// 		{
-// 		}
-// 		i++;
-// 	}
-// }

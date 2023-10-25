@@ -87,7 +87,7 @@ void	make_background(mlx_t *mlx, t_color *c, t_background *bg)
 	uint32_t	x;
 	uint32_t	y;
 
-	bg->ceiling = mlx_new_image(mlx, WIDTH, mlx->height / 2);
+	bg->ceiling = mlx_new_image(mlx, mlx->width, mlx->height / 2);
 	x = -1;
 	while (++x < bg->ceiling->width)
 	{
@@ -96,7 +96,7 @@ void	make_background(mlx_t *mlx, t_color *c, t_background *bg)
 			mlx_put_pixel(bg->ceiling, x, y, c->c_color);
 	}
 	mlx_image_to_window(mlx, bg->ceiling, 0, 0);
-	bg->floor = mlx_new_image(mlx, WIDTH, HEIGHT); //is it really HEIGHT here or mlx->height?
+	bg->floor = mlx_new_image(mlx, mlx->width, mlx->height);
 	x = -1;
 	while (++x < bg->floor->width)
 	{

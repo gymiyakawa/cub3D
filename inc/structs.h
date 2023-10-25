@@ -3,7 +3,7 @@
 
 #include "MLX42/include/MLX42/MLX42.h"
 
-typedef struct	s_main t_main;
+typedef struct s_main	t_main;
 
 typedef struct s_color
 {
@@ -24,7 +24,7 @@ typedef struct s_background
 	mlx_image_t	*floor;
 	mlx_image_t	*ceiling;
 	t_main		*ms;
-} t_background;
+}	t_background;
 
 //	textures and paths follow the direction order: NO, SO, EA, WE
 typedef struct s_texture
@@ -34,19 +34,16 @@ typedef struct s_texture
 	int				text_x;
 	int				text_y;
 	int				text_num;
+	int				text_i;
 	t_main			*ms;
 }	t_texture;
 
 typedef struct s_map
 {
-	// void	*win;
 	char	**maze;
 	int		p_view;
 	int		p_y;
 	int		p_x;
-	// int		m_size;
-	// mlx_image_t	*m_img;
-	// int		*test_map;
 	int		x_max;
 	int		y_max;
 	int		last_line;
@@ -119,22 +116,19 @@ typedef struct s_ray
 	double	rot_speed;
 	double	mov_speed;
 	t_main	*ms;
-} t_ray;
+}	t_ray;
 
 typedef struct s_main
 {
-	t_color		*colors;
-	t_map		*map;
-	t_texture	*texture;
-	t_background *bg;
-	t_ray		*ray;
-	mlx_t		*mlx;
-	mlx_image_t	*game;
-	int32_t		game_inst;
-	int			fd;
-	// bool		game_over;
-	char		**file_copy;
-	// char		*filename;
-	int			line_count;
-	char		**valid_lines;
+	t_color			*colors;
+	t_map			*map;
+	t_texture		*texture;
+	t_background	*bg;
+	t_ray			*ray;
+	mlx_t			*mlx;
+	mlx_image_t		*game;
+	int				fd;
+	char			**file_copy;
+	int				line_count;
+	char			**valid_lines;
 }	t_main;

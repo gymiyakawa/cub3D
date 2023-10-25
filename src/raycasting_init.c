@@ -9,11 +9,11 @@ void	set_raycasting_vars(t_ray *ray)
 	ray->map_y = ray->ms->map->p_y;
 	ray->direction = get_direction(ray->ms->map->p_view);
 	if (ray->direction < 0)
-		error_and_exit(E_PARS, ray->ms);
+		error_and_exit(E_PVIEW, ray->ms);
 	set_orientation(ray);
 }
 
-int	get_direction(int	p_view)
+int	get_direction(int p_view)
 {
 	if (p_view == 'N')
 		return (NORTH);
@@ -24,10 +24,7 @@ int	get_direction(int	p_view)
 	if (p_view == 'W')
 		return (WEST);
 	else
-	{
-		perror(E_PVIEW);
 		return (-1);
-	}
 }
 
 void	set_orientation(t_ray *ray)
@@ -54,4 +51,3 @@ void	set_orientation(t_ray *ray)
 	}
 	return ;
 }
-
