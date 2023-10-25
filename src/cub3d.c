@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:16:35 by raruiz-r          #+#    #+#             */
-/*   Updated: 2023/10/25 15:01:54 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:03:38 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int ac, char **av)
 	}
 	else
 	{
+		printf("Error\n");
 		printf(E_AC);
 		exit(1);
 	}
