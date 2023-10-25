@@ -16,8 +16,6 @@ void	init_ms(t_main **ms, char **av)
 	(*ms)->line_count = line_count(av[1], *ms);
 	(*ms)->file_copy = copy_file(av[1], *ms);
 	(*ms)->valid_lines = NULL;
-	// (*ms)->game_over = false;
-	// (*ms)->filename = ft_strdup(av[1]);
 	(*ms)->game = NULL;
 	init_color(&(*ms)->colors, *ms);
 	init_texture(&(*ms)->texture, *ms);
@@ -33,29 +31,6 @@ void	init_ray(t_ray **ray, t_main *ms)
 	*ray = ft_calloc(1, sizeof(t_ray));
 	if (!*ray)
 		error_and_exit(E_MALLOC, ms);
-	(*ray)->px = 0;
-	(*ray)->py = 0;
-	(*ray)->dir_x = 0;
-	(*ray)->dir_y = 0;
-	(*ray)->plane_x = 0;
-	(*ray)->plane_y = 0;
-	(*ray)->camera_x = 0;
-	(*ray)->raydir_x = 0;
-	(*ray)->raydir_y = 0;
-	(*ray)->map_x = 0;
-	(*ray)->map_y = 0;
-	(*ray)->sidedist_x = 0;
-	(*ray)->sidedist_y = 0;
-	(*ray)->deltadist_x = 0;
-	(*ray)->deltadist_y = 0;
-	(*ray)->perpwalldist = 0;
-	(*ray)->step_x = 0;
-	(*ray)->step_y = 0;
-	(*ray)->hit = 0;
-	(*ray)->side = 0;
-	(*ray)->line_height = 0;
-	(*ray)->draw_start = 0;
-	(*ray)->draw_end = 0;
 	(*ray)->rot_speed = ROT_SPEED;
 	(*ray)->mov_speed = MOV_SPEED;
 	(*ray)->ms = ms;
@@ -81,14 +56,6 @@ void	init_color(t_color **color, t_main *ms)
 	(*color)->floor_ceiling = ft_calloc(2, sizeof(char *));
 	if (!(*color)->floor_ceiling)
 		error_and_exit(E_MALLOC, ms);
-	(*color)->f_red = 0;
-	(*color)->f_blue = 0;
-	(*color)->f_green = 0;
-	(*color)->c_red = 0;
-	(*color)->c_blue = 0;
-	(*color)->c_green = 0;
-	(*color)->f_color = 0;
-	(*color)->c_color = 0;
 	(*color)->ms = ms;
 	return ;
 }
