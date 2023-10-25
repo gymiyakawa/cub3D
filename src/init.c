@@ -16,8 +16,6 @@ void	init_ms(t_main **ms, char **av)
 	(*ms)->line_count = line_count(av[1], *ms);
 	(*ms)->file_copy = copy_file(av[1], *ms);
 	(*ms)->valid_lines = NULL;
-	// (*ms)->game_over = false;
-	// (*ms)->filename = ft_strdup(av[1]);
 	(*ms)->game = NULL;
 	init_color(&(*ms)->colors, *ms);
 	init_texture(&(*ms)->texture, *ms);

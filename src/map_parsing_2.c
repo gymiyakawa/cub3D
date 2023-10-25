@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parsing_2.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/25 13:14:38 by raruiz-r          #+#    #+#             */
+/*   Updated: 2023/10/25 13:17:28 by raruiz-r         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
@@ -18,7 +29,7 @@ char	**clean_maze(char **maze, t_main *ms, int lines)
 	}
 	i = 0;
 	while (i <= last_line)
-	{			
+	{
 		maze[i] = trim_end_spaces(maze[i]);
 		if (!maze[i])
 			free_partial_maze(maze, ms, i);

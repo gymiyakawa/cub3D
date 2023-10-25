@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/25 13:16:35 by raruiz-r          #+#    #+#             */
+/*   Updated: 2023/10/25 13:16:38 by raruiz-r         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
@@ -49,7 +59,4 @@ int	main(int ac, char **av)
 		perror(E_AC);
 	clean_exit(ms);
 	return (0);
-	// add headers
-	//norminette
-	//test with valgrind and leaks
 }

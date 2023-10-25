@@ -1,13 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_control.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/25 13:16:08 by raruiz-r          #+#    #+#             */
+/*   Updated: 2023/10/25 13:16:17 by raruiz-r         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-/* The left and right arrow keys of the keyboard must allow you to look left and
-right in the maze.
-◦ The W, A, S, and D keys must allow you to move the point of view through
-the maze.
-◦ Pressing ESC must close the window and quit the program cleanly.
-◦ Clicking on the red cross on the window’s frame must close the window and
-quit the program cleanly.*/
 void	key_bindings(mlx_key_data_t input, void *main_struct)
 {
 	t_main	*ms;

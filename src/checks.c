@@ -87,4 +87,3 @@ bool	are_there_repeats(t_main *ms)
 		return (true);
 	return (false);
 }
-

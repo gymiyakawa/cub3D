@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/25 13:15:53 by raruiz-r          #+#    #+#             */
+/*   Updated: 2023/10/25 13:15:55 by raruiz-r         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
@@ -31,8 +42,6 @@ void	*free_map(t_map *map)
 
 void	*free_ms(t_main *ms)
 {
-	// if (ms->filename)
-	// 	ms->filename = x_free(ms->filename);
 	if (ms->file_copy)
 		ms->file_copy = ft_free_array(ms->file_copy);
 	if (ms)
