@@ -18,7 +18,7 @@ MLX_SUPP_FILE = ./suppresion/MLX42leak_suppresion.supp
 LIBFT_DIR = ./inc/libft/
 
 ####    FILES    ####
-RAW_SRC = cub3d.c color_parsing.c init.c init_2.c exit.c map_parsing.c 			\
+RAW_SRC = cub3d.c color_parsing.c init.c init_2.c exit.c map_parsing.c 	\
 		print.c parsing_utils.c  parsing_utils_2.c texture_parsing.c	\
 		checks.c exit_2.c mlx_control.c raycasting.c flood_fill.c 		\
 		map_parsing_2.c raycasting_init.c texture_rendering.c moves.c
@@ -77,16 +77,22 @@ fclean: clean
 	@echo "$(RED)MLX42 folder deleted $(RESET)"
 	@echo "$(RED)cub3d cleaned$(RESET)"
 
-leak:
-	make
+valgrind:
+	@make
+	@echo "\n	<!> ATTENTION <!>\n"
+	@echo "To run valgrind, all funcitons inside if (parsing(av[1], ms)) must be commented out\n"
 	valgrind --leak-check=full --show-leak-kinds=all --suppressions=$(MLX_SUPP_FILE) --log-file=valgrind.log ./cub3d ./maps/small.cub
+
+leak:
+	@make
+	leaks --atExit -- ./cub3d maps/big.cub
 
 run:
 	@make
-	@echo "testing with sample map"
+	@echo "testing with big.cub"
 	@echo ""
-	@./cub3d ./maps/small.cub
+	@./cub3d ./maps/big.cub
 	
 re: fclean all
 
-.PHONY: all clean fclean re leak run mlx
+.PHONY: all clean fclean re leak run mlx valgrind

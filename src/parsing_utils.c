@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:14:56 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/25 13:15:11 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:43:06 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	check_valid_path(char *path, t_main *ms)
 	if (fd < 0)
 	{
 		path = x_free(path);
-		error_and_exit(E_OPEN, ms);
+		error_and_exit(E_PRS_TXT, ms);
 	}
 	close (fd);
 	return ;

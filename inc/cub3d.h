@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:15:39 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/25 13:15:42 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:39:25 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@
 #define E_RPT_ELEM "No element can be repeated\n"
 #define E_INV_LINE "All non-identified lines must be empty\n"
 #define E_MLX_INI "MLX42 failed to initialize\n"
-#define E_MAZ_OP "Maze or player is not within closed walls\n"
+#define E_MAZ_OP "Floor or player square must be contained\n"
 #define E_DUP "Unable to duplicate maze\n"
 #define E_PAD "Unable to pad maze\n"
 #define E_AC "Wrong number of arguments\n"
