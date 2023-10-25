@@ -132,9 +132,9 @@ typedef struct s_main
 	mlx_image_t	*game;
 	int32_t		game_inst;
 	int			fd;
-	bool		game_over;
+	// bool		game_over;
 	char		**file_copy;
-	char		*filename;
+	// char		*filename;
 	int			line_count;
 	char		**valid_lines;
 }	t_main;

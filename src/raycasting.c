@@ -20,7 +20,7 @@ void	raycasting(t_main *ms)
 		texture_calculations(ray, text);
 		render_texture(ray, text, i);
 	}
-	ms->game_inst = mlx_image_to_window(ray->ms->mlx, ray->ms->game, 0, 0);
+	ms->game_inst = mlx_image_to_window(ray->ms->mlx, ray->ms->game, 0, 0); // no need to save it to game_inst either? maybe get rid of this variable? also: it is not initialized in init
 	return ;
 }
 

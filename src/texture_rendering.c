@@ -32,7 +32,7 @@ int	get_text_index(t_ray *ray)
 		return (WEST);
 	else
 	{
-		printf("error in get_text_index\n");
+		printf(E_TEX_IND); //do we need this?
 		return (0);
 	}
 }

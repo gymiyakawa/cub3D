@@ -58,6 +58,7 @@
 #define E_WIN "Error with rendering game image\n"
 #define E_RAY "Error setting ray direction\n"
 #define E_PVIEW "p_view not set\n"
+#define E_TEX_IND "Error in get_text_index\n"
 // #define TEST "TESTY TEST!\n" //delete this later
 
 // FUNCTION PROTOTYPES

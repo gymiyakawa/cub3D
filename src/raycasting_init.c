@@ -30,8 +30,6 @@ int	get_direction(int	p_view)
 	}
 }
 
-	// removed variables set to 0s;
-	// possible variables: plane_x and y, dir_x and y
 void	set_orientation(t_ray *ray)
 {
 	if (ray->direction == NORTH)

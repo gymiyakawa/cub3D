@@ -31,8 +31,8 @@ void	*free_map(t_map *map)
 
 void	*free_ms(t_main *ms)
 {
-	if (ms->filename)
-		ms->filename = x_free(ms->filename);
+	// if (ms->filename)
+	// 	ms->filename = x_free(ms->filename);
 	if (ms->file_copy)
 		ms->file_copy = ft_free_array(ms->file_copy);
 	if (ms)

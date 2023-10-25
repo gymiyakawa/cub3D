@@ -96,7 +96,7 @@ void	make_background(mlx_t *mlx, t_color *c, t_background *bg)
 			mlx_put_pixel(bg->ceiling, x, y, c->c_color);
 	}
 	mlx_image_to_window(mlx, bg->ceiling, 0, 0);
-	bg->floor = mlx_new_image(mlx, WIDTH, HEIGHT);
+	bg->floor = mlx_new_image(mlx, WIDTH, HEIGHT); //is it really HEIGHT here or mlx->height?
 	x = -1;
 	while (++x < bg->floor->width)
 	{
