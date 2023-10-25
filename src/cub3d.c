@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:16:35 by raruiz-r          #+#    #+#             */
-/*   Updated: 2023/10/25 13:16:38 by raruiz-r         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:01:54 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	parsing(char *str, t_main *ms)
 void	init_mlx(t_main *ms)
 {
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3d", true);
+	ms->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (!ms->mlx)
 		error_and_exit(E_MLX_INI, ms);
 	ms->game = mlx_new_image(ms->mlx, WIDTH, HEIGHT);
@@ -41,7 +41,6 @@ int	main(int ac, char **av)
 {
 	t_main	*ms;
 
-	ms = NULL;
 	if (ac == 2)
 	{
 		init_ms(&ms, av);
@@ -56,7 +55,9 @@ int	main(int ac, char **av)
 		}
 	}
 	else
-		perror(E_AC);
-	clean_exit(ms);
+	{
+		printf(E_AC);
+		exit(1);
+	}
 	return (0);
 }
