@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:15:39 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/31 15:10:54 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:23:45 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@
 #define E_OPEN "Invalid file descriptor, file not found\n"
 #define E_PRS_COL "Invalid color parameter\n"
 #define E_PRS_TXT "Invalid texture parameter\n"
+#define E_RPT_TXT "Repeated textures are not allowed\n"
 #define E_INV_CHAR "Invalid character in maze line or .cub file out of order\n"
 #define E_PLAY "Wrong or insufficient player number\n"
 #define E_MSS_ELEM "Missing required element: NO, SO, EA, WE, F, C or map\n"
@@ -179,6 +180,7 @@ int			parse_texture(t_main *ms);
 int			parse_indiv_textures(t_texture *t, char *direction);
 int			texture_pathsetter(char *arg, t_main *ms, int path_i, char *dir);
 int			which_path(char *direction);
+void		check_repeat_textures(t_texture *t);
 
 // texture rendering 
 void		texture_calculations(t_ray *ray, t_texture *text);

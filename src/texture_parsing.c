@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:15:22 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/25 13:15:25 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:58:41 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,30 @@ int	parse_texture(t_main *ms)
 		error_and_exit(E_PRS_TXT, ms);
 	if (parse_indiv_textures(ms->texture, "SO") != 0)
 		error_and_exit(E_PRS_TXT, ms);
-	if (parse_indiv_textures(ms->texture, "WE") != 0)
-		error_and_exit(E_PRS_TXT, ms);
 	if (parse_indiv_textures(ms->texture, "EA") != 0)
 		error_and_exit(E_PRS_TXT, ms);
+	if (parse_indiv_textures(ms->texture, "WE") != 0)
+		error_and_exit(E_PRS_TXT, ms);
+	check_repeat_textures(ms->texture);
 	return (0);
+}
+
+void	check_repeat_textures(t_texture *t)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (t->paths[++i])
+	{
+		j = 0 + i;
+		while (t->paths[++j])
+		{
+			if (!ft_strncmp(t->paths[i], t->paths[j], ft_strlen(t->paths[j])))
+				error_and_exit(E_RPT_TXT, t->ms);
+		}
+	}
+	return ;
 }
 
 int	parse_indiv_textures(t_texture *t, char *direction)
@@ -75,12 +94,15 @@ int	texture_pathsetter(char *arg, t_main *ms, int path_i, char *dir)
 		error_and_exit(E_MALLOC, ms);
 	j = 0;
 	i = find_identifier_pos(ms, dir) + 2;
-	while (arg[++i])
+	while (arg[i] == ' ')
+		i++;
+	while (arg[i])
 	{
 		if (arg[i] == ' ' || arg[i] == '\n')
-			continue ;
+			break ;
 		else
 			path[j++] = arg[i];
+		i++;
 	}
 	check_valid_path(path, ms);
 	ms->texture->paths[path_i] = ft_strdup(path);

@@ -89,9 +89,9 @@ leak:
 
 run:
 	@make
-	@echo "testing with big.cub"
+	@echo "testing with 42.cub"
 	@echo ""
-	@./cub3d ./maps/big.cub
+	@./cub3d ./maps/42.cub
 	
 bunker:
 	@make
@@ -101,4 +101,8 @@ bunker:
 	
 re: fclean all
 
-.PHONY: all clean fclean re leak run mlx valgrind bunker
+bonus:
+	@echo "no bonus for this project"
+	@echo "try make run or make bunker"
+
+.PHONY: all clean fclean re leak run mlx valgrind bunker bonus
