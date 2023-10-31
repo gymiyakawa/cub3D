@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:14:26 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/25 13:14:29 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:11:27 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,13 @@ int	set_floor_ceiling(t_main *ms)
 	arg = find_identifier(ms, "F");
 	if (!arg)
 		return (-1);
+	count_commas(arg, ms);
 	ms->colors->floor_ceiling[0] = ft_strdup(arg);
 	arg = NULL;
 	arg = find_identifier(ms, "C");
 	if (!arg)
 		return (-1);
+	count_commas(arg, ms);
 	ms->colors->floor_ceiling[1] = ft_strdup(arg);
 	arg = NULL;
 	return (0);
@@ -94,8 +96,10 @@ int	set_color_bit(char *arg, u_int32_t *color_bit, int *i)
 			continue ;
 		if (ft_isdigit(arg[*i]) == false)
 			return (1);
-		if (*color_bit != 0)
+		if (*color_bit != 256)
 			*color_bit *= 10;
+		else
+			*color_bit -= 256;
 		*color_bit += (int)arg[*i] - '0';
 	}
 	if (*color_bit < 0 || *color_bit > 255)

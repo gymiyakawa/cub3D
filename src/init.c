@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:21:46 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/25 13:21:47 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:03:10 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ void	init_color(t_color **color, t_main *ms)
 	(*color)->floor_ceiling = ft_calloc(2, sizeof(char *));
 	if (!(*color)->floor_ceiling)
 		error_and_exit(E_MALLOC, ms);
+	(*color)->f_red = 256;
+	(*color)->f_blue = 256;
+	(*color)->f_green = 256;
+	(*color)->c_red = 256;
+	(*color)->c_blue = 256;
+	(*color)->c_green = 256;
 	(*color)->ms = ms;
 	return ;
 }

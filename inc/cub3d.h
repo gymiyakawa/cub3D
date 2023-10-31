@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:15:39 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/31 12:14:13 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:10:54 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ int			line_count(char *str, t_main *ms);
 char		**copy_file(char *str, t_main *ms);
 int			check_input_extension(char *str, t_main *ms);
 bool		is_valid_line(char *line);
+void		count_commas(char *arg, t_main *ms);
 
 //print.c
 void		print_color_struct(t_color *c);

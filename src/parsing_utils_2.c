@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:14:54 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/25 13:15:13 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:09:49 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,21 @@ bool	is_valid_line(char *line)
 	}
 	charset = x_free(charset);
 	return (false);
+}
+
+void	count_commas(char *arg, t_main *ms)
+{
+	int	i;
+	int	counter;
+
+	counter = 0;
+	i = -1;
+	while (arg[++i])
+	{
+		if (counter > 2)
+			error_and_exit(E_PRS_COL, ms);
+		if (arg[i] == ',')
+			counter++;
+	}
+	return ;
 }
