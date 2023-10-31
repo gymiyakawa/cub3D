@@ -1,11 +1,12 @@
    NO textures/photo_butterfly.png
-SO textures/photo_lake.png
-WE textures/photo_clouds.png
-EA textures/photo_cabin.png
+SO     textures/photo_lake.   png
+WE textures/photo_clouds.pn g
+            F 70, 45    ,  45
 
-C 100, 170, 255
+C 100, 1   70, 25   5
 
-F 70, 45,  45
+
+EA textures/photo_c abin.png
 
 111111111111111111111111111
 100000000000000000000000001

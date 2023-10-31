@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:15:39 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/25 13:39:25 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/31 12:14:13 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@
 #define E_MAP "Input file inexistent or not conforming to .cub extension\n"
 #define E_MAP_NFD "Map not found\n"
 #define E_INV_MAP "Invalid map\n"
-#define E_MALLOC "Error on malloc\n"
-#define E_OPEN "Error opening fd\n"
+#define E_MALLOC "Malloc failed\n"
+#define E_OPEN "Invalid file descriptor, file not found\n"
 #define E_PRS_COL "Invalid color parameter\n"
 #define E_PRS_TXT "Invalid texture parameter\n"
 #define E_INV_CHAR "Invalid character in maze line or .cub file out of order\n"

@@ -93,6 +93,12 @@ run:
 	@echo ""
 	@./cub3d ./maps/big.cub
 	
+bunker:
+	@make
+	@echo "testing with bunker.cub"
+	@echo ""
+	@./cub3d ./maps/bunker.cub
+	
 re: fclean all
 
-.PHONY: all clean fclean re leak run mlx valgrind
+.PHONY: all clean fclean re leak run mlx valgrind bunker
