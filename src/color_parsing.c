@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:14:26 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/31 15:11:27 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/11/01 09:21:21 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,20 +90,48 @@ int	parse_floor(t_color *c, char *arg)
 
 int	set_color_bit(char *arg, u_int32_t *color_bit, int *i)
 {
-	while (arg[++*i] != ',' && arg[*i] != '\n')
+	(*i)++;
+	while (arg[*i] == ' ')
+		(*i)++;
+	while (ft_isdigit(arg[*i]) == true)
 	{
 		if (arg[*i] == ' ')
-			continue ;
-		if (ft_isdigit(arg[*i]) == false)
 			return (1);
 		if (*color_bit != 256)
 			*color_bit *= 10;
 		else
 			*color_bit -= 256;
 		*color_bit += (int)arg[*i] - '0';
+		(*i)++;
 	}
 	if (*color_bit < 0 || *color_bit > 255)
 		return (2);
-	else
-		return (0);
+	while (arg[*i] != ',' && arg[*i] != '\n')
+	{
+		if (arg[*i] != ' ')
+			return (3);
+		(*i)++;
+	}
+	return (0);
 }
+
+		// OG
+// int	set_color_bit(char *arg, u_int32_t *color_bit, int *i)
+// {
+// 	while (arg[++*i] != ',' && arg[*i] != '\n')
+// 	{
+// 		if (arg[*i] == ' ')
+// 			continue ;
+// 		if (ft_isdigit(arg[*i]) == false)
+// 			return (1);
+// 		if (*color_bit != 256)
+// 			*color_bit *= 10;
+// 		else
+// 			*color_bit -= 256;
+// 		*color_bit += (int)arg[*i] - '0';
+// 	}
+// 	if (*color_bit < 0 || *color_bit > 255)
+// 		return (2);
+// 	else
+// 		return (0);
+// }

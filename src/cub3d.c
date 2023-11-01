@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:16:35 by raruiz-r          #+#    #+#             */
-/*   Updated: 2023/10/31 12:29:14 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/10/31 16:42:40 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(int ac, char **av)
 			raycasting(ms);
 			mlx_key_hook(ms->mlx, &key_bindings, ms);
 			mlx_loop(ms->mlx);
+			clean_exit(ms);
 		}
 	}
 	else
