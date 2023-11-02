@@ -59,6 +59,7 @@
   "files.associations": {
     "mlx42_int.h": "c",
     "get_next_line.h": "c",
-    "__node_handle": "c"
+    "__node_handle": "c",
+    "fcntl.h": "c"
   }
 }

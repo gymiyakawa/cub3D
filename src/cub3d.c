@@ -6,7 +6,7 @@
 /*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:16:35 by raruiz-r          #+#    #+#             */
-/*   Updated: 2023/11/02 10:22:25 by raruiz-r         ###   ########.fr       */
+/*   Updated: 2023/11/02 10:23:32 by raruiz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	main(int ac, char **av)
 			set_raycasting_vars(ms->ray);
 			raycasting(ms);
 			mlx_key_hook(ms->mlx, &key_bindings, ms);
-			mlx_loop_hook(ms->mlx, &moves, ms);
 			mlx_loop(ms->mlx);
 			clean_exit(ms);
 		}
@@ -63,23 +62,4 @@ int	main(int ac, char **av)
 		exit(1);
 	}
 	return (0);
-}
-
-void	moves(void *param)
-{
-	t_main *ms = param;
-	
-	if (ms->code == AHEAD)
-		move_ahead(ms->ray);
-	if (ms->code == BACK)
-		move_back(ms->ray);
-	if (ms->code == RIGHT)
-		move_right(ms->ray);
-	if (ms->code == LEFT)
-		move_left(ms->ray);
-	if (ms->code == ROT_RIGHT)
-		rotate_right(ms->ray);
-	if (ms->code == ROT_LEFT)
-		rotate_left(ms->ray);
-	raycasting(ms);
 }

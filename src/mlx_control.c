@@ -6,40 +6,11 @@
 /*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:16:08 by raruiz-r          #+#    #+#             */
-/*   Updated: 2023/11/02 10:21:08 by raruiz-r         ###   ########.fr       */
+/*   Updated: 2023/11/02 10:24:13 by raruiz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-// void	key_bindings(mlx_key_data_t input, void *main_struct)
-// {
-// 	t_main	*ms;
-
-// 	ms = main_struct;
-// 	refresh_game(ms);
-// 	if (input.key == MLX_KEY_ESCAPE && input.action == MLX_PRESS)
-// 		mlx_close_window(ms->mlx);
-// 	if (input.key == MLX_KEY_W && (input.action == MLX_PRESS
-// 			|| input.action == MLX_REPEAT))
-// 		move_ahead(ms->ray);
-// 	if (input.key == MLX_KEY_S && (input.action == MLX_PRESS
-// 			|| input.action == MLX_REPEAT))
-// 		move_back(ms->ray);
-// 	if (input.key == MLX_KEY_D && (input.action == MLX_PRESS
-// 			|| input.action == MLX_REPEAT))
-// 		move_right(ms->ray);
-// 	if (input.key == MLX_KEY_A && (input.action == MLX_PRESS
-// 			|| input.action == MLX_REPEAT))
-// 		move_left(ms->ray);
-// 	if (input.key == MLX_KEY_RIGHT && (input.action == MLX_PRESS
-// 			|| input.action == MLX_REPEAT))
-// 		rotate_right(ms->ray);
-// 	if (input.key == MLX_KEY_LEFT && (input.action == MLX_PRESS
-// 			|| input.action == MLX_REPEAT))
-// 		rotate_left(ms->ray);
-// 	raycasting(ms);
-// }
 
 void	key_bindings(mlx_key_data_t input, void *main_struct)
 {
@@ -51,25 +22,24 @@ void	key_bindings(mlx_key_data_t input, void *main_struct)
 		mlx_close_window(ms->mlx);
 	if (input.key == MLX_KEY_W && (input.action == MLX_PRESS
 			|| input.action == MLX_REPEAT))
-		ms->code = AHEAD;
+		move_ahead(ms->ray);
 	if (input.key == MLX_KEY_S && (input.action == MLX_PRESS
 			|| input.action == MLX_REPEAT))
-		ms->code = BACK;
+		move_back(ms->ray);
 	if (input.key == MLX_KEY_D && (input.action == MLX_PRESS
 			|| input.action == MLX_REPEAT))
-		ms->code = RIGHT;
+		move_right(ms->ray);
 	if (input.key == MLX_KEY_A && (input.action == MLX_PRESS
 			|| input.action == MLX_REPEAT))
-		ms->code = LEFT;
+		move_left(ms->ray);
 	if (input.key == MLX_KEY_RIGHT && (input.action == MLX_PRESS
 			|| input.action == MLX_REPEAT))
-		ms->code = ROT_RIGHT;
+		rotate_right(ms->ray);
 	if (input.key == MLX_KEY_LEFT && (input.action == MLX_PRESS
 			|| input.action == MLX_REPEAT))
-		ms->code = ROT_LEFT;
-	// raycasting(ms);
+		rotate_left(ms->ray);
+	raycasting(ms);
 }
-
 
 void	refresh_game(t_main *ms)
 {

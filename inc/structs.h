@@ -6,7 +6,7 @@
 /*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:15:35 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/11/02 10:13:09 by raruiz-r         ###   ########.fr       */
+/*   Updated: 2023/11/02 10:23:53 by raruiz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ typedef struct s_main
 	mlx_t			*mlx;
 	mlx_image_t		*game;
 	int				fd;
-	int				code; //here
 	char			**file_copy;
 	int				line_count;
 	char			**valid_lines;
