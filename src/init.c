@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:21:46 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/31 15:03:10 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/11/02 10:13:05 by raruiz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_ms(t_main **ms, char **av)
 	init_background(&(*ms)->bg, *ms);
 	init_ray(&(*ms)->ray, *ms);
 	(*ms)->mlx = NULL;
+	(*ms)->code = -1; //here
 	return ;
 }
 

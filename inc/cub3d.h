@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
+/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:15:39 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/31 15:23:45 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/11/02 10:19:51 by raruiz-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 // game config
 #define WIDTH 1920
 #define HEIGHT 1080
-#define ROT_SPEED 0.15
-#define MOV_SPEED 0.1
+#define ROT_SPEED 0.015
+#define MOV_SPEED 0.01
 
 // general macros
 #define TRUE 1
@@ -37,6 +37,14 @@
 #define SOUTH 1
 #define EAST 2
 #define WEST 3
+
+// moves
+#define AHEAD 0
+#define BACK 1
+#define RIGHT 2 //here
+#define LEFT 3
+#define ROT_RIGHT 4
+#define ROT_LEFT 5
 
 // colors
 #define RED 0XFF0000FF
@@ -188,3 +196,6 @@ int			get_text_index(t_ray *ray);
 void		render_texture(t_ray *ray, t_texture *text, int i);
 uint32_t	make_px_color(t_texture *text_strt, mlx_texture_t *t);
 void		no_texture(t_ray *ray, int i);
+
+
+void	moves(void *param);
