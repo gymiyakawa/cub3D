@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:15:39 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/31 15:23:45 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/11/02 10:36:29 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 #define TRUE 1
 #define FALSE 0
 #define MAX_FILES 256
+#define INI_C_B 256
 
 //	directions
 #define NORTH 0
@@ -181,6 +182,9 @@ int			parse_indiv_textures(t_texture *t, char *direction);
 int			texture_pathsetter(char *arg, t_main *ms, int path_i, char *dir);
 int			which_path(char *direction);
 void		check_repeat_textures(t_texture *t);
+
+//texture parsing2
+void		check_remaining_arg(char *arg, int i, t_main *ms);
 
 // texture rendering 
 void		texture_calculations(t_ray *ray, t_texture *text);

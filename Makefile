@@ -21,7 +21,8 @@ LIBFT_DIR = ./inc/libft/
 RAW_SRC = cub3d.c color_parsing.c init.c init_2.c exit.c map_parsing.c 	\
 		print.c parsing_utils.c  parsing_utils_2.c texture_parsing.c	\
 		checks.c exit_2.c mlx_control.c raycasting.c flood_fill.c 		\
-		map_parsing_2.c raycasting_init.c texture_rendering.c moves.c
+		map_parsing_2.c raycasting_init.c texture_rendering.c moves.c	\
+		texture_parsing2.c
 
 RAW_INC = cub3d.h structs.h
 

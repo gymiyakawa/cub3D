@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:15:22 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/31 15:58:41 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/11/02 10:34:47 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ int	texture_pathsetter(char *arg, t_main *ms, int path_i, char *dir)
 		if (arg[i] == ' ' || arg[i] == '\n')
 			break ;
 		else
-			path[j++] = arg[i];
-		i++;
+			path[j++] = arg[i++];
 	}
+	check_remaining_arg(arg, i, ms);
 	check_valid_path(path, ms);
 	ms->texture->paths[path_i] = ft_strdup(path);
 	path = x_free(path);

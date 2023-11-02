@@ -1,13 +1,13 @@
-   NO     textures/photo_butterfly.png     
 SO     textures/photo_lake.png
 
+     F  40  ,          14    ,  43
+   NO     textures/photo_butterfly.png      
 WE textures/photo_clouds.png 
 
 EA      textures/photo_cabin.png
-     F 13     ,     44    ,  13
 
 
-C 100,   170, 255    
+C 100,   170, 255  
 
 
 

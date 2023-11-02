@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:14:26 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/11/01 09:21:21 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/11/02 10:03:17 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ int	set_color_bit(char *arg, u_int32_t *color_bit, int *i)
 	{
 		if (arg[*i] == ' ')
 			return (1);
-		if (*color_bit != 256)
+		if (*color_bit != INI_C_B)
 			*color_bit *= 10;
 		else
-			*color_bit -= 256;
+			*color_bit -= INI_C_B;
 		*color_bit += (int)arg[*i] - '0';
 		(*i)++;
 	}
