@@ -6,7 +6,11 @@
 /*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:21:46 by gmiyakaw          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/11/02 10:23:58 by raruiz-r         ###   ########.fr       */
+=======
+/*   Updated: 2023/11/02 10:02:48 by gmiyakaw         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +72,12 @@ void	init_color(t_color **color, t_main *ms)
 	(*color)->floor_ceiling = ft_calloc(2, sizeof(char *));
 	if (!(*color)->floor_ceiling)
 		error_and_exit(E_MALLOC, ms);
-	(*color)->f_red = 256;
-	(*color)->f_blue = 256;
-	(*color)->f_green = 256;
-	(*color)->c_red = 256;
-	(*color)->c_blue = 256;
-	(*color)->c_green = 256;
+	(*color)->f_red = INI_C_B;
+	(*color)->f_blue = INI_C_B;
+	(*color)->f_green = INI_C_B;
+	(*color)->c_red = INI_C_B;
+	(*color)->c_blue = INI_C_B;
+	(*color)->c_green = INI_C_B;
 	(*color)->ms = ms;
 	return ;
 }

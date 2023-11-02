@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:14:19 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/10/25 13:14:23 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/11/02 12:13:13 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	elements_check(t_main *ms)
 		error_and_exit(E_RPT_ELEM, ms);
 	if (detect_loose_char(ms) == true)
 		error_and_exit(E_INV_LINE, ms);
-	ms->valid_lines = ft_free_array((*ms).valid_lines);
 }
 
 char	**find_valid_lines(t_main *ms)

@@ -21,7 +21,8 @@ LIBFT_DIR = ./inc/libft/
 RAW_SRC = cub3d.c color_parsing.c init.c init_2.c exit.c map_parsing.c 	\
 		print.c parsing_utils.c  parsing_utils_2.c texture_parsing.c	\
 		checks.c exit_2.c mlx_control.c raycasting.c flood_fill.c 		\
-		map_parsing_2.c raycasting_init.c texture_rendering.c moves.c
+		map_parsing_2.c raycasting_init.c texture_rendering.c moves.c	\
+		texture_parsing2.c
 
 RAW_INC = cub3d.h structs.h
 
@@ -81,11 +82,11 @@ valgrind:
 	@make
 	@echo "\n	<!> ATTENTION <!>\n"
 	@echo "To run valgrind, all funcitons inside if (parsing(av[1], ms)) must be commented out\n"
-	valgrind --leak-check=full --show-leak-kinds=all --suppressions=$(MLX_SUPP_FILE) --log-file=valgrind.log ./cub3d ./maps/small.cub
+	valgrind --leak-check=full --show-leak-kinds=all --suppressions=$(MLX_SUPP_FILE) --log-file=valgrind.log ./cub3d ./maps/15_extraelement.cub
 
 leak:
 	@make
-	leaks --atExit -- ./cub3d maps/big.cub
+	leaks --atExit -- ./cub3d maps/15_extraelement.cub
 
 run:
 	@make
