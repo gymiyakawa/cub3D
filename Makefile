@@ -82,11 +82,11 @@ valgrind:
 	@make
 	@echo "\n	<!> ATTENTION <!>\n"
 	@echo "To run valgrind, all funcitons inside if (parsing(av[1], ms)) must be commented out\n"
-	valgrind --leak-check=full --show-leak-kinds=all --suppressions=$(MLX_SUPP_FILE) --log-file=valgrind.log ./cub3d ./maps/small.cub
+	valgrind --leak-check=full --show-leak-kinds=all --suppressions=$(MLX_SUPP_FILE) --log-file=valgrind.log ./cub3d ./maps/15_extraelement.cub
 
 leak:
 	@make
-	leaks --atExit -- ./cub3d maps/big.cub
+	leaks --atExit -- ./cub3d maps/15_extraelement.cub
 
 run:
 	@make

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: raruiz-r <raruiz-r@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:15:53 by raruiz-r          #+#    #+#             */
-/*   Updated: 2023/10/25 13:15:55 by raruiz-r         ###   ########.fr       */
+/*   Updated: 2023/11/02 12:16:49 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	*free_ms(t_main *ms)
 {
 	if (ms->file_copy)
 		ms->file_copy = ft_free_array(ms->file_copy);
+	if (ms->valid_lines)
+		ms->valid_lines = ft_free_array(ms->valid_lines);
 	if (ms)
 		ms = x_free(ms);
 	return (NULL);
@@ -58,12 +60,13 @@ void	*free_color(t_color *colors)
 		colors->floor_ceiling = x_free(colors->floor_ceiling);
 	}
 	colors = x_free(colors);
-	return (colors);
+	return (NULL);
 }
 
 void	*free_texture(t_texture *t)
 {
-	t->paths = ft_free_array(t->paths);
+	if (t->paths)
+		t->paths = ft_free_array(t->paths);
 	if (t->mlx_textures)
 	{
 		if (t->mlx_textures[0])
@@ -74,8 +77,8 @@ void	*free_texture(t_texture *t)
 			mlx_delete_texture(t->mlx_textures[2]);
 		if (t->mlx_textures[3])
 			mlx_delete_texture(t->mlx_textures[3]);
+		t->mlx_textures = x_free(t->mlx_textures);
 	}
-	t->mlx_textures = x_free(t->mlx_textures);
 	t = x_free(t);
 	return (NULL);
 }
