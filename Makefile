@@ -81,24 +81,27 @@ fclean: clean
 valgrind:
 	@make
 	@echo "\n	<!> ATTENTION <!>\n"
-	@echo "To run valgrind, all funcitons inside if (parsing(av[1], ms)) must be commented out\n"
+	@echo "To run valgrind, all funcitons inside of (parsing(av[1], ms)) must be commented out\n"
 	valgrind --leak-check=full --show-leak-kinds=all --suppressions=$(MLX_SUPP_FILE) --log-file=valgrind.log ./cub3d ./maps/15_extraelement.cub
 
 leak:
 	@make
-	leaks --atExit -- ./cub3d maps/15_extraelement.cub
+	leaks --atExit -- ./$(NAME) maps/42.cub
+
+tester:
+	@bash maptester.sh
 
 run:
 	@make
 	@echo "testing with 42.cub"
 	@echo ""
-	@./cub3d ./maps/42.cub
+	@./$(NAME) ./maps/42.cub
 	
 bunker:
 	@make
 	@echo "testing with bunker.cub"
 	@echo ""
-	@./cub3d ./maps/bunker.cub
+	@./$(NAME) ./maps/bunker.cub
 	
 re: fclean all
 

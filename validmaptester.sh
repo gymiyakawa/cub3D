@@ -1,5 +1,5 @@
 rm -f log.txt
-for file in ./maps/invalid/*
+for file in ./maps/*
 do
 	echo "map passed: $file"
 	echo $file >> log.txt
