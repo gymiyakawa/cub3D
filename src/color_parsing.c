@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:14:26 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/11/02 10:03:17 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/11/03 14:25:00 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	set_color_bit(char *arg, u_int32_t *color_bit, int *i)
 		*color_bit += (int)arg[*i] - '0';
 		(*i)++;
 	}
-	if (*color_bit < 0 || *color_bit > 255)
+	if (*color_bit > 255)
 		return (2);
 	while (arg[*i] != ',' && arg[*i] != '\n')
 	{
@@ -114,24 +114,3 @@ int	set_color_bit(char *arg, u_int32_t *color_bit, int *i)
 	}
 	return (0);
 }
-
-		// OG
-// int	set_color_bit(char *arg, u_int32_t *color_bit, int *i)
-// {
-// 	while (arg[++*i] != ',' && arg[*i] != '\n')
-// 	{
-// 		if (arg[*i] == ' ')
-// 			continue ;
-// 		if (ft_isdigit(arg[*i]) == false)
-// 			return (1);
-// 		if (*color_bit != 256)
-// 			*color_bit *= 10;
-// 		else
-// 			*color_bit -= 256;
-// 		*color_bit += (int)arg[*i] - '0';
-// 	}
-// 	if (*color_bit < 0 || *color_bit > 255)
-// 		return (2);
-// 	else
-// 		return (0);
-// }
